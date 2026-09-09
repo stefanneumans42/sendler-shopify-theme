@@ -1,0 +1,204 @@
+{% comment %}
+  SENDLER global header
+{% endcomment %}
+
+<div class="sendler-site-header full-width">
+
+  {% if section.settings.show_announcement and section.settings.announcement_text != blank %}
+    <div class="sendler-announcement">
+      <div class="sendler-container sendler-announcement__inner">
+        {% if section.settings.announcement_link != blank %}
+          <a href="{{ section.settings.announcement_link }}">
+            {{ section.settings.announcement_text }}
+          </a>
+        {% else %}
+          <span>{{ section.settings.announcement_text }}</span>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+
+  <header class="sendler-header">
+    <div class="sendler-container sendler-header__inner">
+
+      <!-- Mobile menu -->
+      <details class="sendler-mobile-nav">
+        <summary
+          class="sendler-header__icon sendler-mobile-nav__toggle"
+          aria-label="Open menu"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              d="M4 7h16M4 12h16M4 17h16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+          </svg>
+        </summary>
+
+        <nav class="sendler-mobile-nav__panel" aria-label="Mobile navigation">
+          {% if section.settings.menu != blank %}
+            {% for link in section.settings.menu.links %}
+              <a href="{{ link.url }}">
+                {{ link.title }}
+              </a>
+            {% endfor %}
+          {% else %}
+            <a href="{{ routes.all_products_collection_url }}">Shop</a>
+            <a href="/pages/find-my-essentials">Find My Essentials</a>
+            <a href="/pages/why-sendler">Why Sendler</a>
+          {% endif %}
+        </nav>
+      </details>
+
+      <!-- Logo -->
+      <a
+        class="sendler-header__logo"
+        href="{{ routes.root_url }}"
+        aria-label="{{ shop.name }}"
+      >
+        {% if section.settings.logo != blank %}
+          {{
+            section.settings.logo
+            | image_url: width: 440
+            | image_tag:
+              class: 'sendler-header__logo-image',
+              width: section.settings.logo_width,
+              loading: 'eager',
+              alt: shop.name
+          }}
+        {% else %}
+          <span>SENDLER</span>
+        {% endif %}
+      </a>
+
+      <!-- Desktop navigation -->
+      <nav class="sendler-header__nav" aria-label="Main navigation">
+        {% if section.settings.menu != blank %}
+          {% for link in section.settings.menu.links %}
+            <a
+              href="{{ link.url }}"
+              {% if link.current %}
+                aria-current="page"
+              {% endif %}
+            >
+              {{ link.title }}
+            </a>
+          {% endfor %}
+        {% else %}
+          <a href="{{ routes.all_products_collection_url }}">Shop</a>
+          <a href="/pages/find-my-essentials">Find My Essentials</a>
+          <a href="/pages/why-sendler">Why Sendler</a>
+        {% endif %}
+      </nav>
+
+      <!-- Utilities -->
+      <div class="sendler-header__utilities">
+
+        <a
+          class="sendler-header__icon"
+          href="{{ routes.search_url }}"
+          aria-label="Search"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <circle
+              cx="11"
+              cy="11"
+              r="6.5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+            />
+            <path
+              d="m16 16 4 4"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+            />
+          </svg>
+        </a>
+
+        {% if shop.customer_accounts_enabled %}
+          <a
+            class="sendler-header__icon sendler-header__account"
+            href="{{ routes.account_url }}"
+            aria-label="Account"
+          >
+            {{ 'icon-account.svg' | inline_asset_content }}
+          </a>
+        {% endif %}
+
+        <a
+          class="sendler-header__icon sendler-header__cart"
+          href="{{ routes.cart_url }}"
+          aria-label="Cart"
+        >
+          {{ 'icon-cart.svg' | inline_asset_content }}
+
+          {% if cart.item_count > 0 %}
+            <span class="sendler-header__cart-count">
+              {{ cart.item_count }}
+            </span>
+          {% endif %}
+        </a>
+
+      </div>
+    </div>
+  </header>
+</div>
+
+{% schema %}
+{
+  "name": "SENDLER header",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement text",
+      "default": "Health shouldn't be a full-time job."
+    },
+    {
+      "type": "url",
+      "id": "announcement_link",
+      "label": "Announcement link"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 100,
+      "max": 220,
+      "step": 10,
+      "unit": "px",
+      "default": 140
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main menu"
+    }
+  ]
+}
+{% endschema %}

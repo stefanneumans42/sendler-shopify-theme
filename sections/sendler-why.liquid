@@ -1,0 +1,399 @@
+<section class="sendler-why">
+  <div class="sendler-container">
+
+    <div class="sendler-why__layout">
+
+      <div class="sendler-why__intro">
+
+        {% if section.settings.eyebrow != blank %}
+          <div class="sendler-eyebrow">
+            {{ section.settings.eyebrow }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="sendler-why__heading">
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.text != blank %}
+          <div class="sendler-why__text">
+            {{ section.settings.text }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.link_label != blank %}
+          {% if section.settings.link != blank %}
+            <a
+              href="{{ section.settings.link }}"
+              class="sendler-text-link sendler-why__link"
+            >
+              {{ section.settings.link_label }}
+              <span aria-hidden="true">→</span>
+            </a>
+          {% else %}
+            <span class="sendler-text-link sendler-why__link">
+              {{ section.settings.link_label }}
+              <span aria-hidden="true">→</span>
+            </span>
+          {% endif %}
+        {% endif %}
+
+      </div>
+
+
+      {% if section.blocks.size > 0 %}
+        <div class="sendler-why__standards">
+
+          {% for block in section.blocks %}
+            <article
+              class="sendler-why__standard"
+              {{ block.shopify_attributes }}
+            >
+
+              <div class="sendler-why__standard-top">
+                <span class="sendler-why__standard-number">
+                  0{{ forloop.index }}
+                </span>
+
+                <div class="sendler-why__standard-icon" aria-hidden="true">
+                  {% case block.settings.icon %}
+
+                    {% when 'evidence' %}
+                      <svg viewBox="0 0 24 24">
+                        <path d="M4 18 10 12l4 4 6-8" />
+                        <path d="M17 8h3v3" />
+                      </svg>
+
+                    {% when 'dose' %}
+                      <svg viewBox="0 0 24 24">
+                        <path d="M12 3v18M7 8h10M7 16h10" />
+                      </svg>
+
+                    {% when 'quality' %}
+                      <svg viewBox="0 0 24 24">
+                        <path d="M12 3 19 6v5c0 5-3.2 8-7 10-3.8-2-7-5-7-10V6l7-3Z" />
+                        <path d="m8.5 12 2.2 2.2 4.8-5" />
+                      </svg>
+
+                    {% when 'usefulness' %}
+                      <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="8" />
+                        <path d="M9 12.5 11 14.5 15.5 9" />
+                      </svg>
+
+                  {% endcase %}
+                </div>
+              </div>
+
+              {% if block.settings.heading != blank %}
+                <h3>
+                  {{ block.settings.heading }}
+                </h3>
+              {% endif %}
+
+              {% if block.settings.text != blank %}
+                <p>
+                  {{ block.settings.text }}
+                </p>
+              {% endif %}
+
+            </article>
+          {% endfor %}
+
+        </div>
+      {% endif %}
+
+    </div>
+
+  </div>
+</section>
+
+
+{% stylesheet %}
+
+.sendler-why {
+  padding: 120px 0;
+  background: var(--sendler-green);
+  color: var(--sendler-white);
+}
+
+.sendler-why__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(70px, 8vw, 120px);
+  align-items: start;
+}
+
+.sendler-why__intro {
+  position: sticky;
+  top: 120px;
+  max-width: 580px;
+}
+
+.sendler-why .sendler-eyebrow {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.sendler-why__heading {
+  margin: 0;
+  color: var(--sendler-white);
+  font-size: clamp(2.75rem, 4.5vw, 4.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.sendler-why__text {
+  margin-top: 26px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.sendler-why__text p {
+  margin: 0 0 18px;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.sendler-why__text p:last-child {
+  margin-bottom: 0;
+}
+
+.sendler-why__link {
+  margin-top: 30px;
+  color: var(--sendler-white);
+}
+
+.sendler-why__link:hover {
+  color: var(--sendler-white);
+}
+
+
+/* Standards */
+
+.sendler-why__standards {
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.sendler-why__standard {
+  padding: 34px 0 38px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.sendler-why__standard-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.sendler-why__standard-number {
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.sendler-why__standard-icon {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.sendler-why__standard-icon svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.55;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sendler-why__standard h3 {
+  margin: 0;
+  color: var(--sendler-white);
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.sendler-why__standard p {
+  max-width: 580px;
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+
+@media screen and (max-width: 900px) {
+
+  .sendler-why__layout {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .sendler-why__intro {
+    position: static;
+    max-width: 700px;
+  }
+
+}
+
+
+@media screen and (max-width: 749px) {
+
+  .sendler-why {
+    padding: 82px 0;
+  }
+
+  .sendler-why__layout {
+    gap: 48px;
+  }
+
+  .sendler-why__heading {
+    font-size: 2.6rem;
+  }
+
+  .sendler-why__text {
+    font-size: 17px;
+  }
+
+  .sendler-why__standard {
+    padding: 28px 0 30px;
+  }
+
+  .sendler-why__standard h3 {
+    font-size: 21px;
+  }
+
+}
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER why",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "WHY SENDLER"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "An ingredient isn’t useful just because it appears on the label."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>A supplement can contain the right ingredient and still make very little sense.</p><p>Dose matters. Form matters. Evidence matters.</p><p>If we can’t explain why a product exists, who it’s for and why the dose makes sense, it probably doesn’t belong in the SENDLER catalogue.</p>"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Why Sendler"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "standard",
+      "name": "Standard",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "evidence",
+              "label": "Evidence"
+            },
+            {
+              "value": "dose",
+              "label": "Dose"
+            },
+            {
+              "value": "quality",
+              "label": "Quality"
+            },
+            {
+              "value": "usefulness",
+              "label": "Usefulness"
+            }
+          ],
+          "default": "evidence"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Evidence"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "What does the research actually support?"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SENDLER why",
+      "blocks": [
+        {
+          "type": "standard",
+          "settings": {
+            "icon": "evidence",
+            "heading": "Evidence",
+            "text": "What does the research actually support?"
+          }
+        },
+        {
+          "type": "standard",
+          "settings": {
+            "icon": "dose",
+            "heading": "Dose",
+            "text": "Is there enough of the ingredient to make the formula meaningful?"
+          }
+        },
+        {
+          "type": "standard",
+          "settings": {
+            "icon": "quality",
+            "heading": "Quality",
+            "text": "Can we stand behind how the product is made and what goes into it?"
+          }
+        },
+        {
+          "type": "standard",
+          "settings": {
+            "icon": "usefulness",
+            "heading": "Usefulness",
+            "text": "Does this solve a real need, or are we simply adding another bottle to the shelf?"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,320 @@
+<section class="sendler-quality full-width">
+  <div class="sendler-container">
+
+    <div class="sendler-quality__layout">
+
+      <div class="sendler-quality__intro">
+
+        {% if section.settings.eyebrow != blank %}
+          <div class="sendler-eyebrow">
+            {{ section.settings.eyebrow }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="sendler-quality__heading">
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.text != blank %}
+          <div class="sendler-quality__text">
+            {{ section.settings.text }}
+          </div>
+        {% endif %}
+
+      </div>
+
+
+      {% if section.blocks.size > 0 %}
+        <div class="sendler-quality__badges">
+
+          {% for block in section.blocks %}
+            <article
+              class="sendler-quality__badge"
+              {{ block.shopify_attributes }}
+            >
+
+              <div class="sendler-quality__icon" aria-hidden="true">
+
+                {% case block.settings.icon %}
+
+                  {% when 'usa' %}
+                    <svg viewBox="0 0 24 24">
+                      <path d="M4 5h16v14H4z" />
+                      <path d="M4 9h16M4 13h16M4 17h16" />
+                      <path d="M4 5h8v8H4z" />
+                    </svg>
+
+                  {% when 'testing' %}
+                    <svg viewBox="0 0 24 24">
+                      <path d="M9 3h6M10 3v6l-5 9h14l-5-9V3" />
+                      <path d="M8 14h8" />
+                    </svg>
+
+                  {% when 'manufacturing' %}
+                    <svg viewBox="0 0 24 24">
+                      <path d="M4 20V9l5 3V8l5 3V6l6 4v10H4Z" />
+                    </svg>
+
+                  {% when 'label' %}
+                    <svg viewBox="0 0 24 24">
+                      <path d="M5 4h14v16H5z" />
+                      <path d="M8 8h8M8 12h8M8 16h5" />
+                    </svg>
+
+                {% endcase %}
+
+              </div>
+
+              {% if block.settings.heading != blank %}
+                <h3>{{ block.settings.heading }}</h3>
+              {% endif %}
+
+              {% if block.settings.text != blank %}
+                <p>{{ block.settings.text }}</p>
+              {% endif %}
+
+            </article>
+          {% endfor %}
+
+        </div>
+      {% endif %}
+
+    </div>
+
+  </div>
+</section>
+
+
+{% stylesheet %}
+
+.sendler-quality {
+  padding: 120px 0;
+  background: var(--sendler-white);
+}
+
+.sendler-quality__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(70px, 8vw, 120px);
+  align-items: start;
+}
+
+.sendler-quality__intro {
+  max-width: 560px;
+}
+
+.sendler-quality__heading {
+  margin: 0;
+  font-size: clamp(2.6rem, 4.2vw, 4rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.sendler-quality__text {
+  margin-top: 26px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.sendler-quality__text p {
+  margin: 0 0 18px;
+}
+
+.sendler-quality__text p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* Quality badges */
+
+.sendler-quality__badges {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.sendler-quality__badge {
+  min-height: 230px;
+  padding: 30px;
+  border: 1px solid var(--sendler-border);
+  border-radius: 10px;
+  background: var(--sendler-canvas);
+}
+
+.sendler-quality__icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 44px;
+  color: var(--sendler-green);
+}
+
+.sendler-quality__icon svg {
+  width: 32px;
+  height: 32px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sendler-quality__badge h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.sendler-quality__badge p {
+  margin: 11px 0 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+
+@media screen and (max-width: 900px) {
+
+  .sendler-quality__layout {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+
+}
+
+
+@media screen and (max-width: 749px) {
+
+  .sendler-quality {
+    padding: 82px 0;
+  }
+
+  .sendler-quality__badges {
+    grid-template-columns: 1fr;
+  }
+
+  .sendler-quality__badge {
+    min-height: 0;
+  }
+
+  .sendler-quality__icon {
+    margin-bottom: 28px;
+  }
+
+}
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER quality",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "QUALITY WITHOUT THE THEATER"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What’s on the label should be what’s in the bottle."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Supplement quality shouldn’t depend on vague promises of purity.</p><p>We focus on clear formulas, responsible manufacturing and information you can actually verify.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Quality badge",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "usa",
+              "label": "Made in USA"
+            },
+            {
+              "value": "testing",
+              "label": "Testing"
+            },
+            {
+              "value": "manufacturing",
+              "label": "Manufacturing"
+            },
+            {
+              "value": "label",
+              "label": "Transparent label"
+            }
+          ],
+          "default": "usa"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Made in USA"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Manufactured in the United States."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SENDLER quality",
+      "blocks": [
+        {
+          "type": "badge",
+          "settings": {
+            "icon": "usa",
+            "heading": "Made in USA",
+            "text": "Manufactured in the United States."
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "icon": "manufacturing",
+            "heading": "Quality manufacturing",
+            "text": "Produced under established manufacturing and quality-control standards."
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "icon": "testing",
+            "heading": "Testing & verification",
+            "text": "We prioritize products backed by appropriate testing and supplier documentation."
+          }
+        },
+        {
+          "type": "badge",
+          "settings": {
+            "icon": "label",
+            "heading": "Transparent formulas",
+            "text": "Clear ingredients, clear doses and no need to hide behind proprietary blends."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

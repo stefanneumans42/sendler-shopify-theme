@@ -1,0 +1,548 @@
+<footer class="sendler-footer">
+  <div class="sendler-container">
+
+    <div class="sendler-footer__top">
+
+      <div class="sendler-footer__brand">
+
+        <a
+          href="{{ routes.root_url }}"
+          class="sendler-footer__logo"
+          aria-label="{{ shop.name }}"
+        >
+          SENDLER
+        </a>
+
+        {% if section.settings.tagline != blank %}
+          <p class="sendler-footer__tagline">
+            {{ section.settings.tagline }}
+          </p>
+        {% endif %}
+
+        {% if section.settings.brand_text != blank %}
+          <div class="sendler-footer__brand-text">
+            {{ section.settings.brand_text }}
+          </div>
+        {% endif %}
+
+      </div>
+
+
+      <div class="sendler-footer__menus">
+
+        {% for block in section.blocks %}
+          <div
+            class="sendler-footer__menu"
+            {{ block.shopify_attributes }}
+          >
+
+            {% if block.settings.heading != blank %}
+              <h3>{{ block.settings.heading }}</h3>
+            {% endif %}
+
+            {% if block.settings.menu != blank %}
+              <ul>
+                {% for link in block.settings.menu.links %}
+                  <li>
+                    <a href="{{ link.url }}">
+                      {{ link.title }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+          </div>
+        {% endfor %}
+
+      </div>
+
+
+      {% if section.settings.show_newsletter %}
+        <div class="sendler-footer__newsletter">
+
+          {% if section.settings.newsletter_heading != blank %}
+            <h3>
+              {{ section.settings.newsletter_heading }}
+            </h3>
+          {% endif %}
+
+          {% if section.settings.newsletter_text != blank %}
+            <p>
+              {{ section.settings.newsletter_text }}
+            </p>
+          {% endif %}
+
+          {% form 'customer', class: 'sendler-footer__form' %}
+
+            <input
+              type="hidden"
+              name="contact[tags]"
+              value="newsletter"
+            >
+
+            <div class="sendler-footer__form-row">
+
+              <label
+                class="visually-hidden"
+                for="SendlerFooterEmail-{{ section.id }}"
+              >
+                Email address
+              </label>
+
+              <input
+                id="SendlerFooterEmail-{{ section.id }}"
+                type="email"
+                name="contact[email]"
+                value="{{ form.email }}"
+                placeholder="Email address"
+                autocorrect="off"
+                autocapitalize="off"
+                autocomplete="email"
+                required
+              >
+
+              <button
+                type="submit"
+                aria-label="Subscribe"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M5 12h14M14 7l5 5-5 5" />
+                </svg>
+              </button>
+
+            </div>
+
+            {% if form.posted_successfully? %}
+              <p class="sendler-footer__form-message">
+                Thanks. You're on the list.
+              </p>
+            {% endif %}
+
+            {% if form.errors %}
+              <div class="sendler-footer__form-message sendler-footer__form-message--error">
+                {{ form.errors | default_errors }}
+              </div>
+            {% endif %}
+
+          {% endform %}
+
+        </div>
+      {% endif %}
+
+    </div>
+
+
+    <div class="sendler-footer__bottom">
+
+      <div class="sendler-footer__copyright">
+        © {{ 'now' | date: '%Y' }} SENDLER
+      </div>
+
+      {% if section.settings.bottom_menu != blank %}
+        <nav
+          class="sendler-footer__legal"
+          aria-label="Legal"
+        >
+          {% for link in section.settings.bottom_menu.links %}
+            <a href="{{ link.url }}">
+              {{ link.title }}
+            </a>
+          {% endfor %}
+        </nav>
+      {% endif %}
+
+      {% if section.settings.domain_text != blank %}
+        <div class="sendler-footer__domain">
+          {{ section.settings.domain_text }}
+        </div>
+      {% endif %}
+
+    </div>
+
+  </div>
+</footer>
+
+
+{% stylesheet %}
+
+.sendler-footer {
+  padding: 90px 0 30px;
+  background: var(--sendler-charcoal);
+  color: var(--sendler-white);
+}
+
+
+/* Main footer */
+
+.sendler-footer__top {
+  display: grid;
+  grid-template-columns:
+    minmax(250px, 1.1fr)
+    minmax(360px, 1.4fr)
+    minmax(260px, 0.9fr);
+  gap: clamp(50px, 7vw, 100px);
+  padding-bottom: 72px;
+}
+
+
+/* Brand */
+
+.sendler-footer__logo {
+  display: inline-block;
+  color: var(--sendler-white);
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.sendler-footer__tagline {
+  max-width: 320px;
+  margin: 26px 0 0;
+  color: var(--sendler-white);
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.sendler-footer__brand-text {
+  max-width: 330px;
+  margin-top: 18px;
+}
+
+.sendler-footer__brand-text p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+/* Navigation */
+
+.sendler-footer__menus {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.sendler-footer__menu h3,
+.sendler-footer__newsletter h3 {
+  margin: 0 0 22px;
+  color: rgba(255, 255, 255, 0.54);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.sendler-footer__menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sendler-footer__menu li + li {
+  margin-top: 13px;
+}
+
+.sendler-footer__menu a {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 14px;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.sendler-footer__menu a:hover {
+  color: var(--sendler-white);
+}
+
+
+/* Newsletter */
+
+.sendler-footer__newsletter p {
+  max-width: 300px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.sendler-footer__form {
+  margin-top: 24px;
+}
+
+.sendler-footer__form-row {
+  display: grid;
+  grid-template-columns: 1fr 46px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 7px;
+}
+
+.sendler-footer__form-row input {
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 15px;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: var(--sendler-white);
+  font: inherit;
+  font-size: 14px;
+}
+
+.sendler-footer__form-row input::placeholder {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.sendler-footer__form-row:focus-within {
+  border-color: rgba(255, 255, 255, 0.65);
+}
+
+.sendler-footer__form-row button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: var(--sendler-white);
+  color: var(--sendler-charcoal);
+  cursor: pointer;
+}
+
+.sendler-footer__form-row button:hover {
+  background: var(--sendler-canvas);
+}
+
+.sendler-footer__form-row button svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sendler-footer__form-message {
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12px;
+}
+
+.sendler-footer__form-message--error {
+  color: #f5b3b3;
+}
+
+
+/* Bottom */
+
+.sendler-footer__bottom {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 30px;
+  align-items: center;
+  padding-top: 26px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.sendler-footer__copyright,
+.sendler-footer__domain,
+.sendler-footer__legal a {
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.sendler-footer__legal {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.sendler-footer__legal a {
+  text-decoration: none;
+}
+
+.sendler-footer__legal a:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.sendler-footer__domain {
+  text-align: right;
+}
+
+
+/* Accessibility helper */
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+
+/* Responsive */
+
+@media screen and (max-width: 1050px) {
+
+  .sendler-footer__top {
+    grid-template-columns: 1fr 1.4fr;
+  }
+
+  .sendler-footer__newsletter {
+    grid-column: 1 / -1;
+    max-width: 440px;
+  }
+
+}
+
+
+@media screen and (max-width: 749px) {
+
+  .sendler-footer {
+    padding: 70px 0 28px;
+  }
+
+  .sendler-footer__top {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding-bottom: 52px;
+  }
+
+  .sendler-footer__menus {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 24px;
+  }
+
+  .sendler-footer__newsletter {
+    grid-column: auto;
+  }
+
+  .sendler-footer__bottom {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .sendler-footer__legal {
+    justify-content: flex-start;
+    gap: 14px 18px;
+  }
+
+  .sendler-footer__domain {
+    text-align: left;
+  }
+
+}
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER footer",
+  "tag": "section",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Health shouldn’t be a full-time job."
+    },
+    {
+      "type": "richtext",
+      "id": "brand_text",
+      "label": "Brand text",
+      "default": "<p>Evidence-backed supplements, sensible doses and less noise.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Show newsletter signup",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter heading",
+      "default": "Stay useful"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_text",
+      "label": "Newsletter text",
+      "default": "Useful health information, product updates and occasional offers. No daily inbox abuse."
+    },
+    {
+      "type": "link_list",
+      "id": "bottom_menu",
+      "label": "Legal menu"
+    },
+    {
+      "type": "text",
+      "id": "domain_text",
+      "label": "Domain text",
+      "default": "getsendler.com"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SENDLER footer",
+      "blocks": [
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "Shop"
+          }
+        },
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "SENDLER"
+          }
+        },
+        {
+          "type": "menu",
+          "settings": {
+            "heading": "Help"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

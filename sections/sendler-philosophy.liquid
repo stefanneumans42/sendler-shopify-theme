@@ -1,0 +1,272 @@
+<section class="sendler-philosophy full-width">
+  <div class="sendler-container">
+
+    <div class="sendler-philosophy__intro">
+      {% if section.settings.eyebrow != blank %}
+        <div class="sendler-eyebrow">
+          {{ section.settings.eyebrow }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="sendler-philosophy__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="sendler-philosophy__text">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if section.blocks.size > 0 %}
+      <div class="sendler-philosophy__grid">
+
+        {% for block in section.blocks %}
+          <article
+            class="sendler-philosophy__item"
+            {{ block.shopify_attributes }}
+          >
+            <div class="sendler-philosophy__number">
+              0{{ forloop.index }}
+            </div>
+
+            {% if block.settings.heading != blank %}
+              <h3>{{ block.settings.heading }}</h3>
+            {% endif %}
+
+            {% if block.settings.text != blank %}
+              <p>{{ block.settings.text }}</p>
+            {% endif %}
+          </article>
+        {% endfor %}
+
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% stylesheet %}
+
+.sendler-philosophy {
+  padding: 120px 0;
+  background: var(--sendler-white);
+}
+
+.sendler-philosophy__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.7fr);
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 72px;
+}
+
+.sendler-philosophy__heading {
+  max-width: 680px;
+  margin: 0;
+}
+
+.sendler-philosophy__text {
+  max-width: 500px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.sendler-philosophy__text p {
+  margin: 0;
+}
+
+.sendler-philosophy__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--sendler-border);
+  border-bottom: 1px solid var(--sendler-border);
+}
+
+.sendler-philosophy__item {
+  min-width: 0;
+  padding: 34px 30px 38px;
+  border-right: 1px solid var(--sendler-border);
+}
+
+.sendler-philosophy__item:first-child {
+  padding-left: 0;
+}
+
+.sendler-philosophy__item:last-child {
+  padding-right: 0;
+  border-right: 0;
+}
+
+.sendler-philosophy__number {
+  margin-bottom: 42px;
+  color: var(--sendler-green);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.sendler-philosophy__item h3 {
+  margin: 0 0 12px;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.sendler-philosophy__item p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+@media screen and (max-width: 900px) {
+  .sendler-philosophy__intro {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .sendler-philosophy__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sendler-philosophy__item {
+    border-bottom: 1px solid var(--sendler-border);
+  }
+
+  .sendler-philosophy__item:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .sendler-philosophy__item:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+
+  .sendler-philosophy__item:first-child {
+    padding-left: 30px;
+  }
+
+  .sendler-philosophy__item:last-child {
+    padding-right: 30px;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .sendler-philosophy {
+    padding: 80px 0;
+  }
+
+  .sendler-philosophy__intro {
+    margin-bottom: 48px;
+  }
+
+  .sendler-philosophy__text {
+    font-size: 17px;
+  }
+
+  .sendler-philosophy__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sendler-philosophy__item,
+  .sendler-philosophy__item:first-child,
+  .sendler-philosophy__item:last-child {
+    padding: 28px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--sendler-border);
+  }
+
+  .sendler-philosophy__item:last-child {
+    border-bottom: 0;
+  }
+
+  .sendler-philosophy__number {
+    margin-bottom: 22px;
+  }
+}
+
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "SENDLER philosophy",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "A SIMPLER APPROACH TO SUPPLEMENTS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Less noise. More of what works."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>The supplement aisle has become unnecessarily complicated. SENDLER focuses on useful products, sensible doses and clear guidance — so you can spend less time researching supplements and more time living your life.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "principle",
+      "name": "Principle",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Evidence-led selection"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "We look at the research before we look at the trends."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SENDLER philosophy",
+      "blocks": [
+        {
+          "type": "principle",
+          "settings": {
+            "heading": "Evidence-led selection",
+            "text": "We look at the research before we look at the trends."
+          }
+        },
+        {
+          "type": "principle",
+          "settings": {
+            "heading": "Transparent dosing",
+            "text": "We tell you what’s in the product and how much."
+          }
+        },
+        {
+          "type": "principle",
+          "settings": {
+            "heading": "Quality-first sourcing",
+            "text": "Products are selected with manufacturing quality and ingredient standards in mind."
+          }
+        },
+        {
+          "type": "principle",
+          "settings": {
+            "heading": "Focused catalogue",
+            "text": "We don’t need hundreds of products to help you make better choices."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

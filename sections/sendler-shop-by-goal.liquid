@@ -1,0 +1,391 @@
+<section class="sendler-goals full-width">
+  <div class="sendler-container">
+
+    <div class="sendler-goals__header">
+      <div>
+        {% if section.settings.eyebrow != blank %}
+          <div class="sendler-eyebrow">
+            {{ section.settings.eyebrow }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="sendler-goals__heading">
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+      </div>
+
+      {% if section.settings.text != blank %}
+        <div class="sendler-goals__intro">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+    </div>
+
+
+    {% if section.blocks.size > 0 %}
+      <div class="sendler-goals__grid">
+
+        {% for block in section.blocks %}
+          <article
+            class="sendler-goal-card"
+            {{ block.shopify_attributes }}
+          >
+
+            {% if block.settings.image != blank %}
+              <div class="sendler-goal-card__media">
+                {{
+                  block.settings.image
+                  | image_url: width: 900
+                  | image_tag:
+                    class: 'sendler-goal-card__image',
+                    widths: '360, 540, 720, 900',
+                    sizes: '(min-width: 900px) 25vw, (min-width: 600px) 50vw, 100vw',
+                    loading: 'lazy'
+                }}
+              </div>
+            {% else %}
+              <div class="sendler-goal-card__placeholder">
+                <span>
+                  0{{ forloop.index }}
+                </span>
+              </div>
+            {% endif %}
+
+
+            <div class="sendler-goal-card__content">
+
+              {% if block.settings.heading != blank %}
+                <h3>
+                  {{ block.settings.heading }}
+                </h3>
+              {% endif %}
+
+              {% if block.settings.text != blank %}
+                <p>
+                  {{ block.settings.text }}
+                </p>
+              {% endif %}
+
+              {% if block.settings.link_label != blank %}
+                {% if block.settings.link != blank %}
+                  <a
+                    href="{{ block.settings.link }}"
+                    class="sendler-goal-card__link"
+                  >
+                    {{ block.settings.link_label }}
+
+                    <svg
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M5 12h14M14 7l5 5-5 5" />
+                    </svg>
+                  </a>
+                {% else %}
+                  <span class="sendler-goal-card__link">
+                    {{ block.settings.link_label }}
+
+                    <svg
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path d="M5 12h14M14 7l5 5-5 5" />
+                    </svg>
+                  </span>
+                {% endif %}
+              {% endif %}
+
+            </div>
+
+          </article>
+        {% endfor %}
+
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+
+{% stylesheet %}
+
+.sendler-goals {
+  padding: 110px 0;
+  background: var(--sendler-white);
+}
+
+.sendler-goals__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.65fr);
+  gap: 72px;
+  align-items: end;
+  margin-bottom: 54px;
+}
+
+.sendler-goals__heading {
+  max-width: 650px;
+  margin: 0;
+}
+
+.sendler-goals__intro {
+  max-width: 500px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.sendler-goals__intro p {
+  margin: 0;
+}
+
+
+.sendler-goals__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+
+.sendler-goal-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--sendler-border);
+  border-radius: 10px;
+  background: var(--sendler-canvas);
+}
+
+.sendler-goal-card__media,
+.sendler-goal-card__placeholder {
+  aspect-ratio: 1 / 0.78;
+  overflow: hidden;
+  background: var(--sendler-soft-green);
+}
+
+.sendler-goal-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 260ms ease;
+}
+
+.sendler-goal-card:hover .sendler-goal-card__image {
+  transform: scale(1.025);
+}
+
+.sendler-goal-card__placeholder {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 22px;
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(23, 63, 48, 0.14),
+      transparent 38%
+    ),
+    var(--sendler-soft-green);
+}
+
+.sendler-goal-card__placeholder span {
+  color: rgba(23, 63, 48, 0.24);
+  font-size: 58px;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+
+.sendler-goal-card__content {
+  padding: 26px 24px 28px;
+}
+
+.sendler-goal-card h3 {
+  margin: 0;
+  font-size: 21px;
+  line-height: 1.15;
+}
+
+.sendler-goal-card p {
+  min-height: 66px;
+  margin: 12px 0 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.sendler-goal-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+  color: var(--sendler-green);
+  font-size: 14px;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.sendler-goal-card__link svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 160ms ease;
+}
+
+.sendler-goal-card__link:hover svg {
+  transform: translateX(3px);
+}
+
+
+@media screen and (max-width: 1050px) {
+
+  .sendler-goals__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media screen and (max-width: 749px) {
+
+  .sendler-goals {
+    padding: 80px 0;
+  }
+
+  .sendler-goals__header {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-bottom: 40px;
+  }
+
+  .sendler-goals__grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .sendler-goal-card__media,
+  .sendler-goal-card__placeholder {
+    aspect-ratio: 1.35 / 1;
+  }
+
+  .sendler-goal-card__content {
+    padding: 24px 22px 26px;
+  }
+
+  .sendler-goal-card p {
+    min-height: 0;
+  }
+
+}
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER shop by goal",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "SHOP BY GOAL"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Support what matters most."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Straightforward supplements for everyday health, performance and real-life goals.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "goal",
+      "name": "Goal",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "The Basics"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Everyday nutritional foundations."
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "Link label",
+          "default": "Shop The Basics"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SENDLER shop by goal",
+      "blocks": [
+        {
+          "type": "goal",
+          "settings": {
+            "heading": "The Basics",
+            "text": "Everyday nutritional foundations.",
+            "link_label": "Shop The Basics"
+          }
+        },
+        {
+          "type": "goal",
+          "settings": {
+            "heading": "Performance & Energy",
+            "text": "Support for training, physical performance and demanding days.",
+            "link_label": "Shop Performance & Energy"
+          }
+        },
+        {
+          "type": "goal",
+          "settings": {
+            "heading": "Stress & Daily Balance",
+            "text": "Straightforward support for busy schedules and everyday stress.",
+            "link_label": "Shop Stress & Balance"
+          }
+        },
+        {
+          "type": "goal",
+          "settings": {
+            "heading": "Digestion & Metabolic Health",
+            "text": "Focused support for digestion and metabolic health.",
+            "link_label": "Shop Digestion & Metabolic Health"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

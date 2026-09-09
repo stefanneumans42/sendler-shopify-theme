@@ -1,0 +1,524 @@
+<section class="sendler-products full-width">
+  <div class="sendler-container">
+
+    <div class="sendler-products__header">
+      <div>
+        {% if section.settings.eyebrow != blank %}
+          <div class="sendler-eyebrow">
+            {{ section.settings.eyebrow }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="sendler-products__heading">
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+      </div>
+
+      {% if section.settings.text != blank %}
+        <div class="sendler-products__intro">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+    </div>
+
+
+    <div class="sendler-products__grid">
+
+      {% for block in section.blocks %}
+        {% assign product = block.settings.product %}
+
+        <article
+          class="sendler-product-card"
+          {{ block.shopify_attributes }}
+        >
+
+          {% if product != blank %}
+
+            <a
+              href="{{ product.url }}"
+              class="sendler-product-card__media"
+              aria-label="{{ product.title }}"
+            >
+              {% if product.featured_image %}
+                {{
+                  product.featured_image
+                  | image_url: width: 900
+                  | image_tag:
+                    class: 'sendler-product-card__image',
+                    widths: '360, 540, 720, 900',
+                    sizes: '(min-width: 1000px) 25vw, (min-width: 600px) 50vw, 100vw',
+                    loading: 'lazy',
+                    alt: product.title
+                }}
+              {% else %}
+                <div class="sendler-product-card__placeholder">
+                  <span>SENDLER</span>
+                </div>
+              {% endif %}
+            </a>
+
+          {% else %}
+
+            <div class="sendler-product-card__media">
+              <div class="sendler-product-card__placeholder">
+                <span>SENDLER</span>
+              </div>
+            </div>
+
+          {% endif %}
+
+
+          <div class="sendler-product-card__content">
+
+            {% if block.settings.category != blank %}
+              <div class="sendler-product-card__category">
+                {{ block.settings.category }}
+              </div>
+            {% endif %}
+
+            <h3 class="sendler-product-card__title">
+              {% if product != blank %}
+                <a href="{{ product.url }}">
+                  {{ product.title }}
+                </a>
+              {% else %}
+                {{ block.settings.placeholder_title }}
+              {% endif %}
+            </h3>
+
+            {% if block.settings.benefits != blank %}
+              <p class="sendler-product-card__benefits">
+                {{ block.settings.benefits }}
+              </p>
+            {% endif %}
+
+            {% if block.settings.dose != blank %}
+              <div class="sendler-product-card__dose">
+                {{ block.settings.dose }}
+              </div>
+            {% endif %}
+
+            <div class="sendler-product-card__bottom">
+
+              <div class="sendler-product-card__price">
+                {% if product != blank %}
+                  {{ product.price | money }}
+                {% else %}
+                  $XX
+                {% endif %}
+              </div>
+
+              {% if product != blank %}
+                {% assign variant = product.selected_or_first_available_variant %}
+
+                {% if variant.available %}
+                  {% form 'product', product, class: 'sendler-product-card__form' %}
+                    <input
+                      type="hidden"
+                      name="id"
+                      value="{{ variant.id }}"
+                    >
+
+                    <button
+                      type="submit"
+                      class="sendler-product-card__add"
+                    >
+                      Add to cart
+                    </button>
+                  {% endform %}
+                {% else %}
+                  <span class="sendler-product-card__soldout">
+                    Sold out
+                  </span>
+                {% endif %}
+
+              {% else %}
+                <span class="sendler-product-card__add sendler-product-card__add--disabled">
+                  Add to cart
+                </span>
+              {% endif %}
+
+            </div>
+
+          </div>
+
+        </article>
+      {% endfor %}
+
+    </div>
+
+
+    {% if section.settings.view_all_label != blank %}
+      <div class="sendler-products__footer">
+
+        {% if section.settings.view_all_link != blank %}
+          <a
+            href="{{ section.settings.view_all_link }}"
+            class="sendler-text-link"
+          >
+            {{ section.settings.view_all_label }}
+            <span aria-hidden="true">→</span>
+          </a>
+        {% else %}
+          <a
+            href="{{ routes.all_products_collection_url }}"
+            class="sendler-text-link"
+          >
+            {{ section.settings.view_all_label }}
+            <span aria-hidden="true">→</span>
+          </a>
+        {% endif %}
+
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+
+{% stylesheet %}
+
+.sendler-products {
+  padding: 110px 0;
+  background: var(--sendler-canvas);
+}
+
+.sendler-products__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.65fr);
+  gap: 72px;
+  align-items: end;
+  margin-bottom: 54px;
+}
+
+.sendler-products__heading {
+  margin: 0;
+}
+
+.sendler-products__intro {
+  max-width: 500px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.sendler-products__intro p {
+  margin: 0;
+}
+
+
+.sendler-products__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+
+/* Product card */
+
+.sendler-product-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--sendler-border);
+  border-radius: 10px;
+  background: var(--sendler-white);
+}
+
+.sendler-product-card__media {
+  display: block;
+  aspect-ratio: 1 / 1.08;
+  overflow: hidden;
+  background: var(--sendler-soft-green);
+}
+
+.sendler-product-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 28px;
+  transition: transform 220ms ease;
+}
+
+.sendler-product-card:hover .sendler-product-card__image {
+  transform: scale(1.025);
+}
+
+.sendler-product-card__placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(23, 63, 48, 0.08),
+      transparent 55%
+    ),
+    var(--sendler-soft-green);
+}
+
+.sendler-product-card__placeholder span {
+  color: rgba(23, 63, 48, 0.32);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+
+.sendler-product-card__content {
+  padding: 24px;
+}
+
+.sendler-product-card__category {
+  margin-bottom: 8px;
+  color: var(--sendler-text-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.sendler-product-card__title {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.sendler-product-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.sendler-product-card__benefits {
+  min-height: 44px;
+  margin: 9px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.sendler-product-card__dose {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--sendler-border);
+  color: var(--sendler-charcoal);
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.sendler-product-card__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.sendler-product-card__price {
+  color: var(--sendler-charcoal);
+  font-size: 17px;
+  font-weight: 650;
+}
+
+.sendler-product-card__form {
+  margin: 0;
+}
+
+.sendler-product-card__add {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 15px;
+  border: 1px solid var(--sendler-green);
+  border-radius: 7px;
+  background: var(--sendler-green);
+  color: var(--sendler-white);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sendler-product-card__add:hover {
+  background: var(--sendler-green-hover);
+}
+
+.sendler-product-card__add--disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.sendler-product-card__soldout {
+  color: var(--sendler-text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+.sendler-products__footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 42px;
+}
+
+
+@media screen and (max-width: 1050px) {
+
+  .sendler-products__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media screen and (max-width: 749px) {
+
+  .sendler-products {
+    padding: 80px 0;
+  }
+
+  .sendler-products__header {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-bottom: 40px;
+  }
+
+  .sendler-products__grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .sendler-product-card__media {
+    aspect-ratio: 1.25 / 1;
+  }
+
+  .sendler-product-card__benefits {
+    min-height: 0;
+  }
+
+}
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER featured products",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "SENDLER ESSENTIALS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Start with the essentials."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Straightforward supplements with clear doses, useful information and no unnecessary complexity.</p>"
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "default": "View all supplements"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View all link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "text",
+          "id": "placeholder_title",
+          "label": "Placeholder title",
+          "default": "Creatine Monohydrate"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category",
+          "default": "Performance"
+        },
+        {
+          "type": "text",
+          "id": "benefits",
+          "label": "Benefits",
+          "default": "Strength · Performance · Everyday use"
+        },
+        {
+          "type": "text",
+          "id": "dose",
+          "label": "Dose",
+          "default": "5 g per serving"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SENDLER featured products",
+      "blocks": [
+        {
+          "type": "product",
+          "settings": {
+            "placeholder_title": "Creatine Monohydrate",
+            "category": "Performance",
+            "benefits": "Strength · Performance · Everyday use",
+            "dose": "5 g per serving"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "placeholder_title": "Omega-3 EPA/DHA",
+            "category": "The Basics",
+            "benefits": "Heart · Brain · Everyday health",
+            "dose": "EPA + DHA per serving"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "placeholder_title": "Magnesium Glycinate",
+            "category": "The Basics",
+            "benefits": "Magnesium intake · Relaxation · Muscle function",
+            "dose": "Elemental magnesium per serving"
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "placeholder_title": "Vitamin D3",
+            "category": "The Basics",
+            "benefits": "Vitamin D intake · Bones · Immune function",
+            "dose": "2,000 IU / 50 mcg"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

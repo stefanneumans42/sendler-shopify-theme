@@ -1,0 +1,539 @@
+/* ==========================================================================
+   SENDLER Design System
+   ========================================================================== */
+
+:root {
+  /* Brand colors */
+  --sendler-green: #173f30;
+  --sendler-green-hover: #103226;
+  --sendler-canvas: #f7f5ef;
+  --sendler-white: #ffffff;
+  --sendler-charcoal: #171a18;
+  --sendler-text-secondary: #656a66;
+  --sendler-border: #dddcd5;
+  --sendler-soft-green: #ecefe9;
+
+  /* Override Skeleton defaults */
+  --color-background: var(--sendler-canvas);
+  --color-foreground: var(--sendler-charcoal);
+
+  /* Layout */
+  --sendler-page-width: 1280px;
+  --sendler-page-padding: 40px;
+  --sendler-page-padding-mobile: 20px;
+
+  /* Spacing */
+  --sendler-space-xs: 8px;
+  --sendler-space-sm: 16px;
+  --sendler-space-md: 24px;
+  --sendler-space-lg: 40px;
+  --sendler-space-xl: 64px;
+  --sendler-space-2xl: 96px;
+
+  /* Radius */
+  --sendler-radius: 8px;
+
+  /* Typography */
+  --sendler-body-size: 16px;
+  --sendler-body-line: 1.55;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--sendler-canvas);
+  color: var(--sendler-charcoal);
+  font-family: var(--font-primary--family);
+  font-size: var(--sendler-body-size);
+  line-height: var(--sendler-body-line);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--sendler-charcoal);
+  font-family: var(--font-primary--family);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+h1 {
+  font-size: clamp(2.625rem, 5vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+p {
+  color: var(--sendler-text-secondary);
+}
+
+/* ==========================================================================
+   Global layout
+   ========================================================================== */
+
+.sendler-container {
+  width: min(
+    var(--sendler-page-width),
+    calc(100% - (var(--sendler-page-padding) * 2))
+  );
+  margin-inline: auto;
+}
+
+.sendler-section {
+  padding-block: var(--sendler-space-2xl);
+}
+
+.sendler-section--white {
+  background: var(--sendler-white);
+}
+
+.sendler-section--soft {
+  background: var(--sendler-soft-green);
+}
+
+.sendler-section--dark {
+  background: var(--sendler-green);
+  color: var(--sendler-white);
+}
+
+.sendler-section--dark h1,
+.sendler-section--dark h2,
+.sendler-section--dark h3,
+.sendler-section--dark p {
+  color: inherit;
+}
+
+/* ==========================================================================
+   Typography utilities
+   ========================================================================== */
+
+.sendler-eyebrow {
+  margin-bottom: 16px;
+  color: var(--sendler-green);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.sendler-lead {
+  max-width: 680px;
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.sendler-button {
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border: 1px solid transparent;
+  border-radius: var(--sendler-radius);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.sendler-button:hover {
+  transform: translateY(-1px);
+}
+
+.sendler-button--primary {
+  background: var(--sendler-green);
+  color: var(--sendler-white);
+}
+
+.sendler-button--primary:hover {
+  background: var(--sendler-green-hover);
+}
+
+.sendler-button--secondary {
+  border-color: var(--sendler-green);
+  background: transparent;
+  color: var(--sendler-green);
+}
+
+.sendler-button--secondary:hover {
+  background: var(--sendler-green);
+  color: var(--sendler-white);
+}
+
+.sendler-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--sendler-green);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.sendler-text-link:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+
+.sendler-card {
+  border: 1px solid var(--sendler-border);
+  border-radius: var(--sendler-radius);
+  background: var(--sendler-white);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media screen and (max-width: 749px) {
+  :root {
+    --sendler-space-2xl: 64px;
+  }
+
+  .sendler-container {
+    width: calc(100% - (var(--sendler-page-padding-mobile) * 2));
+  }
+
+  h1 {
+    font-size: 2.625rem;
+    line-height: 1.05;
+  }
+
+  h2 {
+    font-size: 2rem;
+    line-height: 1.12;
+  }
+
+  .sendler-lead {
+    font-size: 17px;
+  }
+}
+/* ==========================================================================
+   Announcement bar
+   ========================================================================== */
+
+.sendler-announcement {
+  background: var(--sendler-green);
+  color: var(--sendler-white);
+}
+
+.sendler-announcement__inner {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.sendler-announcement a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.sendler-announcement a:hover {
+  text-decoration: underline;
+}
+
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.sendler-header {
+  position: relative;
+  z-index: 40;
+  background: var(--sendler-canvas);
+  border-bottom: 1px solid var(--sendler-border);
+}
+
+.sendler-header__inner {
+  min-height: 76px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 40px;
+}
+
+
+/* Logo */
+
+.sendler-header__logo {
+  display: inline-flex;
+  align-items: center;
+  color: var(--sendler-charcoal);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.sendler-header__logo-image {
+  display: block;
+  width: auto;
+  max-height: 38px;
+}
+
+
+/* Desktop menu */
+
+.sendler-header__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.sendler-header__nav a {
+  position: relative;
+  color: var(--sendler-charcoal);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.sendler-header__nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -7px;
+  height: 1px;
+  background: var(--sendler-green);
+  transition: right 160ms ease;
+}
+
+.sendler-header__nav a:hover::after,
+.sendler-header__nav a[aria-current="page"]::after {
+  right: 0;
+}
+
+
+/* Utility icons */
+
+.sendler-header__utilities {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+}
+
+.sendler-header__icon {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--sendler-charcoal);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sendler-header__icon svg {
+  width: 21px;
+  height: 21px;
+}
+
+.sendler-header__icon:hover {
+  color: var(--sendler-green);
+}
+
+.sendler-header__cart-count {
+  position: absolute;
+  top: -7px;
+  right: -9px;
+  min-width: 17px;
+  height: 17px;
+  padding-inline: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--sendler-green);
+  color: var(--sendler-white);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+
+/* ==========================================================================
+   Mobile navigation
+   ========================================================================== */
+
+.sendler-mobile-nav {
+  display: none;
+}
+
+.sendler-mobile-nav summary {
+  list-style: none;
+}
+
+.sendler-mobile-nav summary::-webkit-details-marker {
+  display: none;
+}
+
+.sendler-mobile-nav__panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px 26px;
+  border-top: 1px solid var(--sendler-border);
+  border-bottom: 1px solid var(--sendler-border);
+  background: var(--sendler-canvas);
+}
+
+.sendler-mobile-nav__panel a {
+  padding: 15px 0;
+  border-bottom: 1px solid var(--sendler-border);
+  color: var(--sendler-charcoal);
+  font-size: 17px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.sendler-mobile-nav__panel a:last-child {
+  border-bottom: 0;
+}
+
+
+/* ==========================================================================
+   Header responsive
+   ========================================================================== */
+
+@media screen and (max-width: 749px) {
+  .sendler-announcement__inner {
+    min-height: 32px;
+    font-size: 11px;
+  }
+
+  .sendler-header__inner {
+    min-height: 66px;
+    grid-template-columns: 32px 1fr auto;
+    gap: 14px;
+  }
+
+  .sendler-mobile-nav {
+    display: block;
+  }
+
+  .sendler-header__nav {
+    display: none;
+  }
+
+  .sendler-header__logo {
+    justify-self: center;
+    font-size: 19px;
+  }
+
+  .sendler-header__logo-image {
+    max-height: 32px;
+  }
+
+  .sendler-header__utilities {
+    gap: 13px;
+  }
+
+  .sendler-header__account {
+    display: none;
+  }
+
+  .sendler-header__icon {
+    width: 21px;
+    height: 21px;
+  }
+
+  .sendler-header__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+/* ==========================================================================
+   SENDLER full-bleed section backgrounds
+   ========================================================================== */
+
+/*
+ * Keep the section content constrained,
+ * but visually extend its background to the viewport edges.
+ */
+
+.sendler-philosophy,
+.sendler-goals,
+.sendler-quality {
+  box-shadow: 0 0 0 100vmax var(--sendler-white);
+  clip-path: inset(0 -100vmax);
+}
+
+.sendler-products,
+.sendler-reviews {
+  box-shadow: 0 0 0 100vmax var(--sendler-canvas);
+  clip-path: inset(0 -100vmax);
+}
+
+.sendler-why {
+  box-shadow: 0 0 0 100vmax var(--sendler-green);
+  clip-path: inset(0 -100vmax);
+}
+
+.sendler-footer {
+  box-shadow: 0 0 0 100vmax var(--sendler-charcoal);
+  clip-path: inset(0 -100vmax);
+}
+
+.sendler-announcement {
+  box-shadow: 0 0 0 100vmax var(--sendler-green);
+  clip-path: inset(0 -100vmax);
+}
+
+.sendler-header {
+  box-shadow: 0 0 0 100vmax var(--sendler-canvas);
+  clip-path: inset(0 -100vmax);
+}

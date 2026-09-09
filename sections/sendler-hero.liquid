@@ -1,0 +1,582 @@
+<section class="sendler-hero full-width">
+  <div class="sendler-container">
+
+    <div class="sendler-hero__main">
+
+      <div class="sendler-hero__content">
+
+        {% if section.settings.eyebrow != blank %}
+          <div class="sendler-eyebrow">
+            {{ section.settings.eyebrow }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h1 class="sendler-hero__heading">
+            {{ section.settings.heading }}
+          </h1>
+        {% endif %}
+
+        {% if section.settings.text != blank %}
+          <div class="sendler-hero__text">
+            {{ section.settings.text }}
+          </div>
+        {% endif %}
+
+        <div class="sendler-hero__actions">
+
+          {% if section.settings.primary_label != blank %}
+            {% if section.settings.primary_link != blank %}
+              <a
+                href="{{ section.settings.primary_link }}"
+                class="sendler-button sendler-button--primary"
+              >
+                {{ section.settings.primary_label }}
+              </a>
+            {% else %}
+              <span class="sendler-button sendler-button--primary">
+                {{ section.settings.primary_label }}
+              </span>
+            {% endif %}
+          {% endif %}
+
+          {% if section.settings.secondary_label != blank %}
+            {% if section.settings.secondary_link != blank %}
+              <a
+                href="{{ section.settings.secondary_link }}"
+                class="sendler-button sendler-button--secondary"
+              >
+                {{ section.settings.secondary_label }}
+              </a>
+            {% else %}
+              <span class="sendler-button sendler-button--secondary">
+                {{ section.settings.secondary_label }}
+              </span>
+            {% endif %}
+          {% endif %}
+
+        </div>
+
+        {% if section.settings.microcopy != blank %}
+          <div class="sendler-hero__microcopy">
+            {{ section.settings.microcopy }}
+          </div>
+        {% endif %}
+
+      </div>
+
+
+      <div class="sendler-hero__media">
+
+        {% if section.settings.hero_image != blank %}
+
+          {{
+            section.settings.hero_image
+            | image_url: width: 1400
+            | image_tag:
+              class: 'sendler-hero__image',
+              widths: '480, 720, 960, 1200, 1400',
+              sizes: '(min-width: 750px) 48vw, 100vw',
+              loading: 'eager'
+          }}
+
+        {% else %}
+
+          <div class="sendler-hero__placeholder">
+            <div class="sendler-hero__placeholder-inner">
+              <span>SENDLER</span>
+              <small>Hero product composition</small>
+            </div>
+          </div>
+
+        {% endif %}
+
+      </div>
+
+    </div>
+
+
+    {% if section.blocks.size > 0 %}
+      <div class="sendler-hero__principles">
+
+        {% for block in section.blocks %}
+
+          <div
+            class="sendler-hero__principle"
+            {{ block.shopify_attributes }}
+          >
+
+            <div class="sendler-hero__principle-icon" aria-hidden="true">
+
+              {% case block.settings.icon %}
+
+                {% when 'evidence' %}
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12.5 9.2 17 19 7" />
+                  </svg>
+
+                {% when 'dose' %}
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 3v18M7 8h10M7 16h10" />
+                  </svg>
+
+                {% when 'simple' %}
+                  <svg viewBox="0 0 24 24">
+                    <path d="M4 12h16M12 4v16" />
+                  </svg>
+
+              {% endcase %}
+
+            </div>
+
+            <div>
+              {% if block.settings.heading != blank %}
+                <h3>
+                  {{ block.settings.heading }}
+                </h3>
+              {% endif %}
+
+              {% if block.settings.text != blank %}
+                <p>
+                  {{ block.settings.text }}
+                </p>
+              {% endif %}
+            </div>
+
+          </div>
+
+        {% endfor %}
+
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+
+{% stylesheet %}
+
+  .sendler-hero {
+    padding: 72px 0 0;
+    overflow: hidden;
+  }
+
+  .sendler-hero__main {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    align-items: center;
+    gap: clamp(48px, 6vw, 96px);
+    min-height: 560px;
+  }
+
+  .sendler-hero__content {
+    max-width: 620px;
+  }
+
+  .sendler-hero__heading {
+    max-width: 620px;
+    margin: 0;
+    font-size: clamp(3.5rem, 5.4vw, 5rem);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  .sendler-hero__text {
+    max-width: 580px;
+    margin-top: 26px;
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  .sendler-hero__text p {
+    margin: 0;
+    color: var(--sendler-text-secondary);
+  }
+
+  .sendler-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .sendler-hero__microcopy {
+    margin-top: 14px;
+    color: var(--sendler-text-secondary);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .sendler-hero__media {
+    position: relative;
+    min-width: 0;
+  }
+
+  .sendler-hero__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 620px;
+    object-fit: contain;
+  }
+
+  .sendler-hero__placeholder {
+    position: relative;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 12px;
+    background:
+      radial-gradient(
+        circle at 70% 35%,
+        rgba(23, 63, 48, 0.12),
+        transparent 35%
+      ),
+      var(--sendler-soft-green);
+  }
+
+  .sendler-hero__placeholder::before,
+  .sendler-hero__placeholder::after {
+    content: "";
+    position: absolute;
+    bottom: 70px;
+    width: 125px;
+    height: 310px;
+    border-radius: 55px 55px 22px 22px;
+    background: var(--sendler-white);
+    border: 1px solid var(--sendler-border);
+    box-shadow: 0 20px 45px rgba(23, 26, 24, 0.08);
+  }
+
+  .sendler-hero__placeholder::before {
+    left: calc(50% - 135px);
+    transform: rotate(-7deg);
+  }
+
+  .sendler-hero__placeholder::after {
+    right: calc(50% - 135px);
+    transform: rotate(8deg);
+  }
+
+  .sendler-hero__placeholder-inner {
+    position: relative;
+    z-index: 2;
+    width: 140px;
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--sendler-border);
+    border-radius: 58px 58px 24px 24px;
+    background: var(--sendler-white);
+    box-shadow: 0 24px 50px rgba(23, 26, 24, 0.1);
+    transform: translateY(-15px);
+  }
+
+  .sendler-hero__placeholder-inner span {
+    color: var(--sendler-green);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+  }
+
+  .sendler-hero__placeholder-inner small {
+    max-width: 90px;
+    margin-top: 16px;
+    color: var(--sendler-text-secondary);
+    font-size: 11px;
+    line-height: 1.35;
+    text-align: center;
+  }
+
+
+  /* Principles */
+
+  .sendler-hero__principles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 68px;
+    border-top: 1px solid var(--sendler-border);
+    border-bottom: 1px solid var(--sendler-border);
+  }
+
+  .sendler-hero__principle {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 14px;
+    padding: 28px 32px;
+    border-right: 1px solid var(--sendler-border);
+  }
+
+  .sendler-hero__principle:first-child {
+    padding-left: 0;
+  }
+
+  .sendler-hero__principle:last-child {
+    padding-right: 0;
+    border-right: 0;
+  }
+
+  .sendler-hero__principle-icon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sendler-green);
+  }
+
+  .sendler-hero__principle-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .sendler-hero__principle h3 {
+    margin: 0 0 7px;
+    font-size: 15px;
+    font-weight: 650;
+    letter-spacing: -0.01em;
+  }
+
+  .sendler-hero__principle p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+
+  @media screen and (max-width: 900px) {
+
+    .sendler-hero {
+      padding-top: 54px;
+    }
+
+    .sendler-hero__main {
+      grid-template-columns: 1fr;
+      min-height: 0;
+      gap: 50px;
+    }
+
+    .sendler-hero__content {
+      max-width: 680px;
+    }
+
+    .sendler-hero__media {
+      max-width: 680px;
+      width: 100%;
+      margin-inline: auto;
+    }
+
+  }
+
+
+  @media screen and (max-width: 749px) {
+
+    .sendler-hero {
+      padding-top: 42px;
+    }
+
+    .sendler-hero__heading {
+      font-size: 2.9rem;
+      line-height: 1;
+    }
+
+    .sendler-hero__text {
+      margin-top: 22px;
+      font-size: 17px;
+    }
+
+    .sendler-hero__actions {
+      margin-top: 26px;
+    }
+
+    .sendler-hero__actions .sendler-button {
+      width: 100%;
+    }
+
+    .sendler-hero__placeholder {
+      min-height: 390px;
+    }
+
+    .sendler-hero__placeholder::before,
+    .sendler-hero__placeholder::after {
+      width: 90px;
+      height: 235px;
+      bottom: 55px;
+    }
+
+    .sendler-hero__placeholder::before {
+      left: calc(50% - 103px);
+    }
+
+    .sendler-hero__placeholder::after {
+      right: calc(50% - 103px);
+    }
+
+    .sendler-hero__placeholder-inner {
+      width: 105px;
+      min-height: 250px;
+    }
+
+    .sendler-hero__principles {
+      grid-template-columns: 1fr;
+      margin-top: 52px;
+    }
+
+    .sendler-hero__principle,
+    .sendler-hero__principle:first-child,
+    .sendler-hero__principle:last-child {
+      padding: 22px 0;
+      border-right: 0;
+      border-bottom: 1px solid var(--sendler-border);
+    }
+
+    .sendler-hero__principle:last-child {
+      border-bottom: 0;
+    }
+
+  }
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER hero",
+  "tag": "section",
+  "class": "sendler-hero-section",
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "CLARITY FOR A HEALTHIER YOU"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Health shouldn't be a full-time job."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>We help you figure out which supplements may actually make sense — and which ones you can probably skip.</p>"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary button label",
+      "default": "Find My Essentials"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary button label",
+      "default": "Shop Supplements"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "text",
+      "id": "microcopy",
+      "label": "Microcopy",
+      "default": "Free · About 2 minutes · No purchase required"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "principle",
+      "name": "Principle",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "evidence",
+              "label": "Evidence"
+            },
+            {
+              "value": "dose",
+              "label": "Dose"
+            },
+            {
+              "value": "simple",
+              "label": "Simple"
+            }
+          ],
+          "default": "evidence"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Evidence before hype"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Start with what actually makes sense."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SENDLER hero",
+      "blocks": [
+        {
+          "type": "principle",
+          "settings": {
+            "icon": "evidence",
+            "heading": "Evidence before hype",
+            "text": "Start with what actually makes sense."
+          }
+        },
+        {
+          "type": "principle",
+          "settings": {
+            "icon": "dose",
+            "heading": "Doses that matter",
+            "text": "Because an ingredient on the label isn't enough."
+          }
+        },
+        {
+          "type": "principle",
+          "settings": {
+            "icon": "simple",
+            "heading": "Take what you need",
+            "text": "Skip what you probably don't."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

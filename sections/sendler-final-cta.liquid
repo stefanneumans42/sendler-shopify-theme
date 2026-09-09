@@ -1,0 +1,353 @@
+<section class="sendler-final-cta full-width">
+  <div class="sendler-container">
+
+    <div class="sendler-final-cta__shell">
+
+      <div class="sendler-final-cta__content">
+
+        {% if section.settings.eyebrow != blank %}
+          <div class="sendler-final-cta__eyebrow">
+            {{ section.settings.eyebrow }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2 class="sendler-final-cta__heading">
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+
+        {% if section.settings.text != blank %}
+          <div class="sendler-final-cta__text">
+            {{ section.settings.text }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.button_label != blank %}
+          <div class="sendler-final-cta__action">
+
+            {% if section.settings.button_link != blank %}
+              <a
+                href="{{ section.settings.button_link }}"
+                class="sendler-final-cta__button"
+              >
+                {{ section.settings.button_label }}
+
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M5 12h14M14 7l5 5-5 5" />
+                </svg>
+              </a>
+            {% else %}
+              <span class="sendler-final-cta__button">
+                {{ section.settings.button_label }}
+
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M5 12h14M14 7l5 5-5 5" />
+                </svg>
+              </span>
+            {% endif %}
+
+          </div>
+        {% endif %}
+
+        {% if section.settings.microcopy != blank %}
+          <p class="sendler-final-cta__microcopy">
+            {{ section.settings.microcopy }}
+          </p>
+        {% endif %}
+
+      </div>
+
+
+      <div class="sendler-final-cta__visual" aria-hidden="true">
+
+        <div class="sendler-final-cta__line"></div>
+
+        <div class="sendler-final-cta__steps">
+
+          <div class="sendler-final-cta__step">
+            <span>01</span>
+            <strong>Tell us about yourself</strong>
+          </div>
+
+          <div class="sendler-final-cta__step">
+            <span>02</span>
+            <strong>See what may make sense</strong>
+          </div>
+
+          <div class="sendler-final-cta__step">
+            <span>03</span>
+            <strong>Skip what probably doesn’t</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+{% stylesheet %}
+
+.sendler-final-cta {
+  padding: 120px 0;
+  background: var(--sendler-canvas);
+}
+
+.sendler-final-cta__shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.8fr);
+  gap: clamp(60px, 8vw, 120px);
+  align-items: center;
+  overflow: hidden;
+  padding: clamp(64px, 7vw, 100px);
+  border-radius: 14px;
+  background: var(--sendler-green);
+  color: var(--sendler-white);
+}
+
+
+/* Content */
+
+.sendler-final-cta__content {
+  max-width: 670px;
+}
+
+.sendler-final-cta__eyebrow {
+  margin-bottom: 18px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.sendler-final-cta__heading {
+  margin: 0;
+  color: var(--sendler-white);
+  font-size: clamp(3rem, 5vw, 4.8rem);
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+}
+
+.sendler-final-cta__text {
+  max-width: 590px;
+  margin-top: 26px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.sendler-final-cta__text p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.sendler-final-cta__action {
+  margin-top: 34px;
+}
+
+.sendler-final-cta__button {
+  display: inline-flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 25px;
+  border-radius: var(--sendler-radius);
+  background: var(--sendler-white);
+  color: var(--sendler-green);
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+
+.sendler-final-cta__button:hover {
+  background: var(--sendler-canvas);
+  transform: translateY(-1px);
+}
+
+.sendler-final-cta__button svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sendler-final-cta__microcopy {
+  margin: 13px 0 0;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 12px;
+}
+
+
+/* Visual */
+
+.sendler-final-cta__visual {
+  position: relative;
+  padding-left: 42px;
+}
+
+.sendler-final-cta__line {
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  left: 9px;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.sendler-final-cta__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 46px;
+}
+
+.sendler-final-cta__step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.sendler-final-cta__step::before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  left: -41px;
+  width: 17px;
+  height: 17px;
+  border: 4px solid var(--sendler-green);
+  border-radius: 50%;
+  background: var(--sendler-white);
+}
+
+.sendler-final-cta__step span {
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.sendler-final-cta__step strong {
+  max-width: 280px;
+  color: var(--sendler-white);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+
+/* Responsive */
+
+@media screen and (max-width: 900px) {
+
+  .sendler-final-cta__shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sendler-final-cta__visual {
+    margin-top: 16px;
+  }
+
+}
+
+@media screen and (max-width: 749px) {
+
+  .sendler-final-cta {
+    padding: 82px 0;
+  }
+
+  .sendler-final-cta__shell {
+    gap: 52px;
+    padding: 48px 28px;
+    border-radius: 10px;
+  }
+
+  .sendler-final-cta__heading {
+    font-size: 2.7rem;
+  }
+
+  .sendler-final-cta__text {
+    font-size: 17px;
+  }
+
+  .sendler-final-cta__button {
+    width: 100%;
+  }
+
+  .sendler-final-cta__visual {
+    padding-left: 38px;
+  }
+
+}
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER final CTA",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "A HEALTHIER ROUTINE, MADE SIMPLER"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Not sure where to start?"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Answer a few questions about your diet, lifestyle and goals. We’ll help you narrow down which supplements may actually be worth considering.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Find My Essentials"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "microcopy",
+      "label": "Microcopy",
+      "default": "Free · About 2 minutes · No purchase required"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SENDLER final CTA"
+    }
+  ]
+}
+{% endschema %}

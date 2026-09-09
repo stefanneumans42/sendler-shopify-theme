@@ -1,0 +1,281 @@
+{% if section.settings.show_section %}
+  <section class="sendler-reviews">
+    <div class="sendler-container">
+
+      <div class="sendler-reviews__header">
+
+        <div>
+          {% if section.settings.eyebrow != blank %}
+            <div class="sendler-eyebrow">
+              {{ section.settings.eyebrow }}
+            </div>
+          {% endif %}
+
+          {% if section.settings.heading != blank %}
+            <h2 class="sendler-reviews__heading">
+              {{ section.settings.heading }}
+            </h2>
+          {% endif %}
+        </div>
+
+        {% if section.settings.text != blank %}
+          <div class="sendler-reviews__intro">
+            {{ section.settings.text }}
+          </div>
+        {% endif %}
+
+      </div>
+
+
+      {% if section.blocks.size > 0 %}
+        <div class="sendler-reviews__grid">
+
+          {% for block in section.blocks %}
+            <article
+              class="sendler-review-card"
+              {{ block.shopify_attributes }}
+            >
+
+              {% if block.settings.rating > 0 %}
+                <div
+                  class="sendler-review-card__stars"
+                  aria-label="{{ block.settings.rating }} out of 5 stars"
+                >
+                  {% for i in (1..5) %}
+                    <span
+                      {% if i > block.settings.rating %}
+                        class="sendler-review-card__star--muted"
+                      {% endif %}
+                    >★</span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+
+              {% if block.settings.quote != blank %}
+                <blockquote>
+                  “{{ block.settings.quote }}”
+                </blockquote>
+              {% endif %}
+
+              <footer class="sendler-review-card__author">
+
+                {% if block.settings.name != blank %}
+                  <strong>{{ block.settings.name }}</strong>
+                {% endif %}
+
+                {% if block.settings.meta != blank %}
+                  <span>{{ block.settings.meta }}</span>
+                {% endif %}
+
+              </footer>
+
+            </article>
+          {% endfor %}
+
+        </div>
+      {% endif %}
+
+    </div>
+  </section>
+{% endif %}
+
+
+{% stylesheet %}
+
+.sendler-reviews {
+  padding: 120px 0;
+  background: var(--sendler-canvas);
+}
+
+.sendler-reviews__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.65fr);
+  gap: 72px;
+  align-items: end;
+  margin-bottom: 54px;
+}
+
+.sendler-reviews__heading {
+  margin: 0;
+}
+
+.sendler-reviews__intro {
+  max-width: 500px;
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.sendler-reviews__intro p {
+  margin: 0;
+}
+
+
+/* Review cards */
+
+.sendler-reviews__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.sendler-review-card {
+  min-height: 310px;
+  display: flex;
+  flex-direction: column;
+  padding: 32px;
+  border: 1px solid var(--sendler-border);
+  border-radius: 10px;
+  background: var(--sendler-white);
+}
+
+.sendler-review-card__stars {
+  display: flex;
+  gap: 2px;
+  color: var(--sendler-green);
+  font-size: 15px;
+  letter-spacing: 0.02em;
+}
+
+.sendler-review-card__star--muted {
+  opacity: 0.2;
+}
+
+.sendler-review-card blockquote {
+  margin: 30px 0 36px;
+  color: var(--sendler-charcoal);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+}
+
+.sendler-review-card__author {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sendler-review-card__author strong {
+  color: var(--sendler-charcoal);
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.sendler-review-card__author span {
+  color: var(--sendler-text-secondary);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+
+@media screen and (max-width: 900px) {
+
+  .sendler-reviews__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sendler-review-card {
+    min-height: 0;
+  }
+
+}
+
+
+@media screen and (max-width: 749px) {
+
+  .sendler-reviews {
+    padding: 82px 0;
+  }
+
+  .sendler-reviews__header {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin-bottom: 40px;
+  }
+
+  .sendler-review-card {
+    padding: 26px 24px;
+  }
+
+  .sendler-review-card blockquote {
+    margin-top: 24px;
+    font-size: 18px;
+  }
+
+}
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER reviews",
+  "tag": "section",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_section",
+      "label": "Show reviews section",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "REAL CUSTOMERS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Supplements people actually understand."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Real feedback from people using SENDLER as part of their everyday routine.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Review"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer name"
+        },
+        {
+          "type": "text",
+          "id": "meta",
+          "label": "Additional information",
+          "info": "Example: Verified buyer · Magnesium Glycinate"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SENDLER reviews"
+    }
+  ]
+}
+{% endschema %}
