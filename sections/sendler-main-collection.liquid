@@ -1,0 +1,982 @@
+<section
+  id="sendler-shop-{{ section.id }}"
+  class="sendler-shop full-width"
+  data-sendler-shop
+>
+  <div class="sendler-container">
+
+    <!-- HERO -->
+    <header class="sendler-shop__hero">
+
+      {% if section.settings.eyebrow != blank %}
+        <div class="sendler-eyebrow">
+          {{ section.settings.eyebrow }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h1 class="sendler-shop__heading">
+          {{ section.settings.heading }}
+        </h1>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="sendler-shop__intro">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+
+    </header>
+
+
+    <!-- GOAL FILTERS -->
+    <nav
+      class="sendler-shop__filters"
+      aria-label="Filter supplements by goal"
+    >
+
+      <button
+        type="button"
+        class="sendler-shop-filter is-active"
+        data-filter="all"
+        aria-pressed="true"
+      >
+        All
+      </button>
+
+      <button
+        type="button"
+        class="sendler-shop-filter"
+        data-filter="basics"
+        aria-pressed="false"
+      >
+        The Basics
+      </button>
+
+      <button
+        type="button"
+        class="sendler-shop-filter"
+        data-filter="performance"
+        aria-pressed="false"
+      >
+        Performance &amp; Energy
+      </button>
+
+      <button
+        type="button"
+        class="sendler-shop-filter"
+        data-filter="stress"
+        aria-pressed="false"
+      >
+        Stress &amp; Daily Balance
+      </button>
+
+      <button
+        type="button"
+        class="sendler-shop-filter"
+        data-filter="digestion"
+        aria-pressed="false"
+      >
+        Digestion &amp; Metabolic Health
+      </button>
+
+    </nav>
+
+
+    <!-- PRODUCT TOOLBAR -->
+    <div class="sendler-shop__toolbar">
+
+      <div class="sendler-shop__count">
+        <span data-visible-count>
+          {{ collection.products_count }}
+        </span>
+        <span data-product-word>
+          {% if collection.products_count == 1 %}
+            product
+          {% else %}
+            products
+          {% endif %}
+        </span>
+      </div>
+
+
+      {% if collection.sort_options.size > 0 %}
+        <label class="sendler-shop__sort">
+
+          <span>Sort by</span>
+
+          <select data-sendler-sort>
+            {% assign current_sort = collection.sort_by | default: collection.default_sort_by %}
+
+            {% for option in collection.sort_options %}
+              <option
+                value="{{ option.value | escape }}"
+                {% if option.value == current_sort %}
+                  selected
+                {% endif %}
+              >
+                {{ option.name }}
+              </option>
+            {% endfor %}
+          </select>
+
+        </label>
+      {% endif %}
+
+    </div>
+
+
+    <!-- PRODUCT GRID -->
+    {% paginate collection.products by 48 %}
+
+      <div class="sendler-shop__grid" data-product-grid>
+
+        {% for product in collection.products %}
+
+          <article
+            class="sendler-product-card"
+            data-product-card
+
+            data-basics="{% if product.tags contains 'goal_basics' %}true{% else %}false{% endif %}"
+            data-performance="{% if product.tags contains 'goal_performance' %}true{% else %}false{% endif %}"
+            data-stress="{% if product.tags contains 'goal_stress' %}true{% else %}false{% endif %}"
+            data-digestion="{% if product.tags contains 'goal_digestion' %}true{% else %}false{% endif %}"
+          >
+
+            <a
+              href="{{ product.url }}"
+              class="sendler-product-card__media"
+              aria-label="{{ product.title | escape }}"
+            >
+
+              {% if product.featured_image != blank %}
+
+                {{
+                  product.featured_image
+                  | image_url: width: 800
+                  | image_tag:
+                    class: 'sendler-product-card__image',
+                    widths: '300, 450, 600, 800',
+                    loading: 'lazy'
+                }}
+
+              {% else %}
+
+                <div class="sendler-product-card__placeholder">
+
+                  <div class="sendler-product-card__bottle">
+
+                    <div class="sendler-product-card__bottle-label">
+                      <small>SENDLER</small>
+
+                      <span>
+                        {{ product.title }}
+                      </span>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              {% endif %}
+
+            </a>
+
+
+            <div class="sendler-product-card__content">
+
+              <h2 class="sendler-product-card__title">
+                <a href="{{ product.url }}">
+                  {{ product.title }}
+                </a>
+              </h2>
+
+
+              {% if product.metafields.custom.shop_benefits != blank %}
+                <div class="sendler-product-card__benefits">
+                  {{ product.metafields.custom.shop_benefits.value }}
+                </div>
+              {% endif %}
+
+
+              {% if product.metafields.custom.dose_line != blank %}
+                <div class="sendler-product-card__dose">
+                  {{ product.metafields.custom.dose_line.value }}
+                </div>
+              {% endif %}
+
+
+              <div class="sendler-product-card__bottom">
+
+                <div class="sendler-product-card__price">
+
+                  {% if product.compare_at_price > product.price %}
+                    <span class="sendler-product-card__compare">
+                      {{ product.compare_at_price | money }}
+                    </span>
+                  {% endif %}
+
+                  <span>
+                    {{ product.price | money }}
+                  </span>
+
+                </div>
+
+
+                <a
+                  href="{{ product.url }}"
+                  class="sendler-product-card__button"
+                >
+                  View product
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+        {% endfor %}
+
+      </div>
+
+
+      <div
+        class="sendler-shop__empty"
+        data-empty-state
+        hidden
+      >
+        <h3>No products in this category yet.</h3>
+        <p>Try another category or browse all supplements.</p>
+      </div>
+
+
+      {% if paginate.pages > 1 %}
+        <nav class="sendler-shop__pagination" aria-label="Pagination">
+          {{ paginate | default_pagination }}
+        </nav>
+      {% endif %}
+
+    {% endpaginate %}
+
+
+    <!-- ASSESSMENT CTA -->
+    <div class="sendler-shop-assessment">
+
+      <div class="sendler-shop-assessment__content">
+
+        <div class="sendler-shop-assessment__eyebrow">
+          NOT SURE WHERE TO START?
+        </div>
+
+        <h2>
+          You probably don’t need everything here.
+        </h2>
+
+        <p>
+          Take our short assessment and get a simpler view of what may
+          actually make sense for you.
+        </p>
+
+        {% if section.settings.assessment_link != blank %}
+          <a
+            href="{{ section.settings.assessment_link }}"
+            class="sendler-shop-assessment__button"
+          >
+            {{ section.settings.assessment_button }}
+            <span aria-hidden="true">→</span>
+          </a>
+        {% endif %}
+
+        <div class="sendler-shop-assessment__microcopy">
+          Free · About 2 minutes · No purchase required
+        </div>
+
+      </div>
+
+
+      <div class="sendler-shop-assessment__points">
+
+        <div class="sendler-shop-assessment__icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48">
+            <path d="M40 8C22 9 11 18 11 31c0 3 .6 5.7 1.9 8" />
+            <path d="M40 8c-1 18-10 27-22 27-2 0-3.7-.3-5.1-.9" />
+            <path d="M8 42c6-12 14-20 26-27" />
+          </svg>
+        </div>
+
+        <ul>
+          <li>
+            <span>✓</span>
+            Personalised recommendations
+          </li>
+
+          <li>
+            <span>✓</span>
+            Based on your lifestyle and goals
+          </li>
+
+          <li>
+            <span>✓</span>
+            No pressure to buy
+          </li>
+
+          <li>
+            <span>✓</span>
+            A simpler, clearer starting point
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<script>
+  (() => {
+    const root = document.getElementById('sendler-shop-{{ section.id }}');
+
+    if (!root) return;
+
+    const filters = root.querySelectorAll('[data-filter]');
+    const cards = root.querySelectorAll('[data-product-card]');
+    const count = root.querySelector('[data-visible-count]');
+    const productWord = root.querySelector('[data-product-word]');
+    const emptyState = root.querySelector('[data-empty-state]');
+    const sort = root.querySelector('[data-sendler-sort]');
+
+    function updateProducts(filter) {
+      let visible = 0;
+
+      cards.forEach((card) => {
+        const show =
+          filter === 'all' ||
+          card.dataset[filter] === 'true';
+
+        card.hidden = !show;
+
+        if (show) {
+          visible += 1;
+        }
+      });
+
+      if (count) {
+        count.textContent = visible;
+      }
+
+      if (productWord) {
+        productWord.textContent = visible === 1 ? 'product' : 'products';
+      }
+
+      if (emptyState) {
+        emptyState.hidden = visible !== 0;
+      }
+    }
+
+    filters.forEach((button) => {
+      button.addEventListener('click', () => {
+        filters.forEach((filterButton) => {
+          filterButton.classList.remove('is-active');
+          filterButton.setAttribute('aria-pressed', 'false');
+        });
+
+        button.classList.add('is-active');
+        button.setAttribute('aria-pressed', 'true');
+
+        updateProducts(button.dataset.filter);
+      });
+    });
+
+    if (sort) {
+      sort.addEventListener('change', () => {
+        const url = new URL(window.location.href);
+
+        url.searchParams.set('sort_by', sort.value);
+
+        window.location.href = url.toString();
+      });
+    }
+  })();
+</script>
+
+
+{% stylesheet %}
+
+.sendler-shop {
+  padding: 0 0 72px;
+  background: var(--sendler-canvas);
+}
+
+
+/* HERO */
+
+.sendler-shop__hero {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 68px 0 38px;
+  text-align: center;
+}
+
+.sendler-shop__heading {
+  margin: 0;
+  color: var(--sendler-charcoal);
+  font-size: clamp(2.8rem, 5vw, 4.8rem);
+  line-height: 0.98;
+  letter-spacing: -0.052em;
+}
+
+.sendler-shop__intro {
+  max-width: 650px;
+  margin: 18px auto 0;
+  color: var(--sendler-text-secondary);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.sendler-shop__intro p {
+  margin: 0;
+}
+
+
+/* FILTERS */
+
+.sendler-shop__filters {
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  margin-bottom: 38px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.sendler-shop__filters::-webkit-scrollbar {
+  display: none;
+}
+
+.sendler-shop-filter {
+  flex: 0 0 auto;
+  min-height: 42px;
+  padding: 0 19px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--sendler-soft-green);
+  color: var(--sendler-charcoal);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+.sendler-shop-filter:hover {
+  background: #e2e6df;
+}
+
+.sendler-shop-filter.is-active {
+  background: var(--sendler-green);
+  color: var(--sendler-white);
+}
+
+
+/* TOOLBAR */
+
+.sendler-shop__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 18px;
+}
+
+.sendler-shop__count {
+  color: var(--sendler-green);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sendler-shop__sort {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--sendler-text-secondary);
+  font-size: 12px;
+}
+
+.sendler-shop__sort select {
+  min-width: 150px;
+  min-height: 40px;
+  padding: 0 38px 0 13px;
+  border: 1px solid var(--sendler-border);
+  border-radius: 7px;
+  background: var(--sendler-white);
+  color: var(--sendler-charcoal);
+  font: inherit;
+}
+
+
+/* GRID */
+
+.sendler-shop__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+
+/* PRODUCT CARD */
+
+.sendler-product-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+  border: 1px solid var(--sendler-border);
+  border-radius: 9px;
+  background: var(--sendler-white);
+}
+
+.sendler-product-card[hidden] {
+  display: none;
+}
+
+.sendler-product-card__media {
+  display: block;
+  height: 280px;
+  padding: 24px;
+  background: #f2f1ec;
+}
+
+.sendler-product-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.25s ease;
+}
+
+.sendler-product-card:hover .sendler-product-card__image {
+  transform: scale(1.025);
+}
+
+
+/* PLACEHOLDER BOTTLE */
+
+.sendler-product-card__placeholder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sendler-product-card__bottle {
+  position: relative;
+  width: 112px;
+  height: 188px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 27px 27px 11px 11px;
+  background: #603b25;
+  box-shadow: 0 10px 20px rgba(23, 26, 24, 0.12);
+}
+
+.sendler-product-card__bottle::before {
+  content: "";
+  position: absolute;
+  top: -13px;
+  width: 79px;
+  height: 23px;
+  border-radius: 5px 5px 2px 2px;
+  background: #171a18;
+}
+
+.sendler-product-card__bottle-label {
+  width: 88%;
+  min-height: 83px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 14px 8px;
+  background: var(--sendler-canvas);
+  color: var(--sendler-charcoal);
+  text-align: center;
+}
+
+.sendler-product-card__bottle-label small {
+  margin-bottom: 10px;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+}
+
+.sendler-product-card__bottle-label span {
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+
+/* CARD COPY */
+
+.sendler-product-card__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 19px 18px 18px;
+  text-align: center;
+}
+
+.sendler-product-card__title {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.sendler-product-card__title a {
+  color: var(--sendler-charcoal);
+  text-decoration: none;
+}
+
+.sendler-product-card__benefits {
+  min-height: 38px;
+  margin-top: 7px;
+  color: var(--sendler-text-secondary);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.sendler-product-card__dose {
+  margin-top: 15px;
+  padding-top: 14px;
+  border-top: 1px solid var(--sendler-border);
+  color: var(--sendler-charcoal);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.sendler-product-card__bottom {
+  margin-top: auto;
+}
+
+.sendler-product-card__price {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+  color: var(--sendler-green);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.sendler-product-card__compare {
+  color: var(--sendler-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: line-through;
+}
+
+.sendler-product-card__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  margin-top: 14px;
+  border-radius: 7px;
+  background: var(--sendler-green);
+  color: var(--sendler-white);
+  font-size: 13px;
+  font-weight: 650;
+  text-decoration: none;
+  transition: background 0.18s ease;
+}
+
+.sendler-product-card__button:hover {
+  background: var(--sendler-green-hover);
+}
+
+
+/* EMPTY STATE */
+
+.sendler-shop__empty {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.sendler-shop__empty h3 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.sendler-shop__empty p {
+  margin: 8px 0 0;
+  color: var(--sendler-text-secondary);
+}
+
+
+/* PAGINATION */
+
+.sendler-shop__pagination {
+  margin-top: 40px;
+  text-align: center;
+}
+
+
+/* ASSESSMENT */
+
+.sendler-shop-assessment {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 70px;
+  align-items: center;
+  margin-top: 54px;
+  padding: 50px 54px;
+  border-radius: 10px;
+  background: var(--sendler-green);
+  color: var(--sendler-white);
+}
+
+.sendler-shop-assessment__content {
+  max-width: 570px;
+}
+
+.sendler-shop-assessment__eyebrow {
+  margin-bottom: 13px;
+  color: rgba(255,255,255,0.65);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+.sendler-shop-assessment h2 {
+  margin: 0;
+  color: var(--sendler-white);
+  font-size: clamp(2.4rem, 4vw, 3.9rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.sendler-shop-assessment__content > p {
+  max-width: 520px;
+  margin: 17px 0 0;
+  color: rgba(255,255,255,0.73);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.sendler-shop-assessment__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 46px;
+  margin-top: 25px;
+  padding: 0 20px;
+  border-radius: 7px;
+  background: var(--sendler-white);
+  color: var(--sendler-green);
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.sendler-shop-assessment__microcopy {
+  margin-top: 11px;
+  color: rgba(255,255,255,0.58);
+  font-size: 10px;
+}
+
+
+/* CTA RIGHT SIDE */
+
+.sendler-shop-assessment__icon {
+  width: 54px;
+  height: 54px;
+  margin-bottom: 20px;
+}
+
+.sendler-shop-assessment__icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: rgba(255,255,255,0.8);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sendler-shop-assessment__points ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sendler-shop-assessment__points li {
+  display: flex;
+  gap: 11px;
+  margin-top: 13px;
+  color: rgba(255,255,255,0.82);
+  font-size: 14px;
+}
+
+.sendler-shop-assessment__points li span {
+  color: var(--sendler-white);
+  font-weight: 700;
+}
+
+
+/* TABLET */
+
+@media screen and (max-width: 1000px) {
+
+  .sendler-shop__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sendler-shop-assessment {
+    gap: 45px;
+  }
+
+}
+
+
+/* MOBILE */
+
+@media screen and (max-width: 749px) {
+
+  .sendler-shop {
+    padding-bottom: 48px;
+  }
+
+  .sendler-shop__hero {
+    padding: 52px 0 30px;
+  }
+
+  .sendler-shop__heading {
+    font-size: 2.7rem;
+  }
+
+  .sendler-shop__filters {
+    justify-content: flex-start;
+    margin-right: -20px;
+    margin-left: -20px;
+    padding: 0 20px 7px;
+  }
+
+  .sendler-shop__toolbar {
+    margin-top: 8px;
+  }
+
+  .sendler-shop__sort span {
+    display: none;
+  }
+
+  .sendler-shop__sort select {
+    min-width: 125px;
+  }
+
+  .sendler-shop__grid {
+    gap: 10px;
+  }
+
+  .sendler-product-card__media {
+    height: 210px;
+    padding: 18px;
+  }
+
+  .sendler-product-card__content {
+    padding: 15px 12px 13px;
+  }
+
+  .sendler-product-card__title {
+    font-size: 15px;
+  }
+
+  .sendler-product-card__benefits {
+    min-height: 34px;
+    font-size: 11px;
+  }
+
+  .sendler-product-card__dose {
+    font-size: 11px;
+  }
+
+  .sendler-product-card__price {
+    font-size: 16px;
+  }
+
+  .sendler-shop-assessment {
+    grid-template-columns: 1fr;
+    gap: 38px;
+    margin-top: 40px;
+    padding: 40px 25px;
+  }
+
+  .sendler-shop-assessment h2 {
+    font-size: 2.5rem;
+  }
+
+}
+
+
+@media screen and (max-width: 390px) {
+
+  .sendler-shop__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sendler-product-card__media {
+    height: 250px;
+  }
+
+}
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER Shop",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "SHOP SUPPLEMENTS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Evidence-backed supplements for real life."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Intro text",
+      "default": "<p>Sensible doses, clear information and a simple range of products. Start with what makes sense for you. Skip what doesn’t.</p>"
+    },
+    {
+      "type": "text",
+      "id": "assessment_button",
+      "label": "Assessment button",
+      "default": "Find My Essentials"
+    },
+    {
+      "type": "url",
+      "id": "assessment_link",
+      "label": "Assessment link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SENDLER Shop"
+    }
+  ]
+}
+{% endschema %}
