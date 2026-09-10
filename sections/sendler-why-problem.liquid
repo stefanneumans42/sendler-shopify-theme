@@ -1,0 +1,264 @@
+<section class="sendler-why-problem full-width">
+  <div class="sendler-container">
+
+    <div class="sendler-why-problem__header">
+
+      {% if section.settings.eyebrow != blank %}
+        <div class="sendler-eyebrow">
+          {{ section.settings.eyebrow }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="sendler-why-problem__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="sendler-why-problem__intro">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+
+    </div>
+
+
+    <div class="sendler-why-problem__grid">
+
+      {% for block in section.blocks %}
+        <article
+          class="sendler-why-problem__item"
+          {{ block.shopify_attributes }}
+        >
+
+          <div class="sendler-why-problem__number">
+            0{{ forloop.index }}
+          </div>
+
+          {% if block.settings.heading != blank %}
+            <h3>{{ block.settings.heading }}</h3>
+          {% endif %}
+
+          {% if block.settings.text != blank %}
+            <p>{{ block.settings.text }}</p>
+          {% endif %}
+
+        </article>
+      {% endfor %}
+
+    </div>
+
+  </div>
+</section>
+
+
+{% stylesheet %}
+
+.sendler-why-problem {
+  padding: 72px 0 76px;
+  background: var(--sendler-white);
+}
+
+.sendler-why-problem__header {
+  max-width: 780px;
+  margin-bottom: 44px;
+}
+
+.sendler-why-problem__heading {
+  max-width: 720px;
+  margin: 0;
+  font-size: clamp(2.4rem, 4vw, 3.7rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.sendler-why-problem__intro {
+  max-width: 660px;
+  margin-top: 18px;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.sendler-why-problem__intro p {
+  margin: 0;
+}
+
+
+/* Grid */
+
+.sendler-why-problem__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--sendler-border);
+}
+
+.sendler-why-problem__item {
+  padding: 28px 26px 10px;
+  border-right: 1px solid var(--sendler-border);
+}
+
+.sendler-why-problem__item:first-child {
+  padding-left: 0;
+}
+
+.sendler-why-problem__item:last-child {
+  padding-right: 0;
+  border-right: 0;
+}
+
+.sendler-why-problem__number {
+  margin-bottom: 24px;
+  color: var(--sendler-green);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.sendler-why-problem__item h3 {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+.sendler-why-problem__item p {
+  max-width: 245px;
+  margin: 10px 0 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+
+@media screen and (max-width: 900px) {
+
+  .sendler-why-problem__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sendler-why-problem__item {
+    padding: 28px;
+    border-bottom: 1px solid var(--sendler-border);
+  }
+
+  .sendler-why-problem__item:nth-child(2n) {
+    border-right: 0;
+  }
+
+}
+
+
+@media screen and (max-width: 749px) {
+
+  .sendler-why-problem {
+    padding: 58px 0;
+  }
+
+  .sendler-why-problem__header {
+    margin-bottom: 34px;
+  }
+
+  .sendler-why-problem__heading {
+    font-size: 2.35rem;
+  }
+
+  .sendler-why-problem__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sendler-why-problem__item,
+  .sendler-why-problem__item:first-child,
+  .sendler-why-problem__item:last-child {
+    padding: 24px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--sendler-border);
+  }
+
+  .sendler-why-problem__item:last-child {
+    border-bottom: 0;
+  }
+
+}
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER Why problem",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "THE PROBLEM"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "More products don’t mean better health."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>The supplement industry has become very good at giving people more options. That doesn’t necessarily make choosing the right ones any easier.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "problem",
+      "name": "Problem",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SENDLER Why problem",
+      "blocks": [
+        {
+          "type": "problem",
+          "settings": {
+            "heading": "Too many choices",
+            "text": "Most people don’t know what actually matters."
+          }
+        },
+        {
+          "type": "problem",
+          "settings": {
+            "heading": "Underdosed formulas",
+            "text": "An ingredient on the label tells you very little by itself."
+          }
+        },
+        {
+          "type": "problem",
+          "settings": {
+            "heading": "Marketing before evidence",
+            "text": "Trends often move faster than good research."
+          }
+        },
+        {
+          "type": "problem",
+          "settings": {
+            "heading": "Complexity sells",
+            "text": "Confusion makes it easier to sell people things they may not need."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

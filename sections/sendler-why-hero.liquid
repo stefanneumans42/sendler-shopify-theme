@@ -1,0 +1,315 @@
+<section class="sendler-why-hero full-width">
+  <div class="sendler-container">
+
+    <div class="sendler-why-hero__grid">
+
+      <div class="sendler-why-hero__content">
+
+        {% if section.settings.eyebrow != blank %}
+          <div class="sendler-eyebrow">
+            {{ section.settings.eyebrow }}
+          </div>
+        {% endif %}
+
+        <h1 class="sendler-why-hero__heading">
+          {{ section.settings.heading }}
+        </h1>
+
+        {% if section.settings.text != blank %}
+          <div class="sendler-why-hero__text">
+            {{ section.settings.text }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.button_label != blank %}
+          {% if section.settings.button_link != blank %}
+            <a
+              href="{{ section.settings.button_link }}"
+              class="sendler-button sendler-button--primary"
+            >
+              {{ section.settings.button_label }}
+              <span aria-hidden="true">→</span>
+            </a>
+          {% else %}
+            <span class="sendler-button sendler-button--primary">
+              {{ section.settings.button_label }}
+              <span aria-hidden="true">→</span>
+            </span>
+          {% endif %}
+        {% endif %}
+
+        {% if section.settings.microcopy != blank %}
+          <p class="sendler-why-hero__microcopy">
+            {{ section.settings.microcopy }}
+          </p>
+        {% endif %}
+
+      </div>
+
+
+      <div class="sendler-why-hero__media">
+
+        {% if section.settings.image != blank %}
+          {{
+            section.settings.image
+            | image_url: width: 1400
+            | image_tag:
+              class: 'sendler-why-hero__image',
+              widths: '600, 900, 1200, 1400',
+              sizes: '(min-width: 900px) 55vw, 100vw',
+              loading: 'eager'
+          }}
+        {% else %}
+          <div class="sendler-why-hero__placeholder">
+
+            <div class="sendler-why-hero__bottle sendler-why-hero__bottle--one">
+              <span>OMEGA-3</span>
+            </div>
+
+            <div class="sendler-why-hero__bottle sendler-why-hero__bottle--two">
+              <span>VITAMIN D3</span>
+            </div>
+
+            <div class="sendler-why-hero__bottle sendler-why-hero__bottle--three">
+              <span>MAGNESIUM</span>
+            </div>
+
+          </div>
+        {% endif %}
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+{% stylesheet %}
+
+.sendler-why-hero {
+  padding: 64px 0;
+  background: var(--sendler-canvas);
+}
+
+.sendler-why-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(50px, 7vw, 100px);
+  align-items: center;
+}
+
+.sendler-why-hero__content {
+  max-width: 570px;
+}
+
+.sendler-why-hero__heading {
+  margin: 0;
+  font-size: clamp(3.3rem, 5.5vw, 5rem);
+  line-height: 0.96;
+  letter-spacing: -0.05em;
+}
+
+.sendler-why-hero__text {
+  max-width: 500px;
+  margin-top: 24px;
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.sendler-why-hero__text p {
+  margin: 0;
+}
+
+.sendler-why-hero__content .sendler-button {
+  margin-top: 30px;
+}
+
+.sendler-why-hero__microcopy {
+  margin: 11px 0 0;
+  font-size: 12px;
+}
+
+
+/* Media */
+
+.sendler-why-hero__media {
+  min-width: 0;
+}
+
+.sendler-why-hero__image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 570px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.sendler-why-hero__placeholder {
+  position: relative;
+  min-height: 500px;
+  overflow: hidden;
+  border-radius: 10px;
+  background:
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(23, 63, 48, 0.12),
+      transparent 35%
+    ),
+    var(--sendler-soft-green);
+}
+
+.sendler-why-hero__bottle {
+  position: absolute;
+  bottom: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--sendler-border);
+  border-radius: 38px 38px 14px 14px;
+  background: #5b3824;
+  box-shadow: 0 18px 35px rgba(23, 26, 24, 0.15);
+}
+
+.sendler-why-hero__bottle::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  width: 78%;
+  height: 25px;
+  border-radius: 8px 8px 3px 3px;
+  background: #1d1d1c;
+}
+
+.sendler-why-hero__bottle span {
+  width: 82%;
+  padding: 34px 10px;
+  background: var(--sendler-canvas);
+  color: var(--sendler-charcoal);
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.sendler-why-hero__bottle--one {
+  left: 16%;
+  width: 145px;
+  height: 270px;
+}
+
+.sendler-why-hero__bottle--two {
+  left: 45%;
+  width: 125px;
+  height: 230px;
+}
+
+.sendler-why-hero__bottle--three {
+  left: 69%;
+  width: 105px;
+  height: 195px;
+}
+
+
+@media screen and (max-width: 900px) {
+
+  .sendler-why-hero__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sendler-why-hero__content {
+    max-width: 680px;
+  }
+
+}
+
+@media screen and (max-width: 749px) {
+
+  .sendler-why-hero {
+    padding: 48px 0;
+  }
+
+  .sendler-why-hero__heading {
+    font-size: 2.9rem;
+  }
+
+  .sendler-why-hero__placeholder {
+    min-height: 370px;
+  }
+
+  .sendler-why-hero__bottle--one {
+    left: 9%;
+    width: 110px;
+    height: 215px;
+  }
+
+  .sendler-why-hero__bottle--two {
+    left: 41%;
+    width: 100px;
+    height: 190px;
+  }
+
+  .sendler-why-hero__bottle--three {
+    left: 70%;
+    width: 80px;
+    height: 160px;
+  }
+
+}
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER Why hero",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "WHY SENDLER"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Supplements got complicated. They didn’t need to."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Thousands of products. Endless combinations. Conflicting advice. SENDLER exists to make the decision simpler — and help you focus on what actually matters for your health.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Find My Essentials"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "microcopy",
+      "label": "Microcopy",
+      "default": "No purchase required."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SENDLER Why hero"
+    }
+  ]
+}
+{% endschema %}

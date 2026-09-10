@@ -1,0 +1,63 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "why_sendler_hero": {
+      "type": "sendler-why-hero",
+      "settings": {}
+    },
+
+    "why_sendler_problem": {
+      "type": "sendler-why-problem",
+      "blocks": {
+        "problem_1": {
+          "type": "problem",
+          "settings": {
+            "heading": "Too many choices",
+            "text": "Most people don’t know what actually matters."
+          }
+        },
+        "problem_2": {
+          "type": "problem",
+          "settings": {
+            "heading": "Underdosed formulas",
+            "text": "An ingredient on the label tells you very little by itself."
+          }
+        },
+        "problem_3": {
+          "type": "problem",
+          "settings": {
+            "heading": "Marketing before evidence",
+            "text": "Trends often move faster than good research."
+          }
+        },
+        "problem_4": {
+          "type": "problem",
+          "settings": {
+            "heading": "Complexity sells",
+            "text": "Confusion makes it easier to sell people things they may not need."
+          }
+        }
+      },
+      "block_order": [
+        "problem_1",
+        "problem_2",
+        "problem_3",
+        "problem_4"
+      ],
+      "settings": {}
+    }
+  },
+
+  "order": [
+    "why_sendler_hero",
+    "why_sendler_problem"
+  ]
+}
