@@ -148,6 +148,92 @@
         "step_5"
       ],
       "settings": {}
+    },
+
+    "why_sendler_quality": {
+      "type": "sendler-why-quality",
+      "blocks": {
+        "quality_1": {
+          "type": "quality",
+          "settings": {
+            "icon": "usa",
+            "heading": "Made in the USA",
+            "text": "Our current product range is manufactured in the United States."
+          }
+        },
+        "quality_2": {
+          "type": "quality",
+          "settings": {
+            "icon": "manufacturing",
+            "heading": "Manufacturing standards",
+            "text": "We look beyond the front label at how and where products are produced."
+          }
+        },
+        "quality_3": {
+          "type": "quality",
+          "settings": {
+            "icon": "documentation",
+            "heading": "Documentation matters",
+            "text": "We expect meaningful product and manufacturing information from our suppliers."
+          }
+        },
+        "quality_4": {
+          "type": "quality",
+          "settings": {
+            "icon": "transparent",
+            "heading": "Clear formulas",
+            "text": "Ingredients and amounts should be easy for customers to understand."
+          }
+        }
+      },
+      "block_order": [
+        "quality_1",
+        "quality_2",
+        "quality_3",
+        "quality_4"
+      ],
+      "settings": {}
+    },
+
+    "why_sendler_principles": {
+      "type": "sendler-why-principles",
+      "blocks": {
+        "principle_1": {
+          "type": "principle",
+          "settings": {
+            "heading": "No miracle language",
+            "text": "Supplements can support health. They are not magic."
+          }
+        },
+        "principle_2": {
+          "type": "principle",
+          "settings": {
+            "heading": "No trend chasing",
+            "text": "Popularity alone is not enough reason for a product to exist."
+          }
+        },
+        "principle_3": {
+          "type": "principle",
+          "settings": {
+            "heading": "No unnecessary complexity",
+            "text": "More ingredients do not automatically make a formula better."
+          }
+        },
+        "principle_4": {
+          "type": "principle",
+          "settings": {
+            "heading": "No pretending certainty",
+            "text": "Where the evidence is limited or mixed, we should say so."
+          }
+        }
+      },
+      "block_order": [
+        "principle_1",
+        "principle_2",
+        "principle_3",
+        "principle_4"
+      ],
+      "settings": {}
     }
   },
 
@@ -157,6 +243,8 @@
     "why_sendler_standard",
     "why_sendler_dose",
     "why_sendler_no_buy",
-    "why_sendler_process"
+    "why_sendler_process",
+    "why_sendler_quality",
+    "why_sendler_principles"
   ]
 }
