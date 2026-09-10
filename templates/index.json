@@ -9,12 +9,298 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "hello-world",
+    "sendler_hero": {
+      "type": "sendler-hero",
+      "blocks": {
+        "principle_1": {
+          "type": "principle",
+          "settings": {
+            "icon": "evidence",
+            "heading": "Evidence before hype",
+            "text": "Start with what actually makes sense."
+          }
+        },
+        "principle_2": {
+          "type": "principle",
+          "settings": {
+            "icon": "dose",
+            "heading": "Doses that matter",
+            "text": "Because an ingredient on the label isn't enough."
+          }
+        },
+        "principle_3": {
+          "type": "principle",
+          "settings": {
+            "icon": "simple",
+            "heading": "Take what you need",
+            "text": "Skip what you probably don't."
+          }
+        }
+      },
+      "block_order": [
+        "principle_1",
+        "principle_2",
+        "principle_3"
+      ],
+      "settings": {}
+    },
+
+    "sendler_philosophy": {
+      "type": "sendler-philosophy",
+      "blocks": {
+        "principle_1": {
+          "type": "principle",
+          "settings": {
+            "icon": "evidence",
+            "heading": "Evidence-led selection",
+            "text": "We look at the research before we look at the trends."
+          }
+        },
+        "principle_2": {
+          "type": "principle",
+          "settings": {
+            "icon": "dose",
+            "heading": "Transparent dosing",
+            "text": "We tell you what's in the product and how much."
+          }
+        },
+        "principle_3": {
+          "type": "principle",
+          "settings": {
+            "icon": "quality",
+            "heading": "Quality-first sourcing",
+            "text": "Products are selected with manufacturing quality in mind."
+          }
+        },
+        "principle_4": {
+          "type": "principle",
+          "settings": {
+            "icon": "focused",
+            "heading": "Focused catalogue",
+            "text": "We don't need hundreds of products to help you make better choices."
+          }
+        }
+      },
+      "block_order": [
+        "principle_1",
+        "principle_2",
+        "principle_3",
+        "principle_4"
+      ],
+      "settings": {}
+    },
+
+    "sendler_assessment": {
+      "type": "sendler-assessment",
+      "settings": {}
+    },
+
+    "sendler_goals": {
+      "type": "sendler-shop-by-goal",
+      "blocks": {
+        "goal_1": {
+          "type": "goal",
+          "settings": {
+            "heading": "The Basics",
+            "text": "Everyday nutritional foundations.",
+            "link_label": "Shop The Basics"
+          }
+        },
+        "goal_2": {
+          "type": "goal",
+          "settings": {
+            "heading": "Performance & Energy",
+            "text": "Support for training, physical performance and demanding days.",
+            "link_label": "Shop Performance & Energy"
+          }
+        },
+        "goal_3": {
+          "type": "goal",
+          "settings": {
+            "heading": "Stress & Daily Balance",
+            "text": "Straightforward support for busy schedules and everyday stress.",
+            "link_label": "Shop Stress & Balance"
+          }
+        },
+        "goal_4": {
+          "type": "goal",
+          "settings": {
+            "heading": "Digestion & Metabolic Health",
+            "text": "Focused support for digestion and metabolic health.",
+            "link_label": "Shop Digestion & Metabolic Health"
+          }
+        }
+      },
+      "block_order": [
+        "goal_1",
+        "goal_2",
+        "goal_3",
+        "goal_4"
+      ],
+      "settings": {}
+    },
+
+    "sendler_products": {
+      "type": "sendler-featured-products",
+      "blocks": {
+        "product_1": {
+          "type": "product",
+          "settings": {
+            "placeholder_title": "Creatine Monohydrate",
+            "category": "Performance",
+            "benefits": "Strength · Performance · Everyday use",
+            "dose": "5 g per serving"
+          }
+        },
+        "product_2": {
+          "type": "product",
+          "settings": {
+            "placeholder_title": "Omega-3 EPA/DHA",
+            "category": "The Basics",
+            "benefits": "Heart · Brain · Everyday health",
+            "dose": "EPA + DHA per serving"
+          }
+        },
+        "product_3": {
+          "type": "product",
+          "settings": {
+            "placeholder_title": "Magnesium Glycinate",
+            "category": "The Basics",
+            "benefits": "Magnesium intake · Relaxation · Muscle function",
+            "dose": "Elemental magnesium per serving"
+          }
+        },
+        "product_4": {
+          "type": "product",
+          "settings": {
+            "placeholder_title": "Vitamin D3",
+            "category": "The Basics",
+            "benefits": "Vitamin D intake · Bones · Immune function",
+            "dose": "2,000 IU / 50 mcg"
+          }
+        }
+      },
+      "block_order": [
+        "product_1",
+        "product_2",
+        "product_3",
+        "product_4"
+      ],
+      "settings": {}
+    },
+
+    "sendler_why": {
+      "type": "sendler-why",
+      "blocks": {
+        "standard_1": {
+          "type": "standard",
+          "settings": {
+            "icon": "evidence",
+            "heading": "Evidence",
+            "text": "What does the research actually support?"
+          }
+        },
+        "standard_2": {
+          "type": "standard",
+          "settings": {
+            "icon": "dose",
+            "heading": "Dose",
+            "text": "Is there enough of the ingredient to make the formula meaningful?"
+          }
+        },
+        "standard_3": {
+          "type": "standard",
+          "settings": {
+            "icon": "quality",
+            "heading": "Quality",
+            "text": "Can we stand behind how the product is made and what goes into it?"
+          }
+        },
+        "standard_4": {
+          "type": "standard",
+          "settings": {
+            "icon": "usefulness",
+            "heading": "Usefulness",
+            "text": "Does this solve a real need, or are we simply adding another bottle to the shelf?"
+          }
+        }
+      },
+      "block_order": [
+        "standard_1",
+        "standard_2",
+        "standard_3",
+        "standard_4"
+      ],
+      "settings": {}
+    },
+
+    "sendler_quality": {
+      "type": "sendler-quality",
+      "blocks": {
+        "badge_1": {
+          "type": "badge",
+          "settings": {
+            "icon": "usa",
+            "heading": "Made in USA",
+            "text": "Manufactured in the United States."
+          }
+        },
+        "badge_2": {
+          "type": "badge",
+          "settings": {
+            "icon": "manufacturing",
+            "heading": "Quality manufacturing",
+            "text": "Produced under established manufacturing and quality-control standards."
+          }
+        },
+        "badge_3": {
+          "type": "badge",
+          "settings": {
+            "icon": "testing",
+            "heading": "Testing & verification",
+            "text": "We prioritize products backed by appropriate testing and supplier documentation."
+          }
+        },
+        "badge_4": {
+          "type": "badge",
+          "settings": {
+            "icon": "label",
+            "heading": "Transparent formulas",
+            "text": "Clear ingredients, clear doses and no need to hide behind proprietary blends."
+          }
+        }
+      },
+      "block_order": [
+        "badge_1",
+        "badge_2",
+        "badge_3",
+        "badge_4"
+      ],
+      "settings": {}
+    },
+
+    "sendler_reviews": {
+      "type": "sendler-reviews",
+      "settings": {
+        "show_section": false
+      }
+    },
+
+    "sendler_final_cta": {
+      "type": "sendler-final-cta",
       "settings": {}
     }
   },
+
   "order": [
-    "main"
+    "sendler_hero",
+    "sendler_philosophy",
+    "sendler_assessment",
+    "sendler_goals",
+    "sendler_products",
+    "sendler_why",
+    "sendler_quality",
+    "sendler_reviews",
+    "sendler_final_cta"
   ]
 }

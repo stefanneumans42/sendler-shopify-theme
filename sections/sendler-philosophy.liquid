@@ -2,6 +2,7 @@
   <div class="sendler-container">
 
     <div class="sendler-philosophy__intro">
+
       {% if section.settings.eyebrow != blank %}
         <div class="sendler-eyebrow">
           {{ section.settings.eyebrow }}
@@ -19,7 +20,9 @@
           {{ section.settings.text }}
         </div>
       {% endif %}
+
     </div>
+
 
     {% if section.blocks.size > 0 %}
       <div class="sendler-philosophy__grid">
@@ -29,8 +32,37 @@
             class="sendler-philosophy__item"
             {{ block.shopify_attributes }}
           >
-            <div class="sendler-philosophy__number">
-              0{{ forloop.index }}
+
+            <div class="sendler-philosophy__icon" aria-hidden="true">
+
+              {% case block.settings.icon %}
+
+                {% when 'evidence' %}
+                  <svg viewBox="0 0 32 32">
+                    <path d="M5 7.5c4.2 0 7.8 1.2 11 3.6v14.2c-3.2-2.4-6.8-3.6-11-3.6V7.5Z" />
+                    <path d="M27 7.5c-4.2 0-7.8 1.2-11 3.6v14.2c3.2-2.4 6.8-3.6 11-3.6V7.5Z" />
+                  </svg>
+
+                {% when 'dose' %}
+                  <svg viewBox="0 0 32 32">
+                    <path d="M9.2 22.8 22.8 9.2a5.1 5.1 0 0 1 7.2 7.2L16.4 30a5.1 5.1 0 0 1-7.2-7.2Z" />
+                    <path d="m15.5 16.5 7 7" />
+                  </svg>
+
+                {% when 'quality' %}
+                  <svg viewBox="0 0 32 32">
+                    <circle cx="16" cy="16" r="5" />
+                    <path d="M16 3v4M16 25v4M3 16h4M25 16h4M6.8 6.8l2.8 2.8M22.4 22.4l2.8 2.8M25.2 6.8l-2.8 2.8M9.6 22.4l-2.8 2.8" />
+                  </svg>
+
+                {% when 'focused' %}
+                  <svg viewBox="0 0 32 32">
+                    <circle cx="16" cy="10" r="5" />
+                    <path d="M6 27c.8-6 4.1-9 10-9s9.2 3 10 9H6Z" />
+                  </svg>
+
+              {% endcase %}
+
             </div>
 
             {% if block.settings.heading != blank %}
@@ -40,6 +72,7 @@
             {% if block.settings.text != blank %}
               <p>{{ block.settings.text }}</p>
             {% endif %}
+
           </article>
         {% endfor %}
 
@@ -49,144 +82,132 @@
   </div>
 </section>
 
+
 {% stylesheet %}
 
 .sendler-philosophy {
-  padding: 120px 0;
-  background: var(--sendler-white);
+  padding: 54px 0 48px;
+  background: var(--sendler-soft-green);
 }
 
 .sendler-philosophy__intro {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.7fr);
-  gap: 80px;
-  align-items: end;
-  margin-bottom: 72px;
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sendler-philosophy__intro .sendler-eyebrow {
+  margin-bottom: 12px;
 }
 
 .sendler-philosophy__heading {
-  max-width: 680px;
   margin: 0;
+  font-size: clamp(2rem, 3vw, 2.65rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
 }
 
 .sendler-philosophy__text {
-  max-width: 500px;
-  font-size: 18px;
-  line-height: 1.6;
+  max-width: 720px;
+  margin: 14px auto 0;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 .sendler-philosophy__text p {
   margin: 0;
+  color: var(--sendler-charcoal);
 }
+
+
+/* Four principles */
 
 .sendler-philosophy__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--sendler-border);
-  border-bottom: 1px solid var(--sendler-border);
+  gap: 42px;
+  margin-top: 34px;
 }
 
 .sendler-philosophy__item {
-  min-width: 0;
-  padding: 34px 30px 38px;
-  border-right: 1px solid var(--sendler-border);
+  text-align: center;
 }
 
-.sendler-philosophy__item:first-child {
-  padding-left: 0;
+.sendler-philosophy__icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 13px;
+  color: var(--sendler-charcoal);
 }
 
-.sendler-philosophy__item:last-child {
-  padding-right: 0;
-  border-right: 0;
-}
-
-.sendler-philosophy__number {
-  margin-bottom: 42px;
-  color: var(--sendler-green);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+.sendler-philosophy__icon svg {
+  width: 32px;
+  height: 32px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .sendler-philosophy__item h3 {
-  margin: 0 0 12px;
-  font-size: 20px;
-  line-height: 1.2;
+  margin: 0 0 5px;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
 
 .sendler-philosophy__item p {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.55;
+  max-width: 220px;
+  margin: 0 auto;
+  color: var(--sendler-charcoal);
+  font-size: 13px;
+  line-height: 1.4;
 }
 
+
+/* Tablet */
+
 @media screen and (max-width: 900px) {
-  .sendler-philosophy__intro {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
 
   .sendler-philosophy__grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 36px 40px;
   }
 
-  .sendler-philosophy__item {
-    border-bottom: 1px solid var(--sendler-border);
-  }
-
-  .sendler-philosophy__item:nth-child(2n) {
-    border-right: 0;
-  }
-
-  .sendler-philosophy__item:nth-last-child(-n + 2) {
-    border-bottom: 0;
-  }
-
-  .sendler-philosophy__item:first-child {
-    padding-left: 30px;
-  }
-
-  .sendler-philosophy__item:last-child {
-    padding-right: 30px;
-  }
 }
 
+
+/* Mobile */
+
 @media screen and (max-width: 749px) {
+
   .sendler-philosophy {
-    padding: 80px 0;
+    padding: 48px 0;
   }
 
-  .sendler-philosophy__intro {
-    margin-bottom: 48px;
+  .sendler-philosophy__heading {
+    font-size: 2rem;
   }
 
   .sendler-philosophy__text {
-    font-size: 17px;
+    font-size: 15px;
   }
 
   .sendler-philosophy__grid {
     grid-template-columns: 1fr;
+    gap: 30px;
+    margin-top: 34px;
   }
 
-  .sendler-philosophy__item,
-  .sendler-philosophy__item:first-child,
-  .sendler-philosophy__item:last-child {
-    padding: 28px 0;
-    border-right: 0;
-    border-bottom: 1px solid var(--sendler-border);
-  }
-
-  .sendler-philosophy__item:last-child {
-    border-bottom: 0;
-  }
-
-  .sendler-philosophy__number {
-    margin-bottom: 22px;
-  }
 }
 
 {% endstylesheet %}
+
 
 {% schema %}
 {
@@ -210,7 +231,7 @@
       "type": "richtext",
       "id": "text",
       "label": "Text",
-      "default": "<p>The supplement aisle has become unnecessarily complicated. SENDLER focuses on useful products, sensible doses and clear guidance — so you can spend less time researching supplements and more time living your life.</p>"
+      "default": "<p>We cut through the confusion to bring you evidence-backed supplements, sensible doses and clear guidance — so you can feel confident in what you’re taking.</p>"
     }
   ],
   "blocks": [
@@ -218,6 +239,30 @@
       "type": "principle",
       "name": "Principle",
       "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "evidence",
+              "label": "Evidence"
+            },
+            {
+              "value": "dose",
+              "label": "Dose"
+            },
+            {
+              "value": "quality",
+              "label": "Quality"
+            },
+            {
+              "value": "focused",
+              "label": "Focused"
+            }
+          ],
+          "default": "evidence"
+        },
         {
           "type": "text",
           "id": "heading",
@@ -240,6 +285,7 @@
         {
           "type": "principle",
           "settings": {
+            "icon": "evidence",
             "heading": "Evidence-led selection",
             "text": "We look at the research before we look at the trends."
           }
@@ -247,6 +293,7 @@
         {
           "type": "principle",
           "settings": {
+            "icon": "dose",
             "heading": "Transparent dosing",
             "text": "We tell you what’s in the product and how much."
           }
@@ -254,13 +301,15 @@
         {
           "type": "principle",
           "settings": {
+            "icon": "quality",
             "heading": "Quality-first sourcing",
-            "text": "Products are selected with manufacturing quality and ingredient standards in mind."
+            "text": "Products are selected with manufacturing quality in mind."
           }
         },
         {
           "type": "principle",
           "settings": {
+            "icon": "focused",
             "heading": "Focused catalogue",
             "text": "We don’t need hundreds of products to help you make better choices."
           }
