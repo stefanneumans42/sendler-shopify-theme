@@ -1,0 +1,378 @@
+<section class="sendler-why-quality full-width">
+  <div class="sendler-container">
+
+    <div class="sendler-why-quality__header">
+
+      {% if section.settings.eyebrow != blank %}
+        <div class="sendler-eyebrow">
+          {{ section.settings.eyebrow }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="sendler-why-quality__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="sendler-why-quality__intro">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+
+    </div>
+
+
+    {% if section.blocks.size > 0 %}
+      <div class="sendler-why-quality__band">
+
+        {% for block in section.blocks %}
+          <article
+            class="sendler-quality-point"
+            {{ block.shopify_attributes }}
+          >
+
+            <div class="sendler-quality-point__icon" aria-hidden="true">
+
+              {% case block.settings.icon %}
+
+                {% when 'usa' %}
+                  <svg viewBox="0 0 32 32">
+                    <path d="M5 27V8h22v19" />
+                    <path d="M9 8V4h14v4" />
+                    <path d="M11 27V16h10v11" />
+                    <path d="M15 12h2" />
+                  </svg>
+
+                {% when 'manufacturing' %}
+                  <svg viewBox="0 0 32 32">
+                    <path d="M4 27V13l8 5v-5l8 5v-8h8v17H4Z" />
+                    <path d="M23 6h5v4h-5z" />
+                  </svg>
+
+                {% when 'documentation' %}
+                  <svg viewBox="0 0 32 32">
+                    <path d="M8 4h12l5 5v19H8V4Z" />
+                    <path d="M20 4v6h6" />
+                    <path d="M12 16h9M12 20h9M12 24h6" />
+                  </svg>
+
+                {% when 'transparent' %}
+                  <svg viewBox="0 0 32 32">
+                    <path d="M7 5h18v22H7z" />
+                    <path d="M11 11h10M11 16h10M11 21h6" />
+                    <circle cx="23" cy="22" r="4" />
+                    <path d="m26 25 3 3" />
+                  </svg>
+
+              {% endcase %}
+
+            </div>
+
+            {% if block.settings.heading != blank %}
+              <h3>{{ block.settings.heading }}</h3>
+            {% endif %}
+
+            {% if block.settings.text != blank %}
+              <p>{{ block.settings.text }}</p>
+            {% endif %}
+
+          </article>
+        {% endfor %}
+
+      </div>
+    {% endif %}
+
+
+    {% if section.settings.note != blank %}
+      <div class="sendler-why-quality__note">
+        {{ section.settings.note }}
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+
+{% stylesheet %}
+
+.sendler-why-quality {
+  padding: 72px 0 76px;
+  background: var(--sendler-white);
+}
+
+.sendler-why-quality__header {
+  max-width: 850px;
+  margin: 0 auto 40px;
+  text-align: center;
+}
+
+.sendler-why-quality__heading {
+  margin: 0;
+  font-size: clamp(2.5rem, 4vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.sendler-why-quality__intro {
+  max-width: 680px;
+  margin: 16px auto 0;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.sendler-why-quality__intro p {
+  margin: 0;
+}
+
+
+/* Quality band */
+
+.sendler-why-quality__band {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1100px;
+  margin: 0 auto;
+  border-top: 1px solid var(--sendler-border);
+  border-bottom: 1px solid var(--sendler-border);
+}
+
+.sendler-quality-point {
+  min-width: 0;
+  padding: 32px 28px;
+  border-right: 1px solid var(--sendler-border);
+}
+
+.sendler-quality-point:first-child {
+  padding-left: 0;
+}
+
+.sendler-quality-point:last-child {
+  padding-right: 0;
+  border-right: 0;
+}
+
+.sendler-quality-point__icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 17px;
+  color: var(--sendler-green);
+}
+
+.sendler-quality-point__icon svg {
+  width: 31px;
+  height: 31px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sendler-quality-point h3 {
+  margin: 0;
+  color: var(--sendler-charcoal);
+  font-size: 17px;
+  line-height: 1.25;
+}
+
+.sendler-quality-point p {
+  margin: 9px 0 0;
+  color: var(--sendler-text-secondary);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* Fine print */
+
+.sendler-why-quality__note {
+  max-width: 800px;
+  margin: 20px auto 0;
+  color: var(--sendler-text-secondary);
+  font-size: 11px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.sendler-why-quality__note p {
+  margin: 0;
+}
+
+
+@media screen and (max-width: 900px) {
+
+  .sendler-why-quality__band {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sendler-quality-point,
+  .sendler-quality-point:first-child,
+  .sendler-quality-point:last-child {
+    padding: 28px;
+  }
+
+  .sendler-quality-point:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .sendler-quality-point:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--sendler-border);
+  }
+
+}
+
+
+@media screen and (max-width: 749px) {
+
+  .sendler-why-quality {
+    padding: 58px 0;
+  }
+
+  .sendler-why-quality__header {
+    margin-bottom: 30px;
+  }
+
+  .sendler-why-quality__heading {
+    font-size: 2.35rem;
+  }
+
+  .sendler-why-quality__band {
+    grid-template-columns: 1fr;
+  }
+
+  .sendler-quality-point,
+  .sendler-quality-point:first-child,
+  .sendler-quality-point:last-child {
+    padding: 24px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--sendler-border);
+  }
+
+  .sendler-quality-point:last-child {
+    border-bottom: 0;
+  }
+
+}
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER Why quality",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "QUALITY"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Made for a higher standard."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>A sensible formula means little if you can’t trust how the finished product is made. Quality is part of the product — not a badge we add afterward.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "note",
+      "label": "Small note",
+      "default": "<p>Manufacturing, sourcing and testing claims may vary by product. Refer to individual product information for specific details.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "quality",
+      "name": "Quality point",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "usa",
+              "label": "USA"
+            },
+            {
+              "value": "manufacturing",
+              "label": "Manufacturing"
+            },
+            {
+              "value": "documentation",
+              "label": "Documentation"
+            },
+            {
+              "value": "transparent",
+              "label": "Transparent formula"
+            }
+          ],
+          "default": "manufacturing"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SENDLER Why quality",
+      "blocks": [
+        {
+          "type": "quality",
+          "settings": {
+            "icon": "usa",
+            "heading": "Made in the USA",
+            "text": "Our current product range is manufactured in the United States."
+          }
+        },
+        {
+          "type": "quality",
+          "settings": {
+            "icon": "manufacturing",
+            "heading": "Manufacturing standards",
+            "text": "We look beyond the front label at how and where products are produced."
+          }
+        },
+        {
+          "type": "quality",
+          "settings": {
+            "icon": "documentation",
+            "heading": "Documentation matters",
+            "text": "We expect meaningful product and manufacturing information from our suppliers."
+          }
+        },
+        {
+          "type": "quality",
+          "settings": {
+            "icon": "transparent",
+            "heading": "Clear formulas",
+            "text": "Ingredients and amounts should be easy for customers to understand."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

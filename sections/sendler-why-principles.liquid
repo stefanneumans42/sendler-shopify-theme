@@ -1,0 +1,277 @@
+<section class="sendler-why-principles full-width">
+  <div class="sendler-container">
+
+    <div class="sendler-why-principles__header">
+
+      {% if section.settings.eyebrow != blank %}
+        <div class="sendler-eyebrow">
+          {{ section.settings.eyebrow }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="sendler-why-principles__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="sendler-why-principles__intro">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+
+    </div>
+
+    {% if section.blocks.size > 0 %}
+      <div class="sendler-why-principles__grid">
+
+        {% for block in section.blocks %}
+          <article
+            class="sendler-principle"
+            {{ block.shopify_attributes }}
+          >
+
+            <div class="sendler-principle__number">
+              0{{ forloop.index }}
+            </div>
+
+            {% if block.settings.heading != blank %}
+              <h3>{{ block.settings.heading }}</h3>
+            {% endif %}
+
+            {% if block.settings.text != blank %}
+              <p>{{ block.settings.text }}</p>
+            {% endif %}
+
+          </article>
+        {% endfor %}
+
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+
+{% stylesheet %}
+
+.sendler-why-principles {
+  padding: 72px 0 78px;
+  background: var(--sendler-soft-green);
+}
+
+.sendler-why-principles__header {
+  max-width: 820px;
+  margin: 0 auto 42px;
+  text-align: center;
+}
+
+.sendler-why-principles__heading {
+  margin: 0;
+  font-size: clamp(2.5rem, 4vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.sendler-why-principles__intro {
+  max-width: 650px;
+  margin: 16px auto 0;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.sendler-why-principles__intro p {
+  margin: 0;
+}
+
+
+/* Principles */
+
+.sendler-why-principles__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1100px;
+  margin: 0 auto;
+  border-top: 1px solid var(--sendler-border);
+}
+
+.sendler-principle {
+  padding: 30px 30px 0;
+  border-right: 1px solid var(--sendler-border);
+}
+
+.sendler-principle:first-child {
+  padding-left: 0;
+}
+
+.sendler-principle:last-child {
+  padding-right: 0;
+  border-right: 0;
+}
+
+.sendler-principle__number {
+  margin-bottom: 28px;
+  color: var(--sendler-green);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.sendler-principle h3 {
+  margin: 0;
+  color: var(--sendler-charcoal);
+  font-size: 19px;
+  line-height: 1.25;
+}
+
+.sendler-principle p {
+  margin: 9px 0 0;
+  color: var(--sendler-text-secondary);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+
+@media screen and (max-width: 900px) {
+
+  .sendler-why-principles__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sendler-principle,
+  .sendler-principle:first-child,
+  .sendler-principle:last-child {
+    padding: 28px;
+  }
+
+  .sendler-principle:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .sendler-principle:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--sendler-border);
+  }
+
+}
+
+
+@media screen and (max-width: 749px) {
+
+  .sendler-why-principles {
+    padding: 58px 0;
+  }
+
+  .sendler-why-principles__header {
+    margin-bottom: 30px;
+  }
+
+  .sendler-why-principles__heading {
+    font-size: 2.35rem;
+  }
+
+  .sendler-why-principles__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sendler-principle,
+  .sendler-principle:first-child,
+  .sendler-principle:last-child {
+    padding: 24px 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--sendler-border);
+  }
+
+  .sendler-principle:last-child {
+    border-bottom: 0;
+  }
+
+  .sendler-principle__number {
+    margin-bottom: 14px;
+  }
+
+}
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER Why principles",
+  "tag": "section",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "WHAT WE WON’T DO"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "No hype. No gimmicks. No shortcuts."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>We’d rather build trust slowly than sell products quickly using claims we can’t stand behind.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "principle",
+      "name": "Principle",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SENDLER Why principles",
+      "blocks": [
+        {
+          "type": "principle",
+          "settings": {
+            "heading": "No miracle language",
+            "text": "Supplements can support health. They are not magic."
+          }
+        },
+        {
+          "type": "principle",
+          "settings": {
+            "heading": "No trend chasing",
+            "text": "Popularity alone is not enough reason for a product to exist."
+          }
+        },
+        {
+          "type": "principle",
+          "settings": {
+            "heading": "No unnecessary complexity",
+            "text": "More ingredients do not automatically make a formula better."
+          }
+        },
+        {
+          "type": "principle",
+          "settings": {
+            "heading": "No pretending certainty",
+            "text": "Where the evidence is limited or mixed, we should say so."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
