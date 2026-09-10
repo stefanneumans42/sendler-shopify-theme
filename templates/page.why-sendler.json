@@ -94,6 +94,11 @@
     "why_sendler_dose": {
       "type": "sendler-why-dose",
       "settings": {}
+    },
+
+    "why_sendler_no_buy": {
+      "type": "sendler-why-no-buy",
+      "settings": {}
     }
   },
 
@@ -101,6 +106,7 @@
     "why_sendler_hero",
     "why_sendler_problem",
     "why_sendler_standard",
-    "why_sendler_dose"
+    "why_sendler_dose",
+    "why_sendler_no_buy"
   ]
 }
