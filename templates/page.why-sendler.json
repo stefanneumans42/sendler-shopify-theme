@@ -99,6 +99,55 @@
     "why_sendler_no_buy": {
       "type": "sendler-why-no-buy",
       "settings": {}
+    },
+
+    "why_sendler_process": {
+      "type": "sendler-why-process",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "heading": "Research",
+            "text": "We start with the evidence and the need."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "heading": "Formula",
+            "text": "We decide which form and formulation make sense."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "heading": "Dose",
+            "text": "We look at whether the amount is meaningful."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "heading": "Manufacturer",
+            "text": "We evaluate manufacturing standards and documentation."
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "heading": "SENDLER",
+            "text": "Only then does the product earn a place in the catalogue."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5"
+      ],
+      "settings": {}
     }
   },
 
@@ -107,6 +156,7 @@
     "why_sendler_problem",
     "why_sendler_standard",
     "why_sendler_dose",
-    "why_sendler_no_buy"
+    "why_sendler_no_buy",
+    "why_sendler_process"
   ]
 }

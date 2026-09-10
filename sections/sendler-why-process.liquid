@@ -1,0 +1,312 @@
+<section class="sendler-why-process full-width">
+  <div class="sendler-container">
+
+    <div class="sendler-why-process__header">
+
+      {% if section.settings.eyebrow != blank %}
+        <div class="sendler-eyebrow">
+          {{ section.settings.eyebrow }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="sendler-why-process__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="sendler-why-process__intro">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+
+    </div>
+
+
+    {% if section.blocks.size > 0 %}
+      <div class="sendler-why-process__steps">
+
+        {% for block in section.blocks %}
+          <article
+            class="sendler-process-step"
+            {{ block.shopify_attributes }}
+          >
+
+            <div class="sendler-process-step__top">
+
+              <div class="sendler-process-step__number">
+                0{{ forloop.index }}
+              </div>
+
+              {% unless forloop.last %}
+                <div class="sendler-process-step__line"></div>
+              {% endunless %}
+
+            </div>
+
+            {% if block.settings.heading != blank %}
+              <h3>{{ block.settings.heading }}</h3>
+            {% endif %}
+
+            {% if block.settings.text != blank %}
+              <p>{{ block.settings.text }}</p>
+            {% endif %}
+
+          </article>
+        {% endfor %}
+
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+
+{% stylesheet %}
+
+.sendler-why-process {
+  padding: 72px 0 78px;
+  background: var(--sendler-canvas);
+}
+
+.sendler-why-process__header {
+  max-width: 860px;
+  margin-bottom: 48px;
+}
+
+.sendler-why-process__heading {
+  max-width: 800px;
+  margin: 0;
+  font-size: clamp(2.5rem, 4vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.sendler-why-process__intro {
+  max-width: 680px;
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.sendler-why-process__intro p {
+  margin: 0;
+}
+
+
+/* Process */
+
+.sendler-why-process__steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+}
+
+.sendler-process-step {
+  min-width: 0;
+  padding-right: 28px;
+}
+
+.sendler-process-step:last-child {
+  padding-right: 0;
+}
+
+.sendler-process-step__top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.sendler-process-step__number {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--sendler-green);
+  border-radius: 50%;
+  background: var(--sendler-white);
+  color: var(--sendler-green);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.sendler-process-step__line {
+  flex: 1;
+  height: 1px;
+  margin-left: 12px;
+  background: var(--sendler-border);
+}
+
+.sendler-process-step h3 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.sendler-process-step p {
+  max-width: 205px;
+  margin: 9px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* Mobile / tablet */
+
+@media screen and (max-width: 1000px) {
+
+  .sendler-why-process__steps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px 28px;
+  }
+
+  .sendler-process-step {
+    padding-right: 0;
+  }
+
+  .sendler-process-step__line {
+    display: none;
+  }
+
+}
+
+@media screen and (max-width: 749px) {
+
+  .sendler-why-process {
+    padding: 58px 0;
+  }
+
+  .sendler-why-process__heading {
+    font-size: 2.35rem;
+  }
+
+  .sendler-why-process__header {
+    margin-bottom: 36px;
+  }
+
+  .sendler-why-process__steps {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .sendler-process-step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    column-gap: 16px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--sendler-border);
+  }
+
+  .sendler-process-step:last-child {
+    border-bottom: 0;
+  }
+
+  .sendler-process-step__top {
+    grid-row: 1 / span 2;
+    margin: 0;
+  }
+
+  .sendler-process-step h3 {
+    align-self: end;
+  }
+
+  .sendler-process-step p {
+    max-width: none;
+  }
+
+}
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER Why process",
+  "tag": "section",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "HOW WE CHOOSE PRODUCTS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "We start with the need, not with whatever a supplier happens to have available."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Every SENDLER product should have a clear reason to exist before we ever start thinking about packaging or marketing.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SENDLER Why process",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "heading": "Research",
+            "text": "We start with the evidence and the need."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "heading": "Formula",
+            "text": "We decide which form and formulation make sense."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "heading": "Dose",
+            "text": "We look at whether the amount is meaningful."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "heading": "Manufacturer",
+            "text": "We evaluate manufacturing standards and documentation."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "heading": "SENDLER",
+            "text": "Only then does the product earn a place in the catalogue."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
