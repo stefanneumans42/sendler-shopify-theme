@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "why_sendler_hero": {
@@ -53,11 +44,57 @@
         "problem_4"
       ],
       "settings": {}
+    },
+
+    "why_sendler_standard": {
+      "type": "sendler-why-standard",
+      "blocks": {
+        "standard_1": {
+          "type": "standard",
+          "settings": {
+            "icon": "evidence",
+            "heading": "Evidence",
+            "text": "Does the research support a meaningful use?"
+          }
+        },
+        "standard_2": {
+          "type": "standard",
+          "settings": {
+            "icon": "dose",
+            "heading": "Dose",
+            "text": "Is there enough of the ingredient to make sense?"
+          }
+        },
+        "standard_3": {
+          "type": "standard",
+          "settings": {
+            "icon": "quality",
+            "heading": "Quality",
+            "text": "Can we stand behind how it’s manufactured?"
+          }
+        },
+        "standard_4": {
+          "type": "standard",
+          "settings": {
+            "icon": "usefulness",
+            "heading": "Usefulness",
+            "text": "Does this solve a real problem?"
+          }
+        }
+      },
+      "block_order": [
+        "standard_1",
+        "standard_2",
+        "standard_3",
+        "standard_4"
+      ],
+      "settings": {}
     }
   },
 
   "order": [
     "why_sendler_hero",
-    "why_sendler_problem"
+    "why_sendler_problem",
+    "why_sendler_standard"
   ]
 }
