@@ -1,0 +1,545 @@
+<section class="sendler-why-dose full-width">
+  <div class="sendler-container">
+
+    <div class="sendler-why-dose__header">
+
+      {% if section.settings.eyebrow != blank %}
+        <div class="sendler-eyebrow">
+          {{ section.settings.eyebrow }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h2 class="sendler-why-dose__heading">
+          {{ section.settings.heading }}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="sendler-why-dose__intro">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+
+    </div>
+
+
+    <div class="sendler-why-dose__comparison">
+
+      <!-- Generic / other formula -->
+      <article class="sendler-dose-card sendler-dose-card--other">
+
+        <div class="sendler-dose-card__label">
+          {{ section.settings.left_label }}
+        </div>
+
+        <div class="sendler-dose-card__body">
+
+          <div class="sendler-dose-card__copy">
+
+            <h3>
+              {{ section.settings.left_product }}
+            </h3>
+
+            <div class="sendler-dose-card__dose">
+              {{ section.settings.left_dose }}
+            </div>
+
+            <ul>
+              {% if section.settings.left_point_1 != blank %}
+                <li>
+                  <span class="sendler-dose-card__mark">×</span>
+                  {{ section.settings.left_point_1 }}
+                </li>
+              {% endif %}
+
+              {% if section.settings.left_point_2 != blank %}
+                <li>
+                  <span class="sendler-dose-card__mark">×</span>
+                  {{ section.settings.left_point_2 }}
+                </li>
+              {% endif %}
+
+              {% if section.settings.left_point_3 != blank %}
+                <li>
+                  <span class="sendler-dose-card__mark">×</span>
+                  {{ section.settings.left_point_3 }}
+                </li>
+              {% endif %}
+            </ul>
+
+          </div>
+
+
+          <div class="sendler-dose-card__media">
+
+            {% if section.settings.left_image != blank %}
+              {{
+                section.settings.left_image
+                | image_url: width: 700
+                | image_tag:
+                  class: 'sendler-dose-card__image',
+                  widths: '300, 500, 700',
+                  loading: 'lazy'
+              }}
+            {% else %}
+              <div class="sendler-dose-card__bottle sendler-dose-card__bottle--generic">
+                <span>
+                  {{ section.settings.left_product }}
+                  <small>{{ section.settings.left_dose }}</small>
+                </span>
+              </div>
+            {% endif %}
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <div class="sendler-why-dose__vs">
+        VS
+      </div>
+
+
+      <!-- SENDLER -->
+      <article class="sendler-dose-card sendler-dose-card--sendler">
+
+        <div class="sendler-dose-card__label">
+          {{ section.settings.right_label }}
+        </div>
+
+        <div class="sendler-dose-card__body">
+
+          <div class="sendler-dose-card__copy">
+
+            <h3>
+              {{ section.settings.right_product }}
+            </h3>
+
+            <div class="sendler-dose-card__dose">
+              {{ section.settings.right_dose }}
+            </div>
+
+            <ul>
+              {% if section.settings.right_point_1 != blank %}
+                <li>
+                  <span class="sendler-dose-card__mark">✓</span>
+                  {{ section.settings.right_point_1 }}
+                </li>
+              {% endif %}
+
+              {% if section.settings.right_point_2 != blank %}
+                <li>
+                  <span class="sendler-dose-card__mark">✓</span>
+                  {{ section.settings.right_point_2 }}
+                </li>
+              {% endif %}
+
+              {% if section.settings.right_point_3 != blank %}
+                <li>
+                  <span class="sendler-dose-card__mark">✓</span>
+                  {{ section.settings.right_point_3 }}
+                </li>
+              {% endif %}
+            </ul>
+
+          </div>
+
+
+          <div class="sendler-dose-card__media">
+
+            {% if section.settings.right_image != blank %}
+              {{
+                section.settings.right_image
+                | image_url: width: 700
+                | image_tag:
+                  class: 'sendler-dose-card__image',
+                  widths: '300, 500, 700',
+                  loading: 'lazy'
+              }}
+            {% else %}
+              <div class="sendler-dose-card__bottle sendler-dose-card__bottle--sendler">
+                <span>
+                  SENDLER
+                  <small>{{ section.settings.right_dose }}</small>
+                </span>
+              </div>
+            {% endif %}
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+
+{% stylesheet %}
+
+.sendler-why-dose {
+  padding: 72px 0 78px;
+  background: var(--sendler-canvas);
+}
+
+.sendler-why-dose__header {
+  max-width: 840px;
+  margin: 0 auto 42px;
+  text-align: center;
+}
+
+.sendler-why-dose__heading {
+  margin: 0;
+  font-size: clamp(2.5rem, 4vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.sendler-why-dose__intro {
+  max-width: 720px;
+  margin: 16px auto 0;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.sendler-why-dose__intro p {
+  margin: 0;
+}
+
+
+/* Comparison */
+
+.sendler-why-dose__comparison {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.sendler-why-dose__vs {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  width: 46px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 6px solid var(--sendler-canvas);
+  border-radius: 50%;
+  background: var(--sendler-green);
+  color: var(--sendler-white);
+  font-size: 11px;
+  font-weight: 700;
+  transform: translate(-50%, -50%);
+}
+
+
+.sendler-dose-card {
+  overflow: hidden;
+  border: 1px solid var(--sendler-border);
+  border-radius: 12px;
+  background: var(--sendler-white);
+}
+
+.sendler-dose-card__label {
+  padding: 19px 24px 0;
+  color: var(--sendler-green);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.sendler-dose-card__body {
+  display: grid;
+  grid-template-columns: 1fr 0.85fr;
+  gap: 24px;
+  align-items: center;
+  min-height: 285px;
+  padding: 18px 24px 28px;
+}
+
+.sendler-dose-card__copy h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.sendler-dose-card__dose {
+  margin-top: 4px;
+  color: var(--sendler-charcoal);
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.sendler-dose-card ul {
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sendler-dose-card li {
+  display: flex;
+  gap: 9px;
+  margin-top: 9px;
+  color: var(--sendler-text-secondary);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.sendler-dose-card__mark {
+  flex: 0 0 14px;
+  color: var(--sendler-green);
+  font-weight: 700;
+}
+
+
+/* Images / temporary bottles */
+
+.sendler-dose-card__media {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  align-self: stretch;
+}
+
+.sendler-dose-card__image {
+  display: block;
+  width: 100%;
+  height: 245px;
+  object-fit: contain;
+}
+
+.sendler-dose-card__bottle {
+  position: relative;
+  width: 125px;
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px 30px 12px 12px;
+  background: #593621;
+}
+
+.sendler-dose-card__bottle::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  width: 90px;
+  height: 23px;
+  border-radius: 6px 6px 2px 2px;
+  background: #191a19;
+}
+
+.sendler-dose-card__bottle span {
+  width: 88%;
+  padding: 30px 8px;
+  background: var(--sendler-canvas);
+  color: var(--sendler-charcoal);
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.sendler-dose-card__bottle small {
+  display: block;
+  margin-top: 7px;
+  color: var(--sendler-text-secondary);
+  font-size: 9px;
+  font-weight: 500;
+}
+
+.sendler-dose-card__bottle--generic {
+  opacity: 0.72;
+}
+
+
+/* Responsive */
+
+@media screen and (max-width: 900px) {
+
+  .sendler-why-dose__comparison {
+    grid-template-columns: 1fr;
+    max-width: 620px;
+  }
+
+  .sendler-why-dose__vs {
+    top: 50%;
+  }
+
+}
+
+
+@media screen and (max-width: 749px) {
+
+  .sendler-why-dose {
+    padding: 58px 0;
+  }
+
+  .sendler-why-dose__header {
+    margin-bottom: 34px;
+  }
+
+  .sendler-why-dose__heading {
+    font-size: 2.35rem;
+  }
+
+  .sendler-why-dose__comparison {
+    gap: 32px;
+  }
+
+  .sendler-why-dose__vs {
+    top: 50%;
+  }
+
+  .sendler-dose-card__body {
+    grid-template-columns: 1fr 120px;
+    min-height: 250px;
+    padding-inline: 20px;
+  }
+
+  .sendler-dose-card__bottle {
+    width: 92px;
+    height: 165px;
+  }
+
+  .sendler-dose-card__bottle::before {
+    width: 65px;
+  }
+
+}
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER Why dose",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "WHY DOSE MATTERS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "100 mg and 500 mg are not the same product."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Ingredient lists are easy to market. Useful doses are harder. We look beyond the ingredient name and pay attention to how much you’re actually getting.</p>"
+    },
+
+    {
+      "type": "header",
+      "content": "Left comparison"
+    },
+    {
+      "type": "text",
+      "id": "left_label",
+      "label": "Label",
+      "default": "EXAMPLE FORMULA"
+    },
+    {
+      "type": "text",
+      "id": "left_product",
+      "label": "Product",
+      "default": "Ashwagandha"
+    },
+    {
+      "type": "text",
+      "id": "left_dose",
+      "label": "Dose",
+      "default": "100 mg"
+    },
+    {
+      "type": "text",
+      "id": "left_point_1",
+      "label": "Point 1",
+      "default": "Lower amount"
+    },
+    {
+      "type": "text",
+      "id": "left_point_2",
+      "label": "Point 2",
+      "default": "Extract details unclear"
+    },
+    {
+      "type": "text",
+      "id": "left_point_3",
+      "label": "Point 3",
+      "default": "Harder to evaluate"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Image"
+    },
+
+    {
+      "type": "header",
+      "content": "SENDLER comparison"
+    },
+    {
+      "type": "text",
+      "id": "right_label",
+      "label": "Label",
+      "default": "SENDLER"
+    },
+    {
+      "type": "text",
+      "id": "right_product",
+      "label": "Product",
+      "default": "Ashwagandha"
+    },
+    {
+      "type": "text",
+      "id": "right_dose",
+      "label": "Dose",
+      "default": "500 mg"
+    },
+    {
+      "type": "text",
+      "id": "right_point_1",
+      "label": "Point 1",
+      "default": "Dose clearly disclosed"
+    },
+    {
+      "type": "text",
+      "id": "right_point_2",
+      "label": "Point 2",
+      "default": "Extract clearly identified"
+    },
+    {
+      "type": "text",
+      "id": "right_point_3",
+      "label": "Point 3",
+      "default": "Easier to evaluate"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SENDLER Why dose"
+    }
+  ]
+}
+{% endschema %}

@@ -89,12 +89,18 @@
         "standard_4"
       ],
       "settings": {}
+    },
+
+    "why_sendler_dose": {
+      "type": "sendler-why-dose",
+      "settings": {}
     }
   },
 
   "order": [
     "why_sendler_hero",
     "why_sendler_problem",
-    "why_sendler_standard"
+    "why_sendler_standard",
+    "why_sendler_dose"
   ]
 }
