@@ -1,0 +1,620 @@
+<section class="sendler-product-details full-width">
+  <div class="sendler-container">
+
+    <div class="sendler-product-details__grid">
+
+      <!-- SUPPLEMENT FACTS / INGREDIENTS -->
+      <article
+        id="sendler-ingredients"
+        class="sendler-product-detail-panel"
+      >
+        <div class="sendler-product-detail-panel__header">
+
+          <div class="sendler-product-detail-panel__eyebrow">
+            PRODUCT DETAILS
+          </div>
+
+          <h2>
+            Supplement facts & ingredients
+          </h2>
+
+        </div>
+
+
+        {% if product.metafields.custom.supplement_facts_image != blank %}
+
+          <div class="sendler-product-facts-image">
+            {{
+              product.metafields.custom.supplement_facts_image.value
+              | image_url: width: 1200
+              | image_tag:
+                widths: '450, 700, 900, 1200',
+                loading: 'lazy'
+            }}
+          </div>
+
+        {% elsif product.metafields.custom.supplement_facts != blank %}
+
+          <div class="sendler-product-detail-panel__copy sendler-product-facts-copy">
+            {{ product.metafields.custom.supplement_facts | metafield_tag }}
+          </div>
+
+        {% else %}
+
+          <div class="sendler-product-detail-panel__placeholder">
+            Supplement Facts will appear here once this product is populated.
+          </div>
+
+        {% endif %}
+
+
+        {% if product.metafields.custom.other_ingredients != blank %}
+          <div class="sendler-product-detail-row">
+
+            <strong>
+              Other ingredients
+            </strong>
+
+            <div>
+              {{ product.metafields.custom.other_ingredients | metafield_tag }}
+            </div>
+
+          </div>
+        {% endif %}
+
+
+        {% if product.metafields.custom.allergen_statement != blank %}
+          <div class="sendler-product-detail-row">
+
+            <strong>
+              Allergen information
+            </strong>
+
+            <div>
+              {{ product.metafields.custom.allergen_statement | metafield_tag }}
+            </div>
+
+          </div>
+        {% endif %}
+
+      </article>
+
+
+      <!-- QUALITY -->
+      <article
+        id="sendler-quality"
+        class="sendler-product-detail-panel"
+      >
+
+        <div class="sendler-product-detail-panel__header">
+
+          <div class="sendler-product-detail-panel__eyebrow">
+            QUALITY
+          </div>
+
+          <h2>
+            Quality & manufacturing
+          </h2>
+
+        </div>
+
+
+        {% if product.metafields.custom.quality_summary != blank %}
+
+          <div class="sendler-product-detail-panel__copy">
+            {{ product.metafields.custom.quality_summary | metafield_tag }}
+          </div>
+
+        {% else %}
+
+          <div class="sendler-product-detail-panel__placeholder">
+            Product-specific manufacturing and quality information will appear here.
+          </div>
+
+        {% endif %}
+
+
+        <div class="sendler-product-quality-list">
+
+          {% if product.metafields.custom.manufacturing_location != blank %}
+            <div class="sendler-product-quality-item">
+
+              <div class="sendler-product-quality-item__icon">
+                <svg viewBox="0 0 32 32">
+                  <path d="M5 27V9h22v18"/>
+                  <path d="M9 9V5h14v4"/>
+                  <path d="M11 27V17h10v10"/>
+                </svg>
+              </div>
+
+              <div>
+                <span>Manufacturing</span>
+                <strong>
+                  {{ product.metafields.custom.manufacturing_location.value }}
+                </strong>
+              </div>
+
+            </div>
+          {% endif %}
+
+
+          {% if product.metafields.custom.testing_line != blank %}
+            <div class="sendler-product-quality-item">
+
+              <div class="sendler-product-quality-item__icon">
+                <svg viewBox="0 0 32 32">
+                  <path d="M11 4h10"/>
+                  <path d="M13 4v8L7 25a2 2 0 0 0 2 3h14a2 2 0 0 0 2-3l-6-13V4"/>
+                  <path d="M10 21h12"/>
+                </svg>
+              </div>
+
+              <div>
+                <span>Testing</span>
+                <strong>
+                  {{ product.metafields.custom.testing_line.value }}
+                </strong>
+              </div>
+
+            </div>
+          {% endif %}
+
+
+          {% if product.metafields.custom.formula_line != blank %}
+            <div class="sendler-product-quality-item">
+
+              <div class="sendler-product-quality-item__icon">
+                <svg viewBox="0 0 32 32">
+                  <path d="M8 5h16v22H8z"/>
+                  <path d="M12 11h8M12 16h8M12 21h5"/>
+                </svg>
+              </div>
+
+              <div>
+                <span>Formula</span>
+                <strong>
+                  {{ product.metafields.custom.formula_line.value }}
+                </strong>
+              </div>
+
+            </div>
+          {% endif %}
+
+        </div>
+
+
+        {% if product.metafields.custom.quality_note != blank %}
+          <div class="sendler-product-quality-note">
+            {{ product.metafields.custom.quality_note | metafield_tag }}
+          </div>
+        {% endif %}
+
+      </article>
+
+    </div>
+
+
+    <!-- FAQ -->
+    <section
+      id="sendler-faq"
+      class="sendler-product-faq"
+    >
+
+      <div class="sendler-product-faq__header">
+
+        <div class="sendler-eyebrow">
+          QUESTIONS
+        </div>
+
+        <h2>
+          Frequently asked questions
+        </h2>
+
+      </div>
+
+
+      <div class="sendler-product-faq__list">
+
+        {% if product.metafields.custom.faq_1_question != blank %}
+          <details class="sendler-product-faq__item">
+
+            <summary>
+              {{ product.metafields.custom.faq_1_question.value }}
+
+              <span aria-hidden="true">
+                +
+              </span>
+            </summary>
+
+            <div class="sendler-product-faq__answer">
+              {{ product.metafields.custom.faq_1_answer | metafield_tag }}
+            </div>
+
+          </details>
+        {% endif %}
+
+
+        {% if product.metafields.custom.faq_2_question != blank %}
+          <details class="sendler-product-faq__item">
+
+            <summary>
+              {{ product.metafields.custom.faq_2_question.value }}
+
+              <span aria-hidden="true">
+                +
+              </span>
+            </summary>
+
+            <div class="sendler-product-faq__answer">
+              {{ product.metafields.custom.faq_2_answer | metafield_tag }}
+            </div>
+
+          </details>
+        {% endif %}
+
+
+        {% if product.metafields.custom.faq_3_question != blank %}
+          <details class="sendler-product-faq__item">
+
+            <summary>
+              {{ product.metafields.custom.faq_3_question.value }}
+
+              <span aria-hidden="true">
+                +
+              </span>
+            </summary>
+
+            <div class="sendler-product-faq__answer">
+              {{ product.metafields.custom.faq_3_answer | metafield_tag }}
+            </div>
+
+          </details>
+        {% endif %}
+
+
+        {% if product.metafields.custom.faq_4_question != blank %}
+          <details class="sendler-product-faq__item">
+
+            <summary>
+              {{ product.metafields.custom.faq_4_question.value }}
+
+              <span aria-hidden="true">
+                +
+              </span>
+            </summary>
+
+            <div class="sendler-product-faq__answer">
+              {{ product.metafields.custom.faq_4_answer | metafield_tag }}
+            </div>
+
+          </details>
+        {% endif %}
+
+
+        {% if product.metafields.custom.faq_1_question == blank
+          and product.metafields.custom.faq_2_question == blank
+          and product.metafields.custom.faq_3_question == blank
+          and product.metafields.custom.faq_4_question == blank
+        %}
+
+          <div class="sendler-product-faq__placeholder">
+            Product FAQs will appear here once this product is populated.
+          </div>
+
+        {% endif %}
+
+      </div>
+
+    </section>
+
+  </div>
+</section>
+
+
+{% stylesheet %}
+
+.sendler-product-details {
+  padding: 68px 0;
+  background: var(--sendler-white);
+}
+
+
+/* MAIN TWO-COLUMN AREA */
+
+.sendler-product-details__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.sendler-product-detail-panel {
+  padding: 34px;
+  border: 1px solid var(--sendler-border);
+  border-radius: 10px;
+  background: var(--sendler-canvas);
+}
+
+.sendler-product-detail-panel__header {
+  margin-bottom: 25px;
+}
+
+.sendler-product-detail-panel__eyebrow {
+  margin-bottom: 9px;
+  color: var(--sendler-green);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+}
+
+.sendler-product-detail-panel h2 {
+  margin: 0;
+  color: var(--sendler-charcoal);
+  font-size: 25px;
+  line-height: 1.1;
+  letter-spacing: -.035em;
+}
+
+.sendler-product-detail-panel__copy {
+  color: var(--sendler-text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.sendler-product-detail-panel__copy p {
+  margin: 0 0 12px;
+}
+
+.sendler-product-detail-panel__copy p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* FACTS */
+
+.sendler-product-facts-image {
+  padding: 20px;
+  border: 1px solid var(--sendler-border);
+  border-radius: 7px;
+  background: var(--sendler-white);
+}
+
+.sendler-product-facts-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.sendler-product-facts-copy {
+  padding: 20px;
+  border: 1px solid var(--sendler-border);
+  border-radius: 7px;
+  background: var(--sendler-white);
+}
+
+.sendler-product-detail-row {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--sendler-border);
+  color: var(--sendler-text-secondary);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.sendler-product-detail-row strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--sendler-charcoal);
+  font-size: 12px;
+}
+
+.sendler-product-detail-row p {
+  margin: 0;
+}
+
+
+/* QUALITY */
+
+.sendler-product-quality-list {
+  display: grid;
+  gap: 11px;
+  margin-top: 24px;
+}
+
+.sendler-product-quality-item {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 13px;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid var(--sendler-border);
+  border-radius: 7px;
+  background: var(--sendler-white);
+}
+
+.sendler-product-quality-item__icon {
+  width: 34px;
+  height: 34px;
+  color: var(--sendler-green);
+}
+
+.sendler-product-quality-item__icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sendler-product-quality-item span {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--sendler-text-secondary);
+  font-size: 10px;
+}
+
+.sendler-product-quality-item strong {
+  display: block;
+  color: var(--sendler-charcoal);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.sendler-product-quality-note {
+  margin-top: 18px;
+  color: var(--sendler-text-secondary);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.sendler-product-quality-note p {
+  margin: 0;
+}
+
+
+/* DEVELOPMENT PLACEHOLDERS */
+
+.sendler-product-detail-panel__placeholder,
+.sendler-product-faq__placeholder {
+  padding: 22px;
+  border: 1px dashed var(--sendler-border);
+  border-radius: 7px;
+  color: var(--sendler-text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* FAQ */
+
+.sendler-product-faq {
+  display: grid;
+  grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr);
+  gap: 70px;
+  align-items: start;
+  margin-top: 72px;
+}
+
+.sendler-product-faq__header {
+  max-width: 390px;
+}
+
+.sendler-product-faq__header h2 {
+  margin: 0;
+  color: var(--sendler-charcoal);
+  font-size: clamp(2.3rem, 3.6vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -.045em;
+}
+
+.sendler-product-faq__list {
+  border-top: 1px solid var(--sendler-border);
+}
+
+.sendler-product-faq__item {
+  border-bottom: 1px solid var(--sendler-border);
+}
+
+.sendler-product-faq__item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  padding: 21px 0;
+  color: var(--sendler-charcoal);
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+  list-style: none;
+}
+
+.sendler-product-faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.sendler-product-faq__item summary span {
+  color: var(--sendler-green);
+  font-size: 22px;
+  font-weight: 400;
+  transition: transform .18s ease;
+}
+
+.sendler-product-faq__item[open] summary span {
+  transform: rotate(45deg);
+}
+
+.sendler-product-faq__answer {
+  max-width: 650px;
+  padding: 0 45px 20px 0;
+  color: var(--sendler-text-secondary);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.sendler-product-faq__answer p {
+  margin: 0 0 10px;
+}
+
+
+/* TABLET */
+
+@media screen and (max-width: 900px) {
+
+  .sendler-product-details__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sendler-product-faq {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+}
+
+
+/* MOBILE */
+
+@media screen and (max-width: 749px) {
+
+  .sendler-product-details {
+    padding: 48px 0;
+  }
+
+  .sendler-product-detail-panel {
+    padding: 25px 20px;
+  }
+
+  .sendler-product-detail-panel h2 {
+    font-size: 22px;
+  }
+
+  .sendler-product-faq {
+    margin-top: 50px;
+  }
+
+  .sendler-product-faq__header h2 {
+    font-size: 2.45rem;
+  }
+
+  .sendler-product-faq__item summary {
+    padding: 18px 0;
+  }
+
+}
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER Product details",
+  "tag": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "SENDLER Product details"
+    }
+  ]
+}
+{% endschema %}
