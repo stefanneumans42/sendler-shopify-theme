@@ -1,0 +1,464 @@
+{% liquid
+  assign related_products = product.metafields.custom.related_products.value
+  assign fallback_collection = product.collections.first
+%}
+
+<section class="sendler-product-related full-width">
+  <div class="sendler-container">
+
+    <div class="sendler-product-related__header">
+
+      <div>
+
+        {% if section.settings.eyebrow != blank %}
+          <div class="sendler-eyebrow">
+            {{ section.settings.eyebrow }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.heading != blank %}
+          <h2>
+            {{ section.settings.heading }}
+          </h2>
+        {% endif %}
+
+      </div>
+
+
+      <a
+        href="{{ routes.all_products_collection_url }}"
+        class="sendler-product-related__all"
+      >
+        Shop all supplements →
+      </a>
+
+    </div>
+
+
+    <div class="sendler-product-related__grid">
+
+      {% if related_products != blank %}
+
+        {% for related_product in related_products limit: 4 %}
+
+          <article class="sendler-related-card">
+
+            <a
+              href="{{ related_product.url }}"
+              class="sendler-related-card__media"
+            >
+
+              {% if related_product.featured_image != blank %}
+
+                {{
+                  related_product.featured_image
+                  | image_url: width: 700
+                  | image_tag:
+                    class: 'sendler-related-card__image',
+                    widths: '300, 450, 600, 700',
+                    loading: 'lazy'
+                }}
+
+              {% else %}
+
+                <div class="sendler-related-card__placeholder">
+
+                  <div class="sendler-related-card__bottle">
+                    <span>SENDLER</span>
+                  </div>
+
+                </div>
+
+              {% endif %}
+
+            </a>
+
+
+            <div class="sendler-related-card__content">
+
+              <h3>
+                <a href="{{ related_product.url }}">
+                  {{ related_product.title }}
+                </a>
+              </h3>
+
+
+              {% if related_product.metafields.custom.shop_benefits != blank %}
+                <div class="sendler-related-card__benefits">
+                  {{ related_product.metafields.custom.shop_benefits.value }}
+                </div>
+              {% endif %}
+
+
+              {% if related_product.metafields.custom.dose_line != blank %}
+                <div class="sendler-related-card__dose">
+                  {{ related_product.metafields.custom.dose_line.value }}
+                </div>
+              {% endif %}
+
+
+              <div class="sendler-related-card__bottom">
+
+                <div class="sendler-related-card__price">
+                  {{ related_product.price | money }}
+                </div>
+
+                <a
+                  href="{{ related_product.url }}"
+                  class="sendler-related-card__link"
+                >
+                  View product →
+                </a>
+
+              </div>
+
+            </div>
+
+          </article>
+
+        {% endfor %}
+
+
+      {% elsif fallback_collection != blank %}
+
+        {% assign shown = 0 %}
+
+        {% for related_product in fallback_collection.products %}
+
+          {% unless related_product.id == product.id %}
+
+            {% if shown < 4 %}
+
+              <article class="sendler-related-card">
+
+                <a
+                  href="{{ related_product.url }}"
+                  class="sendler-related-card__media"
+                >
+
+                  {% if related_product.featured_image != blank %}
+
+                    {{
+                      related_product.featured_image
+                      | image_url: width: 700
+                      | image_tag:
+                        class: 'sendler-related-card__image',
+                        widths: '300, 450, 600, 700',
+                        loading: 'lazy'
+                    }}
+
+                  {% else %}
+
+                    <div class="sendler-related-card__placeholder">
+
+                      <div class="sendler-related-card__bottle">
+                        <span>SENDLER</span>
+                      </div>
+
+                    </div>
+
+                  {% endif %}
+
+                </a>
+
+
+                <div class="sendler-related-card__content">
+
+                  <h3>
+                    <a href="{{ related_product.url }}">
+                      {{ related_product.title }}
+                    </a>
+                  </h3>
+
+
+                  {% if related_product.metafields.custom.shop_benefits != blank %}
+                    <div class="sendler-related-card__benefits">
+                      {{ related_product.metafields.custom.shop_benefits.value }}
+                    </div>
+                  {% endif %}
+
+
+                  {% if related_product.metafields.custom.dose_line != blank %}
+                    <div class="sendler-related-card__dose">
+                      {{ related_product.metafields.custom.dose_line.value }}
+                    </div>
+                  {% endif %}
+
+
+                  <div class="sendler-related-card__bottom">
+
+                    <div class="sendler-related-card__price">
+                      {{ related_product.price | money }}
+                    </div>
+
+                    <a
+                      href="{{ related_product.url }}"
+                      class="sendler-related-card__link"
+                    >
+                      View product →
+                    </a>
+
+                  </div>
+
+                </div>
+
+              </article>
+
+              {% assign shown = shown | plus: 1 %}
+
+            {% endif %}
+
+          {% endunless %}
+
+        {% endfor %}
+
+      {% endif %}
+
+    </div>
+
+  </div>
+</section>
+
+
+{% stylesheet %}
+
+.sendler-product-related {
+  padding: 68px 0 78px;
+  background: var(--sendler-canvas);
+}
+
+.sendler-product-related__header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.sendler-product-related__header h2 {
+  margin: 0;
+  color: var(--sendler-charcoal);
+  font-size: clamp(2.3rem, 3.5vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: -.045em;
+}
+
+.sendler-product-related__all {
+  flex: 0 0 auto;
+  color: var(--sendler-green);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.sendler-product-related__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+
+/* CARD */
+
+.sendler-related-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--sendler-border);
+  border-radius: 9px;
+  background: var(--sendler-white);
+}
+
+.sendler-related-card__media {
+  display: block;
+  height: 250px;
+  padding: 22px;
+  background: #f0eee8;
+}
+
+.sendler-related-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.sendler-related-card__placeholder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sendler-related-card__bottle {
+  position: relative;
+  width: 100px;
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px 25px 10px 10px;
+  background: #603b25;
+}
+
+.sendler-related-card__bottle::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  width: 70px;
+  height: 21px;
+  border-radius: 5px;
+  background: #171a18;
+}
+
+.sendler-related-card__bottle span {
+  width: 88%;
+  padding: 25px 5px;
+  background: var(--sendler-canvas);
+  color: var(--sendler-charcoal);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-align: center;
+}
+
+.sendler-related-card__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 18px;
+}
+
+.sendler-related-card h3 {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.sendler-related-card h3 a {
+  color: var(--sendler-charcoal);
+  text-decoration: none;
+}
+
+.sendler-related-card__benefits {
+  margin-top: 7px;
+  color: var(--sendler-text-secondary);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.sendler-related-card__dose {
+  margin-top: 14px;
+  padding-top: 13px;
+  border-top: 1px solid var(--sendler-border);
+  color: var(--sendler-charcoal);
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.sendler-related-card__bottom {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+.sendler-related-card__price {
+  color: var(--sendler-green);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.sendler-related-card__link {
+  display: inline-block;
+  margin-top: 9px;
+  color: var(--sendler-charcoal);
+  font-size: 11px;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+
+/* TABLET */
+
+@media screen and (max-width: 1000px) {
+
+  .sendler-product-related__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* MOBILE */
+
+@media screen and (max-width: 749px) {
+
+  .sendler-product-related {
+    padding: 48px 0 55px;
+  }
+
+  .sendler-product-related__header {
+    align-items: start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .sendler-product-related__grid {
+    gap: 10px;
+  }
+
+  .sendler-related-card__media {
+    height: 190px;
+    padding: 15px;
+  }
+
+  .sendler-related-card__content {
+    padding: 14px 12px;
+  }
+
+  .sendler-related-card h3 {
+    font-size: 14px;
+  }
+
+}
+
+
+@media screen and (max-width: 390px) {
+
+  .sendler-product-related__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sendler-related-card__media {
+    height: 240px;
+  }
+
+}
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER Related products",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "EXPLORE MORE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "You might also consider"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SENDLER Related products"
+    }
+  ]
+}
+{% endschema %}
