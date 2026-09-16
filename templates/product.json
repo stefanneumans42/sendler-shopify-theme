@@ -9,12 +9,19 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "product",
+    "product_hero": {
+      "type": "sendler-product-hero",
+      "settings": {}
+    },
+
+    "product_overview": {
+      "type": "sendler-product-overview",
       "settings": {}
     }
   },
+
   "order": [
-    "main"
+    "product_hero",
+    "product_overview"
   ]
 }
