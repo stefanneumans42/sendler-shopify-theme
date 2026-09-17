@@ -11,6 +11,47 @@
   "type": "footer",
   "name": "t:general.footer",
   "sections": {
+    "sendler_footer_nDkx8B": {
+      "type": "sendler-footer",
+      "blocks": {
+        "menu_7qepdA": {
+          "type": "menu",
+          "settings": {
+            "heading": "Shop",
+            "menu": ""
+          }
+        },
+        "menu_BMmxPV": {
+          "type": "menu",
+          "settings": {
+            "heading": "SENDLER",
+            "menu": ""
+          }
+        },
+        "menu_w4e8hh": {
+          "type": "menu",
+          "settings": {
+            "heading": "Help",
+            "menu": ""
+          }
+        }
+      },
+      "block_order": [
+        "menu_7qepdA",
+        "menu_BMmxPV",
+        "menu_w4e8hh"
+      ],
+      "name": "SENDLER footer",
+      "settings": {
+        "tagline": "Health shouldn’t be a full-time job.",
+        "brand_text": "<p>Evidence-backed supplements, sensible doses and less noise.</p>",
+        "show_newsletter": true,
+        "newsletter_heading": "Stay useful",
+        "newsletter_text": "Useful health information, product updates and occasional offers. No daily inbox abuse.",
+        "bottom_menu": "",
+        "domain_text": "getsendler.com"
+      }
+    },
     "footer": {
       "type": "footer",
       "settings": {
@@ -20,6 +61,7 @@
     }
   },
   "order": [
+    "sendler_footer_nDkx8B",
     "footer"
   ]
 }
