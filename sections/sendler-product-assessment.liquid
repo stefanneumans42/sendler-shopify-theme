@@ -26,9 +26,9 @@
 
         {% if section.settings.button_label != blank %}
           <a
-            href="{{ section.settings.button_link }}"
-            class="sendler-product-assessment__button"
-          >
+  href="{{ section.settings.button_link | default: '/pages/find-my-essentials' }}"
+  class="sendler-product-assessment__button"
+>
             {{ section.settings.button_label }}
             <span aria-hidden="true">→</span>
           </a>
