@@ -1,0 +1,57 @@
+{
+  "sections": {
+    "main": {
+      "type": "sendler-policy",
+      "settings": {
+        "heading": "Returns & Refunds"
+      },
+      "blocks": {
+        "topic_0": {
+          "type": "paragraph",
+          "settings": {
+            "heading": "30-day money-back guarantee",
+            "content": "<p>If a SENDLER product isn’t right for you, contact us within 30 days of delivery. You don’t need to justify the return. Opened products are eligible, but the physical product or bottle must be returned before we complete the refund of the product purchase price.</p><p>Please keep the product or bottle. We cannot complete a satisfaction refund if it has been discarded and cannot be returned.</p>"
+          }
+        },
+        "topic_1": {
+          "type": "paragraph",
+          "settings": {
+            "heading": "How to start a return",
+            "content": "<p>Contact <a href=\"mailto:support@getsendler.com\">support@getsendler.com</a> for return instructions within 30 days of delivery. Returns are sent to our fulfillment facility in West Jordan, Utah. Please contact us before sending your return so we can provide the correct instructions.</p>"
+          }
+        },
+        "topic_2": {
+          "type": "paragraph",
+          "settings": {
+            "heading": "Return shipping",
+            "content": "<p>Return shipping costs for ordinary satisfaction returns are the customer’s responsibility.</p><p>If your product is wrong, damaged or defective, or an item is missing due to a fulfillment error attributable to us or our fulfillment partner, we’ll arrange an appropriate replacement or refund and cover the related return or replacement costs.</p>"
+          }
+        },
+        "topic_3": {
+          "type": "paragraph",
+          "settings": {
+            "heading": "When to expect your refund",
+            "content": "<p>Once your returned product is received, we process the refund within 3–5 business days. Your bank or card provider may take additional time to post the credit.</p>"
+          }
+        },
+        "topic_4": {
+          "type": "paragraph",
+          "settings": {
+            "heading": "Need help?",
+            "content": "<p>Email <a href=\"mailto:support@getsendler.com\">support@getsendler.com</a> with any questions about a return or an order.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "topic_0",
+        "topic_1",
+        "topic_2",
+        "topic_3",
+        "topic_4"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

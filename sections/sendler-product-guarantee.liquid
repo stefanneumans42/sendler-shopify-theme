@@ -1,0 +1,54 @@
+<section id="sendler-guarantee" class="sendler-guarantee full-width">
+<div class="sendler-container">
+<div class="sendler-guarantee__copy">
+<h2>Try it for 30 days.</h2>
+<p>If it’s not right for you, contact us within 30 days of delivery. No explanation required. Opened products are eligible; simply return the product to us and we’ll refund the product purchase price.</p>
+<p>Return shipping for ordinary satisfaction returns is your responsibility.</p>
+{% if pages['refund-returns'] != blank %}
+<a href="{{ pages['refund-returns'].url }}{% if theme.role == 'development' %}?view=refund-returns{% endif %}">Read our Returns &amp; Refunds Policy →</a>
+{% elsif theme.role == 'development' %}
+<a href="{{ pages['contact'].url }}?view=refund-returns">Read our Returns &amp; Refunds Policy →</a>
+{% else %}
+<a href="mailto:support@getsendler.com">Contact us for return instructions →</a>
+{% endif %}
+</div>
+</div>
+</section>
+{% stylesheet %}
+.sendler-guarantee {
+  padding:48px 0;
+  background:var(--sendler-soft-green);
+  scroll-margin-top:100px;
+}
+
+.sendler-guarantee__copy {
+  max-width:800px;
+}
+
+.sendler-guarantee h2 {
+  font-size:clamp(26px,3vw,36px);
+  margin:0 0 18px;
+}
+
+.sendler-guarantee p {
+  line-height:1.7;
+}
+
+.sendler-guarantee a {
+  display:inline-block;
+  padding:10px 0;
+  text-underline-offset:4px;
+}
+
+.sendler-guarantee a:focus-visible {
+  outline:3px solid var(--sendler-green);
+  outline-offset:4px;
+}
+
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "SENDLER guarantee",
+  "settings": []
+}
+{% endschema %}

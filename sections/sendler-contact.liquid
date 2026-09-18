@@ -1,0 +1,111 @@
+<section class="sendler-support full-width">
+<h1>Contact SENDLER</h1>
+<p>Questions about an order, a return, or one of our products? Send us a message and we’ll help.</p>
+<p>
+<a href="mailto:support@getsendler.com">support@getsendler.com</a>
+</p>
+{% form 'contact' %}
+{% if form.posted_successfully? %}
+<p role="status" tabindex="-1">Thanks for your message. We’ll be in touch.</p>
+{% endif %}
+{% if form.errors %}
+<div role="alert">{{ form.errors | default_errors }}</div>
+{% endif %}
+<div class="sendler-contact-fields">
+<label for="ContactName-{{ section.id }}">Name</label>
+<input id="ContactName-{{ section.id }}" name="contact[name]" autocomplete="name" value="{{ form.name | default: customer.name | escape }}">
+<label for="ContactEmail-{{ section.id }}">Email (required)</label>
+<input id="ContactEmail-{{ section.id }}" type="email" name="contact[email]" autocomplete="email" required value="{{ form.email | default: customer.email | escape }}" {% if form.errors contains 'email' %}aria-invalid="true"{% endif %}>
+<label for="ContactOrder-{{ section.id }}">Order number (optional)</label>
+<input id="ContactOrder-{{ section.id }}" name="contact[Order number]" value="{{ form['Order number'] | escape }}">
+<label for="ContactMessage-{{ section.id }}">Message (required)</label>
+<textarea id="ContactMessage-{{ section.id }}" name="contact[body]" rows="7" required>{{ form.body | escape }}</textarea>
+<button type="submit">Send message</button>
+</div>
+{% endform %}
+</section>
+{% stylesheet %}
+.sendler-support {
+  width: min(800px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 64px 0 80px;
+}
+
+.sendler-support h1 {
+  margin: 0 0 24px;
+}
+
+.sendler-support h2 {
+  font-size: clamp(24px, 3vw, 30px);
+  margin: 40px 0 16px;
+}
+
+.sendler-support p {
+  line-height: 1.75;
+}
+
+.sendler-support a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.sendler-support :focus-visible {
+  outline: 3px solid var(--sendler-green);
+  outline-offset: 4px;
+}
+
+@media(max-width:749px) {
+  .sendler-support {
+  padding: 40px 0 56px;
+}
+
+
+}
+
+.sendler-contact-fields {
+  display:grid;
+  gap:10px;
+  margin-top:32px;
+}
+
+.sendler-contact-fields label {
+  font-weight:600;
+  margin-top:12px;
+}
+
+.sendler-contact-fields input,.sendler-contact-fields textarea {
+  width:100%;
+  min-width:0;
+  padding:14px;
+  border:1px solid var(--sendler-border);
+  border-radius:4px;
+  font:inherit;
+  background:var(--sendler-white);
+  color:var(--sendler-charcoal);
+}
+
+.sendler-contact-fields textarea {
+  resize:vertical;
+}
+
+.sendler-contact-fields button {
+  justify-self:start;
+  margin-top:14px;
+  padding:15px 28px;
+  border:0;
+  border-radius:4px;
+  background:var(--sendler-green);
+  color:white;
+  font:inherit;
+  font-weight:600;
+  cursor:pointer;
+}
+
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "SENDLER contact",
+  "settings": []
+}
+{% endschema %}

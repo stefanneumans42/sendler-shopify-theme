@@ -1,0 +1,144 @@
+<article class="sendler-support full-width">
+<h1>Frequently asked questions</h1>
+<p>Clear answers about orders, shipping and our 30-day guarantee.</p>
+<section>
+<h2>Orders & shipping</h2>
+<details class="sendler-faq">
+<summary>Where do you ship?</summary>
+<p>We currently ship only within the United States. International shipping is not available at launch.</p>
+</details>
+<details class="sendler-faq">
+<summary>How much does shipping cost?</summary>
+<p>All US orders ship free, with no minimum. Applicable taxes are calculated at checkout.</p>
+</details>
+<details class="sendler-faq">
+<summary>How long does processing take?</summary>
+<p>Orders are normally processed within 1–2 business days.</p>
+</details>
+<details class="sendler-faq">
+<summary>How long does delivery take?</summary>
+<p>Typical delivery is 3–7 business days after shipment. This is an estimate, not a guaranteed delivery date. Orders may ship via USPS, FedEx, or another carrier used by our fulfillment partner.</p>
+</details>
+<details class="sendler-faq">
+<summary>How can I track my order?</summary>
+<p>You should receive tracking information when available after your order ships.</p>
+</details>
+<details class="sendler-faq">
+<summary>Can I change my shipping address?</summary>
+<p>Contact <a href="mailto:support@getsendler.com">support@getsendler.com</a> as soon as possible. We’ll do our best to help, but changes cannot be guaranteed once an order has entered fulfillment.</p>
+</details>
+<details class="sendler-faq">
+<summary>Will my entire order arrive together?</summary>
+<p>Some orders may arrive in more than one shipment.</p>
+</details>
+<details class="sendler-faq">
+<summary>What if tracking says delivered but I can’t find my package?</summary>
+<p>Contact <a href="mailto:support@getsendler.com">support@getsendler.com</a> and we’ll help you investigate the shipment with the carrier.</p>
+</details>
+</section>
+<section>
+<h2>Returns & guarantee</h2>
+<details class="sendler-faq">
+<summary>What is the SENDLER money-back guarantee?</summary>
+<p>Contact us within 30 days of delivery for a no-questions-asked return. Return the physical product or bottle and we’ll refund the product purchase price.</p>
+</details>
+<details class="sendler-faq">
+<summary>Can I return an opened product?</summary>
+<p>Yes. Opened products are eligible. You must return the physical product or bottle before we complete the refund; a discarded product that cannot be returned does not qualify for a satisfaction refund.</p>
+</details>
+<details class="sendler-faq">
+<summary>Do I need to explain why I’m returning it?</summary>
+<p>No. You don’t need to justify your return.</p>
+</details>
+<details class="sendler-faq">
+<summary>Who pays return shipping?</summary>
+<p>You pay return shipping for ordinary satisfaction returns. SENDLER covers related return or replacement costs for wrong, damaged or defective products and fulfillment errors attributable to us or our fulfillment partner.</p>
+</details>
+<details class="sendler-faq">
+<summary>What if my product arrives damaged or incorrect?</summary>
+<p>Contact <a href="mailto:support@getsendler.com">support@getsendler.com</a>. We’ll arrange an appropriate replacement or refund without charging you normal return postage. This also applies to defective products or items missing due to a fulfillment error.</p>
+</details>
+<details class="sendler-faq">
+<summary>How do I start a return?</summary>
+<p>Contact <a href="mailto:support@getsendler.com">support@getsendler.com</a> within 30 days of delivery for return instructions. Returns go to our fulfillment facility in West Jordan, Utah.</p>
+</details>
+<details class="sendler-faq">
+<summary>How long does a refund take?</summary>
+<p>We process refunds within 3–5 business days after receiving the returned product. Your bank or card provider may take additional time to post the credit.</p>
+</details>
+</section>
+<section>
+<h2>SENDLER</h2>
+<details class="sendler-faq">
+<summary>Do I need everything in the range?</summary>
+<p>You probably don’t need everything here. Take what you need. Skip what you don’t.</p>
+</details>
+</section>
+<section>
+<h2>Contact</h2>
+<details class="sendler-faq">
+<summary>How can I contact SENDLER?</summary>
+<p>Email <a href="mailto:support@getsendler.com">support@getsendler.com</a> for help with an order, return or product question.</p>
+</details>
+</section>
+</article>
+{% stylesheet %}
+.sendler-support {
+  width: min(800px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 64px 0 80px;
+}
+
+.sendler-support h1 {
+  margin: 0 0 24px;
+}
+
+.sendler-support h2 {
+  font-size: clamp(24px, 3vw, 30px);
+  margin: 40px 0 16px;
+}
+
+.sendler-support p {
+  line-height: 1.75;
+}
+
+.sendler-support a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.sendler-support :focus-visible {
+  outline: 3px solid var(--sendler-green);
+  outline-offset: 4px;
+}
+
+@media(max-width:749px) {
+  .sendler-support {
+  padding: 40px 0 56px;
+}
+
+
+}
+
+.sendler-faq {
+  border-bottom: 1px solid var(--sendler-border);
+}
+
+.sendler-faq summary {
+  padding: 20px 0;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sendler-faq p {
+  margin: 0 0 24px;
+}
+
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "SENDLER FAQ",
+  "settings": []
+}
+{% endschema %}

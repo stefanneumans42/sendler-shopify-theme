@@ -23,12 +23,17 @@
     "mobile_atc": {
       "type": "sendler-mobile-atc",
       "settings": {}
+    },
+    "product_guarantee": {
+      "type": "sendler-product-guarantee",
+      "settings": {}
     }
   },
   "order": [
     "product_hero",
     "product_overview",
     "product_details",
+    "product_guarantee",
     "product_assessment",
     "product_related",
     "mobile_atc"

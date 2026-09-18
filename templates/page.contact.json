@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "sendler-contact",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "sections": {
+    "main": {
+      "type": "sendler-policy",
+      "settings": {
+        "heading": "Shipping Policy"
+      },
+      "blocks": {
+        "topic_0": {
+          "type": "paragraph",
+          "settings": {
+            "heading": "Where we ship",
+            "content": "<p>We currently ship only within the United States. International shipping is not available at launch.</p>"
+          }
+        },
+        "topic_1": {
+          "type": "paragraph",
+          "settings": {
+            "heading": "Free US shipping",
+            "content": "<p>Shipping is free on all orders within the United States, with no minimum order. Applicable taxes are calculated at checkout.</p>"
+          }
+        },
+        "topic_2": {
+          "type": "paragraph",
+          "settings": {
+            "heading": "Processing and delivery",
+            "content": "<p>Orders are normally processed within 1–2 business days. Typical delivery is 3–7 business days after shipment. This is an estimate, not a guaranteed delivery date.</p><p>Orders may be shipped via USPS, FedEx, or another carrier used by our fulfillment partner. Some orders may arrive in more than one shipment.</p>"
+          }
+        },
+        "topic_3": {
+          "type": "paragraph",
+          "settings": {
+            "heading": "Tracking your order",
+            "content": "<p>You should receive tracking information when available after your order ships.</p>"
+          }
+        },
+        "topic_4": {
+          "type": "paragraph",
+          "settings": {
+            "heading": "Changing your shipping address",
+            "content": "<p>If you need to change your shipping address, contact us as soon as possible at <a href=\"mailto:support@getsendler.com\">support@getsendler.com</a>. We’ll do our best to help, but changes cannot be guaranteed once an order has entered fulfillment.</p>"
+          }
+        },
+        "topic_5": {
+          "type": "paragraph",
+          "settings": {
+            "heading": "Delivered but missing",
+            "content": "<p>If tracking shows your order as delivered but you can’t find it, contact <a href=\"mailto:support@getsendler.com\">support@getsendler.com</a> and we’ll help you investigate the shipment with the carrier.</p>"
+          }
+        },
+        "topic_6": {
+          "type": "paragraph",
+          "settings": {
+            "heading": "Problems with your order",
+            "content": "<p>If your order arrives damaged, defective, incorrect, or missing an item due to a fulfillment error, contact <a href=\"mailto:support@getsendler.com\">support@getsendler.com</a>. We’ll arrange an appropriate replacement or refund and cover the related return or replacement costs.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "topic_0",
+        "topic_1",
+        "topic_2",
+        "topic_3",
+        "topic_4",
+        "topic_5",
+        "topic_6"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

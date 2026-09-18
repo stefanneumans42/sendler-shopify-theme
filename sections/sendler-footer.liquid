@@ -50,6 +50,26 @@
                   </li>
                 {% endfor %}
               </ul>
+            {% else %}
+              <ul>
+                {% case block.settings.fallback %}
+                  {% when 'shop' %}<li><a href="{{ routes.all_products_collection_url }}">Shop</a></li>
+                  {% when 'brand' %}
+                    {% if pages['find-my-essentials'] != blank %}<li><a href="{{ pages['find-my-essentials'].url }}">Find My Essentials</a></li>{% endif %}
+                    {% if pages['why-sendler'] != blank %}<li><a href="{{ pages['why-sendler'].url }}">Why Sendler</a></li>{% endif %}
+                  {% when 'help' %}
+                    {% assign support_handles = 'faq,contact,shipping-policy,refund-returns' | split: ',' %}
+                    {% assign support_labels = 'FAQ,Contact,Shipping Policy,Returns & Refunds' | split: ',' %}
+                    {% for support_handle in support_handles %}
+                      {% assign support_page = pages[support_handle] %}
+                      {% if support_page != blank %}
+                        <li><a href="{{ support_page.url }}{% if theme.role == 'development' %}?view={{ support_handle }}{% endif %}">{{ support_labels[forloop.index0] }}</a></li>
+                      {% elsif theme.role == 'development' %}
+                        {% if pages['contact'] != blank %}<li><a href="{{ pages['contact'].url }}?view={{ support_handle }}">{{ support_labels[forloop.index0] }}</a></li>{% endif %}
+                      {% endif %}
+                    {% endfor %}
+                {% endcase %}
+              </ul>
             {% endif %}
 
           </div>
@@ -153,6 +173,11 @@
               {{ link.title }}
             </a>
           {% endfor %}
+        </nav>
+      {% else %}
+        <nav class="sendler-footer__legal" aria-label="Legal">
+          {% if shop.privacy_policy != blank %}<a href="{{ shop.privacy_policy.url }}">Privacy</a>{% endif %}
+          {% if shop.terms_of_service != blank %}<a href="{{ shop.terms_of_service.url }}">Terms</a>{% endif %}
         </nav>
       {% endif %}
 
@@ -515,6 +540,26 @@
           "type": "link_list",
           "id": "menu",
           "label": "Menu"
+        },
+        {
+          "type": "select",
+          "id": "fallback",
+          "label": "Links when no menu is selected",
+          "default": "shop",
+          "options": [
+            {
+              "value": "shop",
+              "label": "Shop"
+            },
+            {
+              "value": "brand",
+              "label": "SENDLER"
+            },
+            {
+              "value": "help",
+              "label": "Help"
+            }
+          ]
         }
       ]
     }
@@ -526,19 +571,22 @@
         {
           "type": "menu",
           "settings": {
-            "heading": "Shop"
+            "heading": "Shop",
+            "fallback": "shop"
           }
         },
         {
           "type": "menu",
           "settings": {
-            "heading": "SENDLER"
+            "heading": "SENDLER",
+            "fallback": "brand"
           }
         },
         {
           "type": "menu",
           "settings": {
-            "heading": "Help"
+            "heading": "Help",
+            "fallback": "help"
           }
         }
       ]
