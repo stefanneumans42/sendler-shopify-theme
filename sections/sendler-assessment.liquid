@@ -1,101 +1,233 @@
-<section class="sendler-assessment full-width">
+<section
+  id="SendlerAssessment-{{ section.id }}"
+  class="sendler-assessment full-width"
+>
   <div class="sendler-container">
 
-    <div class="sendler-assessment__shell">
+    <div class="sendler-assessment__app" data-sendler-assessment>
 
-      <div class="sendler-assessment__media">
-        {% if section.settings.image != blank %}
-          {{
-            section.settings.image
-            | image_url: width: 1200
-            | image_tag:
-              class: 'sendler-assessment__image',
-              widths: '480, 720, 960, 1200',
-              sizes: '(min-width: 900px) 50vw, 100vw',
-              loading: 'lazy'
-          }}
-        {% else %}
-          <div class="sendler-assessment__placeholder">
-            <span>Real life.</span>
-            <small>Not wellness theater.</small>
+      <!-- START -->
+      <div class="sendler-assessment__screen is-active" data-screen="start">
+
+        <div class="sendler-assessment__intro">
+
+          <div class="sendler-eyebrow">
+            FIND MY ESSENTIALS
           </div>
-        {% endif %}
+
+          <h1>
+            Find what may actually make sense for you.
+          </h1>
+
+          <p class="sendler-assessment__lead">
+            Answer a few questions about your diet, lifestyle and goals.
+            We’ll show you what may be worth considering — and what you
+            probably don’t need.
+          </p>
+
+          <div class="sendler-assessment__intro-points">
+
+            <div>
+              <strong>About 2 minutes</strong>
+              <span>No account required.</span>
+            </div>
+
+            <div>
+              <strong>No purchase required</strong>
+              <span>The result isn’t designed to sell you everything.</span>
+            </div>
+
+            <div>
+              <strong>Your answers stay here</strong>
+              <span>V1 runs entirely in your browser.</span>
+            </div>
+
+          </div>
+
+          <button
+            type="button"
+            class="sendler-assessment__primary"
+            data-start-assessment
+          >
+            Start assessment
+            <span aria-hidden="true">→</span>
+          </button>
+
+          <p class="sendler-assessment__disclaimer">
+            Educational information only. This questionnaire does not diagnose
+            deficiencies or replace individual medical advice.
+          </p>
+
+        </div>
+
       </div>
 
-      <div class="sendler-assessment__content">
 
-        {% if section.settings.eyebrow != blank %}
-          <div class="sendler-assessment__eyebrow">
-            {{ section.settings.eyebrow }}
+      <!-- QUESTIONS -->
+      <div class="sendler-assessment__screen" data-screen="questions">
+
+        <div class="sendler-assessment__topbar">
+
+          <button
+            type="button"
+            class="sendler-assessment__back"
+            data-back
+            aria-label="Go back"
+          >
+            ← Back
+          </button>
+
+          <div class="sendler-assessment__progress-copy">
+            <span data-progress-current>1</span>
+            /
+            <span data-progress-total>13</span>
           </div>
-        {% endif %}
 
-        {% if section.settings.heading != blank %}
-          <h2 class="sendler-assessment__heading">
-            {{ section.settings.heading }}
-          </h2>
-        {% endif %}
+        </div>
 
-        {% if section.settings.text != blank %}
-          <div class="sendler-assessment__text">
-            {{ section.settings.text }}
+
+        <div class="sendler-assessment__progress">
+          <div
+            class="sendler-assessment__progress-fill"
+            data-progress-fill
+          ></div>
+        </div>
+
+
+        <div class="sendler-assessment__question-wrap">
+
+          <div class="sendler-assessment__question-number" data-question-eyebrow>
+            QUESTION 1
           </div>
-        {% endif %}
 
-        {% if section.settings.trust_text != blank %}
-          <div class="sendler-assessment__trust">
-            <svg
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-              focusable="false"
+          <h2 data-question-title></h2>
+
+          <p
+            class="sendler-assessment__question-help"
+            data-question-help
+          ></p>
+
+          <div
+            class="sendler-assessment__options"
+            data-question-options
+          ></div>
+
+          <div
+            class="sendler-assessment__validation"
+            data-validation
+            hidden
+          >
+            Choose at least one option to continue.
+          </div>
+
+
+          <div class="sendler-assessment__question-actions">
+
+            <button
+              type="button"
+              class="sendler-assessment__primary"
+              data-next
             >
-              <path d="M5 12.5 9.2 17 19 7" />
-            </svg>
+              Continue
+              <span aria-hidden="true">→</span>
+            </button>
 
-            <span>{{ section.settings.trust_text }}</span>
           </div>
-        {% endif %}
 
-        {% if section.settings.button_label != blank %}
-          <div class="sendler-assessment__action">
+        </div>
 
-            {% if section.settings.button_link != blank %}
+      </div>
+
+
+      <!-- RESULTS -->
+      <div class="sendler-assessment__screen" data-screen="results">
+
+        <div class="sendler-assessment-results">
+
+          <div class="sendler-assessment-results__hero">
+
+            <div class="sendler-eyebrow">
+              YOUR RESULTS
+            </div>
+
+            <h1>
+              A simpler place to start.
+            </h1>
+
+            <p>
+              These results are based only on the answers you gave us.
+              They are not a diagnosis, and “worth considering” does not
+              mean you have a deficiency or medical need.
+            </p>
+
+          </div>
+
+
+          <div
+            class="sendler-assessment-results__notice"
+            data-results-notice
+            hidden
+          ></div>
+
+
+          <div
+            class="sendler-assessment-results__groups"
+            data-results-groups
+          ></div>
+
+
+          <div class="sendler-assessment-results__footer">
+
+            <div>
+              <h2>
+                You probably don’t need everything here.
+              </h2>
+
+              <p>
+                That’s the point. Supplements should solve a real problem,
+                fill a practical gap or support a goal — not become another
+                collection to maintain.
+              </p>
+            </div>
+
+
+            <div class="sendler-assessment-results__actions">
+
               <a
-                href="{{ section.settings.button_link }}"
-                class="sendler-assessment__button"
+                href="{{ routes.all_products_collection_url }}"
+                class="sendler-assessment__primary"
               >
-                {{ section.settings.button_label }}
-
-                <svg
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M5 12h14M14 7l5 5-5 5" />
-                </svg>
+                Explore SENDLER
+                <span aria-hidden="true">→</span>
               </a>
-            {% else %}
-              <span class="sendler-assessment__button">
-                {{ section.settings.button_label }}
 
-                <svg
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path d="M5 12h14M14 7l5 5-5 5" />
-                </svg>
-              </span>
-            {% endif %}
+              <button
+                type="button"
+                class="sendler-assessment__secondary"
+                data-restart
+              >
+                Retake assessment
+              </button>
+
+            </div>
 
           </div>
-        {% endif %}
 
-        {% if section.settings.microcopy != blank %}
-          <p class="sendler-assessment__microcopy">
-            {{ section.settings.microcopy }}
-          </p>
-        {% endif %}
+
+          <div class="sendler-assessment-results__legal">
+
+            <strong>Important:</strong>
+            This assessment provides general educational information.
+            It does not diagnose nutrient deficiencies, medical conditions
+            or determine whether a supplement is appropriate for you.
+            Speak with a qualified healthcare professional when appropriate,
+            particularly if you take medication, have a medical condition,
+            are pregnant or breastfeeding, or are considering a supplement
+            with meaningful drug interactions.
+
+          </div>
+
+        </div>
 
       </div>
 
@@ -105,220 +237,2315 @@
 </section>
 
 
+<script>
+(() => {
+
+  const root = document.getElementById(
+    'SendlerAssessment-{{ section.id }}'
+  );
+
+  if (!root) return;
+
+
+  /* =========================================================
+     QUESTIONS
+  ========================================================= */
+
+  const questions = [
+
+    {
+      id: 'goals',
+      type: 'multi',
+      title: 'What would you most like to improve right now?',
+      help: 'Choose as many as genuinely matter to you.',
+      options: [
+        ['basics', 'Daily health basics'],
+        ['performance', 'Energy & physical performance'],
+        ['sleep', 'Sleep'],
+        ['stress', 'Stress & resilience'],
+        ['digestion', 'Digestion & regularity'],
+        ['heart_healthy_fats', 'Heart & healthy fats'],
+        ['joints_connective_tissue', 'Joints & connective tissue'],
+        ['skin_healthy_aging', 'Skin & healthy aging'],
+        ['metabolic_health', 'Metabolic health'],
+        ['curious', 'I’m mostly curious']
+      ]
+    },
+
+    {
+      id: 'diet',
+      type: 'single',
+      title: 'Which best describes how you usually eat?',
+      help: '',
+      options: [
+        ['meat_fish', 'I eat meat and/or fish regularly'],
+        ['fish_no_meat', 'I eat fish but little or no meat'],
+        ['eggs_dairy', 'I eat eggs and/or dairy but no meat or fish'],
+        ['no_animal', 'I eat no animal products'],
+        ['inconsistent', 'I don’t have a consistent eating pattern']
+      ]
+    },
+
+    {
+      id: 'fish',
+      type: 'single',
+      title: 'How often do you eat oily fish?',
+      help: 'Think salmon, sardines, mackerel, herring and similar oily fish.',
+      options: [
+        ['fish_2plus', '2 or more times per week'],
+        ['fish_1', 'About once per week'],
+        ['fish_rare', 'Less than once per week'],
+        ['fish_never', 'Never']
+      ]
+    },
+
+    {
+      id: 'b12_foods',
+      type: 'single',
+      title: 'How often do you eat foods that are good sources of vitamin B12?',
+      help: 'Examples include meat, fish, eggs, dairy and B12-fortified foods.',
+      options: [
+        ['most_days', 'Most days'],
+        ['few_week', 'A few times per week'],
+        ['rarely', 'Rarely'],
+        ['never', 'Never'],
+        ['not_sure', 'Not sure']
+      ]
+    },
+
+    {
+      id: 'sun',
+      type: 'single',
+      title: 'How much direct sunlight do you typically get?',
+      help: 'This is only a rough signal. Sun exposure cannot determine your vitamin D status.',
+      options: [
+        ['plenty', 'Plenty most days'],
+        ['some', 'Some, but I’m mostly indoors'],
+        ['very_little', 'Very little'],
+        ['seasonal', 'It varies a lot by season']
+      ]
+    },
+
+    {
+      id: 'fiber',
+      type: 'single',
+      title: 'How would you describe your usual intake of fiber-rich foods?',
+      help: 'Think vegetables, fruit, beans, lentils and whole grains.',
+      options: [
+        ['high', 'High — I eat plenty of them'],
+        ['reasonable', 'Reasonably good'],
+        ['low', 'Probably low'],
+        ['very_low', 'Very low'],
+        ['not_sure', 'Not sure']
+      ]
+    },
+
+    {
+      id: 'digestion',
+      type: 'single',
+      title: 'How is your digestion generally?',
+      help: '',
+      options: [
+        ['comfortable_regular', 'Generally regular and comfortable'],
+        ['occasionally_irregular', 'Occasionally irregular'],
+        ['frequently_irregular', 'Frequently irregular'],
+        ['bloating_heaviness', 'I mainly struggle with bloating or heaviness after meals'],
+        ['multiple_issues', 'I have several recurring digestive issues'],
+        ['no_issue', 'No particular issue']
+      ]
+    },
+
+    {
+      id: 'activity',
+      type: 'single',
+      title: 'How active are you?',
+      help: '',
+      options: [
+        ['strength_3plus', 'Strength training 3 or more times per week'],
+        ['strength_1_2', 'Strength training 1–2 times per week'],
+        ['cardio_endurance', 'Mostly cardio or endurance exercise'],
+        ['generally_active', 'Generally active, but no structured training'],
+        ['sedentary', 'Mostly sedentary']
+      ]
+    },
+
+    {
+      id: 'sweat',
+      type: 'single',
+      title: 'How often do you exercise hard or sweat heavily for around an hour or longer?',
+      help: 'Also include long periods of physical activity in hot conditions.',
+      options: [
+        ['frequently', 'Frequently'],
+        ['sometimes', 'Sometimes'],
+        ['rarely', 'Rarely'],
+        ['never', 'Never']
+      ]
+    },
+
+    {
+      id: 'sleep',
+      type: 'single',
+      title: 'How is your sleep?',
+      help: '',
+      options: [
+        ['good', 'Generally good'],
+        ['trouble_falling_asleep', 'I mainly struggle to fall asleep'],
+        ['wake_during_night', 'I mainly wake during the night'],
+        ['travel_schedule_disruption', 'Travel or my schedule disrupts my sleep'],
+        ['poor_overall', 'Poor overall'],
+        ['no_issue', 'No major issue']
+      ]
+    },
+
+    {
+      id: 'stress',
+      type: 'single',
+      title: 'How would you describe your current stress level?',
+      help: '',
+      options: [
+        ['low', 'Low'],
+        ['moderate', 'Moderate'],
+        ['high', 'High'],
+        ['very_high', 'Very high']
+      ]
+    },
+
+    {
+      id: 'supplements',
+      type: 'multi',
+      title: 'What supplements are you already taking regularly?',
+      help: 'Select everything you currently use. This helps us avoid recommending duplicates.',
+      options: [
+        ['vitamin_d', 'Vitamin D'],
+        ['omega3', 'Omega-3'],
+        ['magnesium', 'Magnesium'],
+        ['creatine', 'Creatine'],
+        ['psyllium', 'Fiber or psyllium'],
+        ['b12', 'Vitamin B12'],
+        ['melatonin', 'Melatonin or another sleep supplement'],
+        ['electrolytes', 'Electrolytes'],
+        ['collagen', 'Collagen'],
+        ['curcumin', 'Curcumin / turmeric'],
+        ['coq10', 'CoQ10'],
+        ['berberine', 'Berberine'],
+        ['ashwagandha', 'Ashwagandha'],
+        ['digestive_enzymes', 'Digestive enzymes'],
+        ['multivitamin', 'Multivitamin'],
+        ['other', 'Something else'],
+        ['none', 'None', true]
+      ]
+    },
+
+    {
+      id: 'safety',
+      type: 'multi',
+      title: 'Before we show your results, do any of these apply to you?',
+      help: 'We don’t need the name of any medication or medical condition.',
+      options: [
+        ['under_18', 'I’m under 18'],
+        ['pregnant', 'I’m pregnant, breastfeeding or trying to become pregnant'],
+        ['medication', 'I take prescription medication'],
+        ['medical_condition', 'I have a medical condition that affects what supplements I should take'],
+        ['none', 'None of these', true],
+        ['prefer_not', 'Prefer not to say', true]
+      ]
+    }
+
+  ];
+
+
+  /* =========================================================
+     STATE
+  ========================================================= */
+
+  let currentQuestion = 0;
+  let answers = {};
+
+
+  const startScreen = root.querySelector('[data-screen="start"]');
+  const questionScreen = root.querySelector('[data-screen="questions"]');
+  const resultsScreen = root.querySelector('[data-screen="results"]');
+
+  const questionTitle = root.querySelector('[data-question-title]');
+  const questionHelp = root.querySelector('[data-question-help]');
+  const questionOptions = root.querySelector('[data-question-options]');
+  const questionEyebrow = root.querySelector('[data-question-eyebrow]');
+
+  const progressCurrent = root.querySelector('[data-progress-current]');
+  const progressTotal = root.querySelector('[data-progress-total]');
+  const progressFill = root.querySelector('[data-progress-fill]');
+
+  const validation = root.querySelector('[data-validation]');
+
+  const nextButton = root.querySelector('[data-next]');
+  const backButton = root.querySelector('[data-back]');
+
+  const resultsGroups = root.querySelector('[data-results-groups]');
+  const resultsNotice = root.querySelector('[data-results-notice]');
+
+
+  progressTotal.textContent = questions.length;
+
+
+  /* =========================================================
+     HELPERS
+  ========================================================= */
+
+  function showScreen(name) {
+
+    [startScreen, questionScreen, resultsScreen].forEach(screen => {
+      screen.classList.remove('is-active');
+    });
+
+    root
+      .querySelector(`[data-screen="${name}"]`)
+      .classList.add('is-active');
+
+    window.scrollTo({
+      top: root.offsetTop - 20,
+      behavior: 'smooth'
+    });
+
+  }
+
+
+  function single(id) {
+    return answers[id] || null;
+  }
+
+
+  function multi(id) {
+    return Array.isArray(answers[id])
+      ? answers[id]
+      : [];
+  }
+
+
+  function hasGoal(goal) {
+    return multi('goals').includes(goal);
+  }
+
+
+  function takes(supplement) {
+    return multi('supplements').includes(supplement);
+  }
+
+
+  function hasSafety(flag) {
+    return multi('safety').includes(flag);
+  }
+
+
+  function result(name, status, reason) {
+    return {
+      name,
+      status,
+      reason
+    };
+  }
+
+
+  /* =========================================================
+     QUESTION RENDERING
+  ========================================================= */
+
+  function renderQuestion() {
+
+    const question = questions[currentQuestion];
+
+    validation.hidden = true;
+
+    questionEyebrow.textContent =
+      `QUESTION ${currentQuestion + 1}`;
+
+    questionTitle.textContent =
+      question.title;
+
+    questionHelp.textContent =
+      question.help || '';
+
+    questionHelp.hidden =
+      !question.help;
+
+    progressCurrent.textContent =
+      currentQuestion + 1;
+
+    progressFill.style.width =
+      `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+    nextButton.innerHTML =
+      currentQuestion === questions.length - 1
+        ? 'See my results <span aria-hidden="true">→</span>'
+        : 'Continue <span aria-hidden="true">→</span>';
+
+    questionOptions.innerHTML = '';
+
+
+    question.options.forEach(option => {
+
+      const value = option[0];
+      const label = option[1];
+      const exclusive = option[2] === true;
+
+      const selected =
+        question.type === 'multi'
+          ? multi(question.id).includes(value)
+          : single(question.id) === value;
+
+
+      const button = document.createElement('button');
+
+      button.type = 'button';
+
+      button.className =
+        'sendler-assessment-option' +
+        (selected ? ' is-selected' : '');
+
+      button.dataset.value = value;
+
+      if (exclusive) {
+        button.dataset.exclusive = 'true';
+      }
+
+      button.innerHTML = `
+        <span class="sendler-assessment-option__control"></span>
+        <span>${label}</span>
+      `;
+
+
+      button.addEventListener('click', () => {
+
+        selectOption(
+          question,
+          value,
+          exclusive
+        );
+
+      });
+
+
+      questionOptions.appendChild(button);
+
+    });
+
+  }
+
+
+  function selectOption(question, value, exclusive) {
+
+    if (question.type === 'single') {
+
+      answers[question.id] = value;
+
+      renderQuestion();
+
+      return;
+    }
+
+
+    let selected = multi(question.id);
+
+
+    if (exclusive) {
+
+      if (selected.includes(value)) {
+
+        selected = [];
+
+      } else {
+
+        selected = [value];
+
+      }
+
+    } else {
+
+      selected = selected.filter(item => {
+
+        const option = question.options.find(
+          candidate => candidate[0] === item
+        );
+
+        return !(option && option[2] === true);
+
+      });
+
+
+      if (selected.includes(value)) {
+
+        selected = selected.filter(
+          item => item !== value
+        );
+
+      } else {
+
+        selected.push(value);
+
+      }
+
+    }
+
+
+    answers[question.id] = selected;
+
+    renderQuestion();
+
+  }
+
+
+  function questionAnswered(question) {
+
+    if (question.type === 'multi') {
+
+      return (
+        Array.isArray(answers[question.id]) &&
+        answers[question.id].length > 0
+      );
+
+    }
+
+    return Boolean(answers[question.id]);
+
+  }
+
+
+  /* =========================================================
+     RULE ENGINE
+  ========================================================= */
+
+
+  function omega3Result() {
+
+    if (takes('omega3')) {
+      return result(
+        'Omega-3 EPA/DHA',
+        'covered',
+        'You already take an omega-3 supplement, so adding another one would usually just duplicate what you are already using.'
+      );
+    }
+
+
+    let score = 0;
+
+    const fish = single('fish');
+
+
+    if (fish === 'fish_never') score += 4;
+    if (fish === 'fish_rare') score += 3;
+    if (fish === 'fish_1') score += 1;
+    if (fish === 'fish_2plus') score -= 3;
+
+    if (hasGoal('heart_healthy_fats')) score += 1;
+
+    if (single('diet') === 'no_animal') score += 1;
+
+
+    let reason =
+      'Your answers do not suggest a strong practical reason to add EPA and DHA right now.';
+
+
+    if (fish === 'fish_never') {
+
+      reason =
+        'You do not eat oily fish, so supplementation can be a practical way to increase your intake of EPA and DHA.';
+
+    } else if (fish === 'fish_rare') {
+
+      reason =
+        'You eat oily fish less than once per week, so a direct source of EPA and DHA may be worth considering.';
+
+    } else if (fish === 'fish_1') {
+
+      reason =
+        'You already get some EPA and DHA from fish. Supplementation may still be useful depending on how consistently you eat it.';
+
+    } else if (fish === 'fish_2plus') {
+
+      reason =
+        'You already eat oily fish at least twice per week, so your answers provide less reason to add an omega-3 supplement.';
+
+    }
+
+
+    if (single('diet') === 'no_animal') {
+
+      reason +=
+        ' SENDLER’s current omega-3 formula is fish-derived, so it may not fit an animal-free diet.';
+
+    }
+
+
+    if (score >= 3) {
+      return result(
+        'Omega-3 EPA/DHA',
+        'worth',
+        reason
+      );
+    }
+
+
+    if (score === 2) {
+      return result(
+        'Omega-3 EPA/DHA',
+        'could',
+        reason
+      );
+    }
+
+
+    return result(
+      'Omega-3 EPA/DHA',
+      'unnecessary',
+      reason
+    );
+
+  }
+
+
+  function vitaminDResult() {
+
+    if (takes('vitamin_d')) {
+      return result(
+        'Vitamin D3',
+        'covered',
+        'You already take vitamin D. Check the amount in your current supplement before adding another source.'
+      );
+    }
+
+
+    let score = 0;
+
+    const sun = single('sun');
+
+
+    if (sun === 'very_little') score += 3;
+    if (sun === 'some') score += 2;
+    if (sun === 'seasonal') score += 1;
+
+    if (hasGoal('basics')) score += 1;
+
+
+    let reason =
+      'Your reported sun exposure does not provide a particularly strong signal for supplementation.';
+
+
+    if (sun === 'very_little') {
+      reason =
+        'You report very little direct sunlight, which can make vitamin D intake more relevant.';
+    }
+
+    if (sun === 'some') {
+      reason =
+        'You spend much of your time indoors, so vitamin D may be worth considering.';
+    }
+
+    if (sun === 'seasonal') {
+      reason =
+        'Your sun exposure varies substantially by season, so vitamin D may become more relevant during lower-exposure periods.';
+    }
+
+
+    reason +=
+      ' A questionnaire cannot determine your vitamin D status; a blood test provides much better information if deficiency is a concern.';
+
+
+    if (score >= 3) {
+      return result(
+        'Vitamin D3',
+        'worth',
+        reason
+      );
+    }
+
+
+    if (score >= 1) {
+      return result(
+        'Vitamin D3',
+        'could',
+        reason
+      );
+    }
+
+
+    return result(
+      'Vitamin D3',
+      'unnecessary',
+      reason
+    );
+
+  }
+
+
+  function b12Result() {
+
+    if (takes('b12')) {
+      return result(
+        'Vitamin B12',
+        'covered',
+        'You already take vitamin B12, so another dedicated B12 supplement may simply duplicate your current intake.'
+      );
+    }
+
+
+    let score = 0;
+
+    const diet = single('diet');
+    const food = single('b12_foods');
+
+
+    if (diet === 'no_animal') score += 5;
+    if (diet === 'eggs_dairy') score += 2;
+
+    if (food === 'never') score += 5;
+    if (food === 'rarely') score += 3;
+    if (food === 'not_sure') score += 1;
+    if (food === 'most_days') score -= 3;
+
+
+    let reason =
+      'Your answers suggest that you regularly eat foods that can provide vitamin B12.';
+
+
+    if (diet === 'no_animal') {
+
+      reason =
+        'You eat no animal products, making a reliable source of vitamin B12 particularly important.';
+
+    } else if (food === 'never') {
+
+      reason =
+        'You report never eating common dietary sources of vitamin B12, so supplementation may be particularly relevant.';
+
+    } else if (food === 'rarely') {
+
+      reason =
+        'You rarely eat foods that are good sources of vitamin B12, so supplementation may be worth considering.';
+
+    }
+
+
+    if (score >= 4) {
+      return result(
+        'Vitamin B12',
+        'worth',
+        reason
+      );
+    }
+
+
+    if (score >= 2) {
+      return result(
+        'Vitamin B12',
+        'could',
+        reason
+      );
+    }
+
+
+    return result(
+      'Vitamin B12',
+      'unnecessary',
+      reason
+    );
+
+  }
+
+
+  function psylliumResult() {
+
+    if (takes('psyllium')) {
+      return result(
+        'Psyllium Husk',
+        'covered',
+        'You already use a fiber or psyllium supplement, so adding another one may simply duplicate your current intake.'
+      );
+    }
+
+
+    let score = 0;
+
+    const fiber = single('fiber');
+    const digestion = single('digestion');
+
+
+    if (fiber === 'very_low') score += 4;
+    if (fiber === 'low') score += 3;
+    if (fiber === 'not_sure') score += 1;
+
+    if (digestion === 'frequently_irregular') score += 3;
+    if (digestion === 'occasionally_irregular') score += 1;
+
+    if (hasGoal('digestion')) score += 1;
+
+    if (
+      fiber === 'high' &&
+      digestion === 'comfortable_regular'
+    ) {
+      score -= 3;
+    }
+
+
+    let reason =
+      'Your answers do not indicate an obvious fiber gap or regularity issue.';
+
+
+    if (
+      fiber === 'very_low' ||
+      fiber === 'low'
+    ) {
+
+      reason =
+        'Your fiber intake appears low. Psyllium can help increase total fiber intake, but it is not a replacement for vegetables, fruit, legumes and whole grains.';
+
+    }
+
+
+    if (digestion === 'frequently_irregular') {
+
+      reason =
+        'You report frequent irregularity, and your overall answers suggest that increasing soluble fiber may be worth considering. Psyllium is still not a substitute for improving the diet itself.';
+
+    }
+
+
+    if (
+      digestion === 'bloating_heaviness' ||
+      digestion === 'multiple_issues'
+    ) {
+
+      reason +=
+        ' Bloating or recurring digestive symptoms alone do not tell us that more fiber is automatically the right answer.';
+
+    }
+
+
+    if (score >= 4) {
+      return result(
+        'Psyllium Husk',
+        'worth',
+        reason
+      );
+    }
+
+
+    if (score >= 2) {
+      return result(
+        'Psyllium Husk',
+        'could',
+        reason
+      );
+    }
+
+
+    return result(
+      'Psyllium Husk',
+      'unnecessary',
+      reason
+    );
+
+  }
+
+
+  function creatineResult() {
+
+    if (takes('creatine')) {
+      return result(
+        'Creatine Monohydrate',
+        'covered',
+        'You already take creatine, so there is usually no reason to add another creatine product.'
+      );
+    }
+
+
+    let score = 0;
+
+    const activity = single('activity');
+
+
+    if (activity === 'strength_3plus') score += 4;
+    if (activity === 'strength_1_2') score += 3;
+    if (activity === 'cardio_endurance') score += 1;
+    if (activity === 'generally_active') score += 1;
+
+    if (hasGoal('performance')) score += 3;
+
+    if (
+      activity === 'sedentary' &&
+      !hasGoal('performance')
+    ) {
+      score -= 2;
+    }
+
+
+    let reason =
+      'Nothing in your current activity or goals creates a particularly strong reason to add creatine.';
+
+
+    if (activity === 'strength_3plus') {
+
+      reason =
+        'You strength train regularly, which is one of the clearest use cases for creatine monohydrate.';
+
+    } else if (activity === 'strength_1_2') {
+
+      reason =
+        'You include regular strength training, so creatine may help support training performance and adaptation.';
+
+    } else if (hasGoal('performance')) {
+
+      reason =
+        'Performance is one of your stated goals, making creatine one of the more evidence-backed supplements worth considering.';
+
+    }
+
+
+    if (score >= 4) {
+      return result(
+        'Creatine Monohydrate',
+        'worth',
+        reason
+      );
+    }
+
+
+    if (score >= 2) {
+      return result(
+        'Creatine Monohydrate',
+        'could',
+        reason
+      );
+    }
+
+
+    return result(
+      'Creatine Monohydrate',
+      'unnecessary',
+      reason
+    );
+
+  }
+
+
+  function electrolyteResult() {
+
+    if (takes('electrolytes')) {
+      return result(
+        'Electrolyte Powder',
+        'covered',
+        'You already use an electrolyte product, so there is little reason to add another one unless your needs change.'
+      );
+    }
+
+
+    let score = 0;
+
+    const sweat = single('sweat');
+    const activity = single('activity');
+
+
+    if (sweat === 'frequently') score += 5;
+    if (sweat === 'sometimes') score += 2;
+    if (sweat === 'never') score -= 3;
+
+    if (activity === 'cardio_endurance') score += 2;
+
+    if (hasGoal('performance')) score += 1;
+
+
+    let reason =
+      'Most ordinary workouts do not automatically require an electrolyte powder.';
+
+
+    if (sweat === 'frequently') {
+
+      reason =
+        'You regularly have long, sweaty sessions or substantial heat exposure, which makes replacing electrolytes more relevant.';
+
+    } else if (sweat === 'sometimes') {
+
+      reason =
+        'You occasionally have prolonged or heavily sweaty activity, so an electrolyte product may be useful on those specific days rather than every day.';
+
+    }
+
+
+    if (score >= 5) {
+      return result(
+        'Electrolyte Powder',
+        'worth',
+        reason
+      );
+    }
+
+
+    if (score >= 2) {
+      return result(
+        'Electrolyte Powder',
+        'could',
+        reason
+      );
+    }
+
+
+    return result(
+      'Electrolyte Powder',
+      'unnecessary',
+      reason
+    );
+
+  }
+
+
+  function magnesiumResult() {
+
+    if (takes('magnesium')) {
+      return result(
+        'Magnesium Glycinate',
+        'covered',
+        'You already take magnesium. Check the amount and form in your current supplement before adding another source.'
+      );
+    }
+
+
+    let score = 0;
+
+
+    if (single('diet') === 'inconsistent') score += 2;
+
+    if (single('fiber') === 'very_low') score += 1;
+
+    if (hasGoal('basics')) score += 1;
+    if (hasGoal('sleep')) score += 1;
+    if (hasGoal('stress')) score += 1;
+
+
+    if (
+      hasSafety('medication') ||
+      hasSafety('medical_condition')
+    ) {
+
+      return result(
+        'Magnesium Glycinate',
+        'context',
+        'Magnesium may still be relevant, but medication use or a medical condition can change what dose or form makes sense. A short questionnaire is not enough to make that call.'
+      );
+
+    }
+
+
+    if (score >= 2) {
+
+      return result(
+        'Magnesium Glycinate',
+        'could',
+        'Magnesium may be useful depending on your overall dietary intake and goals, but stress or poor sleep by themselves do not tell us that you are magnesium deficient.'
+      );
+
+    }
+
+
+    return result(
+      'Magnesium Glycinate',
+      'unnecessary',
+      'Your answers do not give us a strong reason to recommend adding magnesium right now.'
+    );
+
+  }
+
+
+  function melatoninResult() {
+
+    if (takes('melatonin')) {
+      return result(
+        'Melatonin',
+        'covered',
+        'You already use melatonin or another sleep supplement, so adding another melatonin product would likely duplicate what you are already taking.'
+      );
+    }
+
+
+    const sleep = single('sleep');
+
+    let score = 0;
+
+
+    if (sleep === 'travel_schedule_disruption') score += 4;
+    if (sleep === 'trouble_falling_asleep') score += 2;
+    if (sleep === 'poor_overall') score += 1;
+
+    if (hasGoal('sleep')) score += 1;
+
+
+    if (
+      hasSafety('medication') ||
+      hasSafety('medical_condition')
+    ) {
+
+      return result(
+        'Melatonin',
+        'context',
+        'Melatonin can interact with medications and broader sleep problems often need more context than a product questionnaire can provide.'
+      );
+
+    }
+
+
+    if (sleep === 'poor_overall') {
+
+      return result(
+        'Melatonin',
+        'context',
+        'Your sleep problem sounds broader than a simple timing issue. Melatonin is not a universal solution for poor sleep, so this needs more context.'
+      );
+
+    }
+
+
+    if (
+      sleep === 'travel_schedule_disruption' &&
+      score >= 4
+    ) {
+
+      return result(
+        'Melatonin',
+        'worth',
+        'Travel or schedule disruption is one of the clearer situations where melatonin can be useful because the issue involves sleep timing.'
+      );
+
+    }
+
+
+    if (
+      sleep === 'trouble_falling_asleep' &&
+      score >= 2
+    ) {
+
+      return result(
+        'Melatonin',
+        'could',
+        'You mainly struggle with falling asleep. Melatonin may be useful in some situations, but it is not a general solution to every sleep problem.'
+      );
+
+    }
+
+
+    return result(
+      'Melatonin',
+      'unnecessary',
+      'Your answers do not identify one of the clearer use cases for melatonin.'
+    );
+
+  }
+
+
+  function ashwagandhaResult() {
+
+    if (takes('ashwagandha')) {
+      return result(
+        'Ashwagandha',
+        'covered',
+        'You already take ashwagandha, so adding another ashwagandha product would duplicate your current supplement.'
+      );
+    }
+
+
+    let score = 0;
+
+    const stress = single('stress');
+    const sleep = single('sleep');
+
+
+    if (stress === 'very_high') score += 4;
+    if (stress === 'high') score += 3;
+    if (stress === 'moderate') score += 1;
+    if (stress === 'low') score -= 3;
+
+    if (hasGoal('stress')) score += 2;
+
+    if (
+      sleep === 'trouble_falling_asleep' ||
+      sleep === 'poor_overall'
+    ) {
+      score += 1;
+    }
+
+
+    if (
+      hasSafety('pregnant') ||
+      hasSafety('medication') ||
+      hasSafety('medical_condition')
+    ) {
+
+      return result(
+        'Ashwagandha',
+        'context',
+        'Ashwagandha may be relevant to stress, but your safety answers mean a consumer questionnaire should not make that recommendation without more context.'
+      );
+
+    }
+
+
+    if (score >= 4) {
+
+      return result(
+        'Ashwagandha',
+        'worth',
+        'Your answers indicate substantial stress, which is one of the better-supported reasons someone might consider a standardized ashwagandha extract.'
+      );
+
+    }
+
+
+    if (score >= 2) {
+
+      return result(
+        'Ashwagandha',
+        'could',
+        'Stress is relevant to you, so ashwagandha could be useful. The evidence depends partly on the extract and dose, so it is not something we recommend automatically to everyone.'
+      );
+
+    }
+
+
+    return result(
+      'Ashwagandha',
+      'unnecessary',
+      'Your current stress answers do not provide a strong reason to add ashwagandha.'
+    );
+
+  }
+
+
+  function collagenResult() {
+
+    if (takes('collagen')) {
+      return result(
+        'Collagen',
+        'covered',
+        'You already take collagen, so another collagen product would simply duplicate what you are already using.'
+      );
+    }
+
+
+    let score = 0;
+
+    const activity = single('activity');
+
+
+    if (hasGoal('joints_connective_tissue')) score += 3;
+    if (hasGoal('skin_healthy_aging')) score += 3;
+
+    if (
+      hasGoal('performance') &&
+      (
+        activity === 'strength_3plus' ||
+        activity === 'strength_1_2'
+      )
+    ) {
+      score += 1;
+    }
+
+
+    if (score >= 3) {
+
+      return result(
+        'Collagen',
+        'could',
+        'Collagen is relevant to one of your stated skin or connective-tissue goals, but it remains an optional, goal-specific product rather than a basic nutritional essential.'
+      );
+
+    }
+
+
+    return result(
+      'Collagen',
+      'unnecessary',
+      'Nothing in your stated goals gives us a strong reason to recommend collagen.'
+    );
+
+  }
+
+
+  function curcuminResult() {
+
+    if (takes('curcumin')) {
+      return result(
+        'Curcumin',
+        'covered',
+        'You already take curcumin or turmeric, so adding another curcumin product would duplicate your current supplement.'
+      );
+    }
+
+
+    let score = 0;
+
+
+    if (hasGoal('joints_connective_tissue')) score += 3;
+    if (hasGoal('performance')) score += 1;
+
+
+    if (
+      hasSafety('pregnant') ||
+      hasSafety('medication') ||
+      hasSafety('medical_condition')
+    ) {
+
+      return result(
+        'Curcumin',
+        'context',
+        'Curcumin may be relevant to some joint-related goals, but your safety answers mean potential interactions or individual context matter more than a quiz score.'
+      );
+
+    }
+
+
+    if (score >= 3) {
+
+      return result(
+        'Curcumin',
+        'could',
+        'Joint or connective-tissue support is one of your goals, so curcumin could be useful, but it is not something we would describe as essential.'
+      );
+
+    }
+
+
+    return result(
+      'Curcumin',
+      'unnecessary',
+      'Your answers do not identify a particularly strong reason to add curcumin.'
+    );
+
+  }
+
+
+  function berberineResult() {
+
+    if (takes('berberine')) {
+      return result(
+        'Berberine',
+        'covered',
+        'You already take berberine, so adding another berberine product would duplicate your current supplement.'
+      );
+    }
+
+
+    if (hasGoal('metabolic_health')) {
+
+      return result(
+        'Berberine',
+        'context',
+        'You selected metabolic health as a goal. Berberine has meaningful physiological effects, so this is not something we want a two-minute consumer questionnaire to recommend automatically.'
+      );
+
+    }
+
+
+    return result(
+      'Berberine',
+      'unnecessary',
+      'Nothing in your answers gives us a responsible reason to recommend berberine.'
+    );
+
+  }
+
+
+  function coq10Result() {
+
+    if (takes('coq10')) {
+      return result(
+        'CoQ10',
+        'covered',
+        'You already take CoQ10, so another CoQ10 product would duplicate what you are already using.'
+      );
+    }
+
+
+    if (
+      hasSafety('medication') ||
+      hasSafety('medical_condition')
+    ) {
+
+      return result(
+        'CoQ10',
+        'context',
+        'CoQ10 can be relevant in some specific contexts, but medication use or a medical condition means this questionnaire should not make that decision.'
+      );
+
+    }
+
+
+    return result(
+      'CoQ10',
+      'unnecessary',
+      'Your answers do not identify a strong general-purpose reason to add CoQ10.'
+    );
+
+  }
+
+
+  function enzymeResult() {
+
+    if (takes('digestive_enzymes')) {
+      return result(
+        'Digestive Enzymes',
+        'covered',
+        'You already use digestive enzymes, so adding another enzyme product would duplicate what you are already taking.'
+      );
+    }
+
+
+    const digestion = single('digestion');
+
+
+    if (
+      digestion === 'bloating_heaviness' ||
+      digestion === 'multiple_issues'
+    ) {
+
+      return result(
+        'Digestive Enzymes',
+        'context',
+        'Recurring bloating or heaviness does not automatically mean you need digestive enzymes. There are many possible causes, so more context matters.'
+      );
+
+    }
+
+
+    return result(
+      'Digestive Enzymes',
+      'unnecessary',
+      'Nothing in your answers specifically suggests that a digestive-enzyme supplement is needed.'
+    );
+
+  }
+
+
+  function buildResults() {
+
+    return [
+      omega3Result(),
+      vitaminDResult(),
+      b12Result(),
+      psylliumResult(),
+      creatineResult(),
+      electrolyteResult(),
+      magnesiumResult(),
+      melatoninResult(),
+      ashwagandhaResult(),
+      collagenResult(),
+      curcuminResult(),
+      berberineResult(),
+      coq10Result(),
+      enzymeResult()
+    ];
+
+  }
+
+
+  /* =========================================================
+     RESULTS RENDERING
+  ========================================================= */
+
+  const statusConfig = {
+
+    worth: {
+      label: 'Worth considering',
+      intro: 'Your answers give us a reasonably clear practical reason to consider these.',
+      className: 'is-worth'
+    },
+
+    could: {
+      label: 'Could be useful',
+      intro: 'These fit one of your goals or circumstances, but we would not call them obvious essentials.',
+      className: 'is-could'
+    },
+
+    context: {
+      label: 'Needs more context',
+      intro: 'There may be a reason to consider these, but this questionnaire should not make the decision for you.',
+      className: 'is-context'
+    },
+
+    covered: {
+      label: 'Already covered',
+      intro: 'You told us you already use these. More is not automatically better.',
+      className: 'is-covered'
+    },
+
+    unnecessary: {
+      label: 'Probably unnecessary',
+      intro: 'Nothing in your answers gives us a strong reason to add these right now.',
+      className: 'is-unnecessary'
+    }
+
+  };
+
+
+  function renderResults() {
+
+    showScreen('results');
+
+    resultsGroups.innerHTML = '';
+
+    resultsNotice.hidden = true;
+    resultsNotice.innerHTML = '';
+
+
+    /*
+      STRONG GLOBAL SAFETY STOP
+    */
+
+    if (
+      hasSafety('under_18') ||
+      hasSafety('pregnant')
+    ) {
+
+      resultsNotice.hidden = false;
+
+      resultsNotice.innerHTML = `
+        <strong>We’re stopping the recommendation engine here.</strong>
+        <p>
+          This consumer questionnaire is designed for adults who are not
+          pregnant, breastfeeding or trying to become pregnant.
+          In your situation, individualized professional guidance is more
+          appropriate than an automated supplement list.
+        </p>
+      `;
+
+      resultsGroups.innerHTML = `
+        <div class="sendler-assessment-results__restricted">
+          <h2>No automated supplement recommendations shown.</h2>
+          <p>
+            That is intentional. SENDLER would rather give you no product
+            recommendation than pretend this questionnaire has enough
+            information to make one responsibly.
+          </p>
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    const results = buildResults();
+
+
+    if (
+      hasSafety('medication') ||
+      hasSafety('medical_condition')
+    ) {
+
+      resultsNotice.hidden = false;
+
+      resultsNotice.innerHTML = `
+        <strong>One extra note before you read this.</strong>
+        <p>
+          You indicated medication use or a relevant medical condition.
+          We have automatically made several recommendations more conservative.
+          This result should not be used to override professional medical advice.
+        </p>
+      `;
+
+    } else if (hasSafety('prefer_not')) {
+
+      resultsNotice.hidden = false;
+
+      resultsNotice.innerHTML = `
+        <strong>Safety information skipped.</strong>
+        <p>
+          That’s completely fine. We can still show general matches, but
+          medication use, pregnancy and medical conditions can materially
+          change whether some supplements are appropriate.
+        </p>
+      `;
+
+    }
+
+
+    if (takes('multivitamin')) {
+
+      const existing =
+        resultsNotice.hidden
+          ? ''
+          : resultsNotice.innerHTML;
+
+      resultsNotice.hidden = false;
+
+      resultsNotice.innerHTML =
+        existing +
+        `
+          <div class="sendler-assessment-results__notice-extra">
+            <strong>You also take a multivitamin.</strong>
+            <p>
+              Check its label before adding individual nutrients such as
+              vitamin D, B12 or magnesium so you do not accidentally
+              duplicate them.
+            </p>
+          </div>
+        `;
+
+    }
+
+
+    const order = [
+      'worth',
+      'could',
+      'context',
+      'covered',
+      'unnecessary'
+    ];
+
+
+    order.forEach(status => {
+
+      const group = results.filter(
+        item => item.status === status
+      );
+
+      if (!group.length) return;
+
+
+      const config = statusConfig[status];
+
+
+      const section = document.createElement('section');
+
+      section.className =
+        `sendler-result-group ${config.className}`;
+
+
+      section.innerHTML = `
+        <div class="sendler-result-group__header">
+          <div>
+            <div class="sendler-result-group__label">
+              ${config.label}
+            </div>
+
+            <p>
+              ${config.intro}
+            </p>
+          </div>
+
+          <div class="sendler-result-group__count">
+            ${group.length}
+          </div>
+        </div>
+
+        <div class="sendler-result-group__items">
+          ${group.map(item => `
+            <article class="sendler-result-card">
+
+              <div class="sendler-result-card__status">
+                ${config.label}
+              </div>
+
+              <h3>
+                ${item.name}
+              </h3>
+
+              <p>
+                ${item.reason}
+              </p>
+
+            </article>
+          `).join('')}
+        </div>
+      `;
+
+
+      resultsGroups.appendChild(section);
+
+    });
+
+  }
+
+
+  /* =========================================================
+     EVENTS
+  ========================================================= */
+
+  root
+    .querySelector('[data-start-assessment]')
+    .addEventListener('click', () => {
+
+      currentQuestion = 0;
+
+      showScreen('questions');
+
+      renderQuestion();
+
+    });
+
+
+  nextButton.addEventListener('click', () => {
+
+    const question =
+      questions[currentQuestion];
+
+
+    if (!questionAnswered(question)) {
+
+      validation.hidden = false;
+
+      return;
+
+    }
+
+
+    if (
+      currentQuestion <
+      questions.length - 1
+    ) {
+
+      currentQuestion += 1;
+
+      renderQuestion();
+
+      window.scrollTo({
+        top: root.offsetTop - 20,
+        behavior: 'smooth'
+      });
+
+      return;
+
+    }
+
+
+    renderResults();
+
+  });
+
+
+  backButton.addEventListener('click', () => {
+
+    if (currentQuestion === 0) {
+
+      showScreen('start');
+
+      return;
+
+    }
+
+
+    currentQuestion -= 1;
+
+    renderQuestion();
+
+  });
+
+
+  root
+    .querySelector('[data-restart]')
+    .addEventListener('click', () => {
+
+      answers = {};
+      currentQuestion = 0;
+
+      showScreen('start');
+
+    });
+
+})();
+</script>
+
+
 {% stylesheet %}
 
+/* =========================================================
+   PAGE
+========================================================= */
+
 .sendler-assessment {
-  padding: 110px 0;
   background: var(--sendler-canvas);
+  color: var(--sendler-charcoal);
 }
 
-.sendler-assessment__shell {
+.sendler-assessment__app {
+  min-height: 650px;
+}
+
+.sendler-assessment__screen {
+  display: none;
+}
+
+.sendler-assessment__screen.is-active {
+  display: block;
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+.sendler-assessment__intro {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 100px 0 120px;
+  text-align: center;
+}
+
+.sendler-assessment__intro h1,
+.sendler-assessment-results__hero h1 {
+  max-width: 850px;
+  margin: 15px auto 0;
+  font-size: clamp(3.4rem, 6vw, 6.7rem);
+  line-height: .94;
+  letter-spacing: -.06em;
+}
+
+.sendler-assessment__lead {
+  max-width: 690px;
+  margin: 27px auto 0;
+  color: var(--sendler-text-secondary);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.sendler-assessment__intro-points {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  min-height: 590px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  max-width: 850px;
+  margin: 45px auto 0;
   overflow: hidden;
-  border-radius: 12px;
+  border: 1px solid var(--sendler-border);
+  border-radius: 8px;
+  background: var(--sendler-border);
+}
+
+.sendler-assessment__intro-points > div {
+  padding: 25px 20px;
+  background: var(--sendler-white);
+}
+
+.sendler-assessment__intro-points strong,
+.sendler-assessment__intro-points span {
+  display: block;
+}
+
+.sendler-assessment__intro-points strong {
+  font-size: 13px;
+}
+
+.sendler-assessment__intro-points span {
+  margin-top: 7px;
+  color: var(--sendler-text-secondary);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.sendler-assessment__primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  min-height: 52px;
+  margin-top: 35px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 7px;
+  background: var(--sendler-green);
+  color: var(--sendler-white);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.sendler-assessment__primary:hover {
+  background: var(--sendler-green-hover);
+}
+
+.sendler-assessment__disclaimer {
+  max-width: 600px;
+  margin: 18px auto 0;
+  color: var(--sendler-text-secondary);
+  font-size: 10px;
+  line-height: 1.5;
 }
 
 
-/* Image */
+/* =========================================================
+   QUESTION PROGRESS
+========================================================= */
 
-.sendler-assessment__media {
-  min-width: 0;
+.sendler-assessment__topbar {
+  max-width: 900px;
+  margin: 0 auto;
+  padding-top: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sendler-assessment__back {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--sendler-text-secondary);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sendler-assessment__progress-copy {
+  color: var(--sendler-text-secondary);
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.sendler-assessment__progress {
+  max-width: 900px;
+  height: 3px;
+  margin: 15px auto 0;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--sendler-border);
+}
+
+.sendler-assessment__progress-fill {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--sendler-green);
+  transition: width .25s ease;
+}
+
+
+/* =========================================================
+   QUESTION
+========================================================= */
+
+.sendler-assessment__question-wrap {
+  max-width: 900px;
+  min-height: 610px;
+  margin: 0 auto;
+  padding: 70px 0 100px;
+}
+
+.sendler-assessment__question-number {
+  color: var(--sendler-green);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .13em;
+}
+
+.sendler-assessment__question-wrap h2 {
+  max-width: 780px;
+  margin: 12px 0 0;
+  font-size: clamp(2.5rem, 4vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -.05em;
+}
+
+.sendler-assessment__question-help {
+  max-width: 680px;
+  margin: 17px 0 0;
+  color: var(--sendler-text-secondary);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.sendler-assessment__options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 34px;
+}
+
+.sendler-assessment-option {
+  min-height: 67px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 15px 17px;
+  border: 1px solid var(--sendler-border);
+  border-radius: 7px;
+  background: var(--sendler-white);
+  color: var(--sendler-charcoal);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 550;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color .15s ease,
+    background .15s ease;
+}
+
+.sendler-assessment-option:hover {
+  border-color: #9eaaa3;
+}
+
+.sendler-assessment-option.is-selected {
+  border-color: var(--sendler-green);
   background: var(--sendler-soft-green);
 }
 
-.sendler-assessment__image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  min-height: 590px;
-  object-fit: cover;
+.sendler-assessment-option__control {
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  position: relative;
+  border: 1px solid #adb2ad;
+  border-radius: 50%;
+  background: var(--sendler-white);
 }
 
-.sendler-assessment__placeholder {
-  min-height: 590px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background:
-    linear-gradient(
-      135deg,
-      rgba(23, 63, 48, 0.04),
-      rgba(23, 63, 48, 0.15)
-    ),
-    var(--sendler-soft-green);
-  color: var(--sendler-green);
+.sendler-assessment-option.is-selected
+.sendler-assessment-option__control {
+  border-color: var(--sendler-green);
+  background: var(--sendler-green);
 }
 
-.sendler-assessment__placeholder span {
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+.sendler-assessment-option.is-selected
+.sendler-assessment-option__control::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  width: 4px;
+  height: 7px;
+  border-right: 1.5px solid white;
+  border-bottom: 1.5px solid white;
+  transform: rotate(45deg);
 }
 
-.sendler-assessment__placeholder small {
-  margin-top: 8px;
+.sendler-assessment__validation {
+  margin-top: 15px;
+  color: #8d2e26;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.sendler-assessment__question-actions {
+  margin-top: 27px;
+}
+
+.sendler-assessment__question-actions
+.sendler-assessment__primary {
+  margin-top: 0;
+}
+
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+.sendler-assessment-results {
+  padding: 90px 0 110px;
+}
+
+.sendler-assessment-results__hero {
+  max-width: 800px;
+  margin: 0 auto 55px;
+  text-align: center;
+}
+
+.sendler-assessment-results__hero p {
+  max-width: 650px;
+  margin: 22px auto 0;
   color: var(--sendler-text-secondary);
   font-size: 14px;
+  line-height: 1.6;
+}
+
+.sendler-assessment-results__notice {
+  max-width: 900px;
+  margin: 0 auto 28px;
+  padding: 20px 22px;
+  border: 1px solid #d4c8a1;
+  border-radius: 8px;
+  background: #f4f0df;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.sendler-assessment-results__notice strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.sendler-assessment-results__notice p {
+  margin: 0;
+}
+
+.sendler-assessment-results__notice-extra {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(23, 26, 24, .12);
+}
+
+.sendler-assessment-results__groups {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.sendler-result-group {
+  padding: 32px 0;
+  border-top: 1px solid var(--sendler-border);
+}
+
+.sendler-result-group__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 19px;
+}
+
+.sendler-result-group__label {
+  font-size: 19px;
+  font-weight: 750;
+  letter-spacing: -.025em;
+}
+
+.sendler-result-group__header p {
+  max-width: 600px;
+  margin: 7px 0 0;
+  color: var(--sendler-text-secondary);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.sendler-result-group__count {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--sendler-soft-green);
+  color: var(--sendler-green);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.sendler-result-group__items {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.sendler-result-card {
+  padding: 23px;
+  border: 1px solid var(--sendler-border);
+  border-radius: 8px;
+  background: var(--sendler-white);
+}
+
+.sendler-result-card__status {
+  margin-bottom: 12px;
+  color: var(--sendler-green);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.sendler-result-card h3 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: -.025em;
+}
+
+.sendler-result-card p {
+  margin: 10px 0 0;
+  color: var(--sendler-text-secondary);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.sendler-result-group.is-unnecessary
+.sendler-result-card__status {
+  color: var(--sendler-text-secondary);
+}
+
+.sendler-result-group.is-context
+.sendler-result-card__status {
+  color: #7a5b15;
+}
+
+.sendler-result-group.is-covered
+.sendler-result-card__status {
+  color: #547064;
 }
 
 
-/* Content */
+/* =========================================================
+   RESULTS END
+========================================================= */
 
-.sendler-assessment__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(56px, 6vw, 90px);
+.sendler-assessment-results__footer {
+  max-width: 1000px;
+  margin: 48px auto 0;
+  padding: 44px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 50px;
+  align-items: center;
+  border-radius: 9px;
   background: var(--sendler-green);
   color: var(--sendler-white);
 }
 
-.sendler-assessment__eyebrow {
-  margin-bottom: 18px;
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  line-height: 1.3;
-  text-transform: uppercase;
-}
-
-.sendler-assessment__heading {
-  max-width: 560px;
+.sendler-assessment-results__footer h2 {
   margin: 0;
-  color: var(--sendler-white);
-  font-size: clamp(2.5rem, 4vw, 3.75rem);
+  max-width: 530px;
+  font-size: clamp(2rem, 3vw, 3.4rem);
   line-height: 1;
-  letter-spacing: -0.045em;
+  letter-spacing: -.045em;
 }
 
-.sendler-assessment__text {
-  max-width: 550px;
-  margin-top: 26px;
-  font-size: 17px;
+.sendler-assessment-results__footer p {
+  max-width: 590px;
+  margin: 14px 0 0;
+  color: rgba(255,255,255,.72);
+  font-size: 11px;
   line-height: 1.6;
 }
 
-.sendler-assessment__text p {
-  margin: 0;
-  color: rgba(255, 255, 255, 0.82);
-}
-
-.sendler-assessment__trust {
+.sendler-assessment-results__actions {
   display: flex;
-  align-items: flex-start;
-  gap: 11px;
-  margin-top: 28px;
-  color: rgba(255, 255, 255, 0.88);
-  font-size: 14px;
-  line-height: 1.5;
+  flex-direction: column;
+  gap: 9px;
+  min-width: 190px;
 }
 
-.sendler-assessment__trust svg {
-  flex: 0 0 20px;
-  width: 20px;
-  height: 20px;
-  margin-top: 1px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.sendler-assessment__action {
-  margin-top: 34px;
-}
-
-.sendler-assessment__button {
-  display: inline-flex;
-  min-height: 52px;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 13px 24px;
-  border-radius: var(--sendler-radius);
+.sendler-assessment-results__actions
+.sendler-assessment__primary {
+  margin: 0;
   background: var(--sendler-white);
   color: var(--sendler-green);
-  font-size: 15px;
+}
+
+.sendler-assessment__secondary {
+  min-height: 45px;
+  padding: 0 18px;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--sendler-white);
+  font: inherit;
+  font-size: 11px;
   font-weight: 650;
-  line-height: 1;
-  text-decoration: none;
-  transition:
-    transform 160ms ease,
-    background-color 160ms ease;
+  cursor: pointer;
 }
 
-.sendler-assessment__button:hover {
-  background: var(--sendler-canvas);
-  transform: translateY(-1px);
+.sendler-assessment-results__legal {
+  max-width: 900px;
+  margin: 32px auto 0;
+  color: var(--sendler-text-secondary);
+  font-size: 10px;
+  line-height: 1.6;
+  text-align: center;
 }
 
-.sendler-assessment__button svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.sendler-assessment-results__restricted {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 45px;
+  border: 1px solid var(--sendler-border);
+  border-radius: 8px;
+  background: var(--sendler-white);
+  text-align: center;
 }
 
-.sendler-assessment__microcopy {
-  margin: 13px 0 0;
-  color: rgba(255, 255, 255, 0.62);
+.sendler-assessment-results__restricted h2 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.sendler-assessment-results__restricted p {
+  max-width: 600px;
+  margin: 15px auto 0;
+  color: var(--sendler-text-secondary);
   font-size: 12px;
-  line-height: 1.4;
+  line-height: 1.6;
 }
 
 
-/* Responsive */
-
-@media screen and (max-width: 900px) {
-
-  .sendler-assessment__shell {
-    grid-template-columns: 1fr;
-  }
-
-  .sendler-assessment__image,
-  .sendler-assessment__placeholder {
-    min-height: 460px;
-  }
-
-  .sendler-assessment__content {
-    padding: 64px;
-  }
-
-}
+/* =========================================================
+   MOBILE
+========================================================= */
 
 @media screen and (max-width: 749px) {
 
-  .sendler-assessment {
-    padding: 80px 0;
+  .sendler-assessment__intro {
+    padding: 65px 0 80px;
   }
 
-  .sendler-assessment__shell {
-    border-radius: 8px;
+  .sendler-assessment__intro h1,
+  .sendler-assessment-results__hero h1 {
+    font-size: 3.2rem;
   }
 
-  .sendler-assessment__image,
-  .sendler-assessment__placeholder {
-    min-height: 340px;
+  .sendler-assessment__lead {
+    font-size: 14px;
   }
 
-  .sendler-assessment__content {
-    padding: 44px 28px;
+  .sendler-assessment__intro-points {
+    grid-template-columns: 1fr;
+    margin-top: 32px;
   }
 
-  .sendler-assessment__heading {
-    font-size: 2.5rem;
+  .sendler-assessment__topbar {
+    padding-top: 25px;
   }
 
-  .sendler-assessment__button {
+  .sendler-assessment__question-wrap {
+    min-height: 570px;
+    padding: 48px 0 80px;
+  }
+
+  .sendler-assessment__question-wrap h2 {
+    font-size: 2.55rem;
+  }
+
+  .sendler-assessment__options {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 27px;
+  }
+
+  .sendler-assessment-option {
+    min-height: 61px;
+  }
+
+  .sendler-assessment-results {
+    padding: 65px 0 80px;
+  }
+
+  .sendler-assessment-results__hero {
+    margin-bottom: 38px;
+  }
+
+  .sendler-result-group__header {
+    gap: 15px;
+  }
+
+  .sendler-result-group__items {
+    grid-template-columns: 1fr;
+  }
+
+  .sendler-assessment-results__footer {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 30px 24px;
+  }
+
+  .sendler-assessment-results__actions {
+    width: 100%;
+  }
+
+  .sendler-assessment-results__actions
+  .sendler-assessment__primary {
     width: 100%;
   }
 
@@ -329,59 +2556,12 @@
 
 {% schema %}
 {
-  "name": "SENDLER assessment CTA",
+  "name": "SENDLER Assessment",
   "tag": "section",
-  "settings": [
-    {
-      "type": "image_picker",
-      "id": "image",
-      "label": "Lifestyle image"
-    },
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow",
-      "default": "PERSONALIZED, NOT OVERWHELMING"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "What should you actually be taking?"
-    },
-    {
-      "type": "richtext",
-      "id": "text",
-      "label": "Text",
-      "default": "<p>Tell us a little about your diet, lifestyle and goals. We’ll help you narrow down which supplements may make sense for you — and which ones you can probably skip.</p>"
-    },
-    {
-      "type": "text",
-      "id": "trust_text",
-      "label": "Trust message",
-      "default": "You don’t need to buy anything from us. The goal is to help you understand what may actually be worth considering."
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "Button label",
-      "default": "Take the 2-minute assessment"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link"
-    },
-    {
-      "type": "text",
-      "id": "microcopy",
-      "label": "Microcopy",
-      "default": "Free · No sign-up required · Results shown immediately"
-    }
-  ],
+  "settings": [],
   "presets": [
     {
-      "name": "SENDLER assessment CTA"
+      "name": "SENDLER Assessment"
     }
   ]
 }

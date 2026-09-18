@@ -1,45 +1,36 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "product_hero": {
       "type": "sendler-product-hero",
       "settings": {}
     },
-
     "product_overview": {
       "type": "sendler-product-overview",
       "settings": {}
     },
-
     "product_details": {
       "type": "sendler-product-details",
       "settings": {}
     },
-
     "product_assessment": {
       "type": "sendler-product-assessment",
       "settings": {}
     },
-
     "product_related": {
       "type": "sendler-product-related",
       "settings": {}
+    },
+    "mobile_atc": {
+      "type": "sendler-mobile-atc",
+      "settings": {}
     }
   },
-
   "order": [
     "product_hero",
     "product_overview",
     "product_details",
     "product_assessment",
-    "product_related"
+    "product_related",
+    "mobile_atc"
   ]
 }

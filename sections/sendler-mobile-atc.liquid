@@ -1,0 +1,306 @@
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<div
+  id="SendlerMobileATC-{{ section.id }}"
+  class="sendler-mobile-atc"
+  data-sendler-mobile-atc
+  aria-hidden="true"
+>
+  <div class="sendler-mobile-atc__inner">
+
+    <div class="sendler-mobile-atc__product">
+
+      <div class="sendler-mobile-atc__title">
+        {{ product.title }}
+      </div>
+
+      <div class="sendler-mobile-atc__price">
+        {{ current_variant.price | money }}
+      </div>
+
+    </div>
+
+
+    {% form 'product', product, class: 'sendler-mobile-atc__form' %}
+
+      <input
+        type="hidden"
+        name="id"
+        value="{{ current_variant.id }}"
+      >
+
+      <input
+        type="hidden"
+        name="quantity"
+        value="1"
+      >
+
+      <button
+        type="submit"
+        name="add"
+        class="sendler-mobile-atc__button"
+        {% unless current_variant.available %}
+          disabled
+        {% endunless %}
+      >
+        {% if current_variant.available %}
+          Add to cart
+        {% else %}
+          Sold out
+        {% endif %}
+      </button>
+
+    {% endform %}
+
+  </div>
+</div>
+
+
+<script>
+  (() => {
+    const stickyBar = document.getElementById(
+      'SendlerMobileATC-{{ section.id }}'
+    );
+
+    if (!stickyBar) return;
+
+    const mainBuyArea = document.querySelector(
+      '.sendler-product-hero__buy'
+    );
+
+    const footer = document.querySelector(
+      '.sendler-footer'
+    );
+
+    if (!mainBuyArea) return;
+
+    let footerVisible = false;
+
+
+    function updateStickyBar() {
+      if (window.innerWidth > 749) {
+        stickyBar.classList.remove('is-visible');
+        stickyBar.setAttribute('aria-hidden', 'true');
+        return;
+      }
+
+      const buyRect = mainBuyArea.getBoundingClientRect();
+
+      /*
+        Show only after the original purchase controls
+        have moved above the viewport.
+      */
+      const passedOriginalButton = buyRect.bottom < 0;
+
+      const shouldShow =
+        passedOriginalButton &&
+        !footerVisible;
+
+      stickyBar.classList.toggle(
+        'is-visible',
+        shouldShow
+      );
+
+      stickyBar.setAttribute(
+        'aria-hidden',
+        shouldShow ? 'false' : 'true'
+      );
+    }
+
+
+    if (footer) {
+      const footerObserver = new IntersectionObserver(
+        (entries) => {
+          footerVisible = entries[0].isIntersecting;
+          updateStickyBar();
+        },
+        {
+          threshold: 0
+        }
+      );
+
+      footerObserver.observe(footer);
+    }
+
+
+    window.addEventListener(
+      'scroll',
+      updateStickyBar,
+      { passive: true }
+    );
+
+    window.addEventListener(
+      'resize',
+      updateStickyBar,
+      { passive: true }
+    );
+
+    updateStickyBar();
+
+  })();
+</script>
+
+
+{% stylesheet %}
+
+.sendler-mobile-atc {
+  display: none;
+}
+
+
+@media screen and (max-width: 749px) {
+
+  .sendler-mobile-atc {
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    display: block;
+
+    padding:
+      10px
+      14px
+      calc(10px + env(safe-area-inset-bottom));
+
+    background: rgba(247, 245, 239, .97);
+
+    border-top:
+      1px solid
+      var(--sendler-border);
+
+    box-shadow:
+      0 -6px 24px
+      rgba(23, 26, 24, .08);
+
+    transform: translateY(110%);
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+      transform .22s ease,
+      opacity .22s ease;
+  }
+
+
+  .sendler-mobile-atc.is-visible {
+    transform: translateY(0);
+    opacity: 1;
+
+    pointer-events: auto;
+  }
+
+
+  .sendler-mobile-atc__inner {
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto;
+
+    gap: 12px;
+
+    align-items: center;
+
+    max-width: 600px;
+
+    margin:
+      0 auto;
+  }
+
+
+  .sendler-mobile-atc__product {
+    min-width: 0;
+  }
+
+
+  .sendler-mobile-atc__title {
+    overflow: hidden;
+
+    color:
+      var(--sendler-charcoal);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+
+  .sendler-mobile-atc__price {
+    margin-top: 3px;
+
+    color:
+      var(--sendler-green);
+
+    font-size: 15px;
+    font-weight: 700;
+
+    line-height: 1;
+  }
+
+
+  .sendler-mobile-atc__form {
+    margin: 0;
+  }
+
+
+  .sendler-mobile-atc__button {
+    min-width: 126px;
+    min-height: 46px;
+
+    padding:
+      0 18px;
+
+    border: 0;
+    border-radius: 7px;
+
+    background:
+      var(--sendler-green);
+
+    color:
+      var(--sendler-white);
+
+    font: inherit;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+  }
+
+
+  .sendler-mobile-atc__button:hover {
+    background:
+      var(--sendler-green-hover);
+  }
+
+
+  .sendler-mobile-atc__button:disabled {
+    opacity: .5;
+
+    cursor: not-allowed;
+  }
+
+}
+
+{% endstylesheet %}
+
+
+{% schema %}
+{
+  "name": "SENDLER Mobile ATC",
+  "tag": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "SENDLER Mobile ATC"
+    }
+  ]
+}
+{% endschema %}
