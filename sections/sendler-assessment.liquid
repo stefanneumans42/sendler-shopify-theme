@@ -15,7 +15,7 @@
             FIND MY ESSENTIALS
           </div>
 
-          <h1>
+          <h1 tabindex="-1" data-start-heading>
             Find what may actually make sense for you.
           </h1>
 
@@ -39,7 +39,7 @@
 
             <div>
               <strong>Your answers stay here</strong>
-              <span>V1 runs entirely in your browser.</span>
+              <span>Your answers are processed in your browser.</span>
             </div>
 
           </div>
@@ -52,6 +52,10 @@
             Start assessment
             <span aria-hidden="true">→</span>
           </button>
+
+          <noscript>
+            <p>Please enable JavaScript to use this assessment. Your answers are processed in your browser.</p>
+          </noscript>
 
           <p class="sendler-assessment__disclaimer">
             Educational information only. This questionnaire does not diagnose
@@ -86,7 +90,15 @@
         </div>
 
 
-        <div class="sendler-assessment__progress">
+        <div
+          class="sendler-assessment__progress"
+          role="progressbar"
+          aria-label="Assessment progress"
+          aria-valuemin="1"
+          aria-valuemax="13"
+          aria-valuenow="1"
+          data-progress
+        >
           <div
             class="sendler-assessment__progress-fill"
             data-progress-fill
@@ -100,20 +112,25 @@
             QUESTION 1
           </div>
 
-          <h2 data-question-title></h2>
+          <h2 id="SendlerQuestion-{{ section.id }}" tabindex="-1" data-question-title></h2>
 
           <p
             class="sendler-assessment__question-help"
+            id="SendlerQuestionHelp-{{ section.id }}"
             data-question-help
           ></p>
 
           <div
             class="sendler-assessment__options"
+            role="group"
+            aria-labelledby="SendlerQuestion-{{ section.id }}"
+            aria-describedby="SendlerQuestionHelp-{{ section.id }}"
             data-question-options
           ></div>
 
           <div
             class="sendler-assessment__validation"
+            role="alert"
             data-validation
             hidden
           >
@@ -150,9 +167,9 @@
               YOUR RESULTS
             </div>
 
-            <h1>
+            <h2 tabindex="-1" data-results-heading>
               A simpler place to start.
-            </h1>
+            </h2>
 
             <p>
               These results are based only on the answers you gave us.
@@ -237,14 +254,11 @@
 </section>
 
 
-<script>
+{% javascript %}
 (() => {
-
-  const root = document.getElementById(
-    'SendlerAssessment-{{ section.id }}'
-  );
-
-  if (!root) return;
+  function initializeAssessment(root) {
+  if (root.dataset.assessmentInitialized) return;
+  root.dataset.assessmentInitialized = 'true';
 
 
   /* =========================================================
@@ -474,6 +488,7 @@
   const progressCurrent = root.querySelector('[data-progress-current]');
   const progressTotal = root.querySelector('[data-progress-total]');
   const progressFill = root.querySelector('[data-progress-fill]');
+  const progress = root.querySelector('[data-progress]');
 
   const validation = root.querySelector('[data-validation]');
 
@@ -485,6 +500,7 @@
 
 
   progressTotal.textContent = questions.length;
+  progress.setAttribute('aria-valuemax', questions.length);
 
 
   /* =========================================================
@@ -501,11 +517,17 @@
       .querySelector(`[data-screen="${name}"]`)
       .classList.add('is-active');
 
-    window.scrollTo({
-      top: root.offsetTop - 20,
-      behavior: 'smooth'
-    });
+    if (name === 'start') root.querySelector('[data-start-heading]').focus({ preventScroll: true });
+    if (name === 'results') root.querySelector('[data-results-heading]').focus({ preventScroll: true });
+    scrollToAssessment();
 
+  }
+
+  function scrollToAssessment() {
+    window.scrollTo({
+      top: root.getBoundingClientRect().top + window.scrollY - 20,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'
+    });
   }
 
 
@@ -549,7 +571,7 @@
      QUESTION RENDERING
   ========================================================= */
 
-  function renderQuestion() {
+  function renderQuestion(selectedValue) {
 
     const question = questions[currentQuestion];
 
@@ -569,6 +591,8 @@
 
     progressCurrent.textContent =
       currentQuestion + 1;
+    progress.setAttribute('aria-valuenow', currentQuestion + 1);
+    progress.setAttribute('aria-valuetext', `Question ${currentQuestion + 1} of ${questions.length}`);
 
     progressFill.style.width =
       `${((currentQuestion + 1) / questions.length) * 100}%`;
@@ -602,6 +626,7 @@
         (selected ? ' is-selected' : '');
 
       button.dataset.value = value;
+      button.setAttribute('aria-pressed', String(selected));
 
       if (exclusive) {
         button.dataset.exclusive = 'true';
@@ -625,8 +650,11 @@
 
 
       questionOptions.appendChild(button);
+      if (value === selectedValue) button.focus({ preventScroll: true });
 
     });
+
+    if (selectedValue === undefined) questionTitle.focus({ preventScroll: true });
 
   }
 
@@ -637,7 +665,7 @@
 
       answers[question.id] = value;
 
-      renderQuestion();
+      renderQuestion(value);
 
       return;
     }
@@ -688,7 +716,7 @@
 
     answers[question.id] = selected;
 
-    renderQuestion();
+    renderQuestion(value);
 
   }
 
@@ -985,8 +1013,9 @@
     }
 
 
-    let reason =
-      'Your answers do not indicate an obvious fiber gap or regularity issue.';
+    let reason = score >= 2
+      ? 'Psyllium may be worth considering based on your fiber intake and regularity answers.'
+      : 'Your answers do not indicate an obvious fiber gap or regularity issue.';
 
 
     if (
@@ -995,7 +1024,7 @@
     ) {
 
       reason =
-        'Your fiber intake appears low. Psyllium can help increase total fiber intake, but it is not a replacement for vegetables, fruit, legumes and whole grains.';
+        'Your fiber intake appears low.';
 
     }
 
@@ -1003,7 +1032,7 @@
     if (digestion === 'frequently_irregular') {
 
       reason =
-        'You report frequent irregularity, and your overall answers suggest that increasing soluble fiber may be worth considering. Psyllium is still not a substitute for improving the diet itself.';
+        'You report frequent irregularity, and your overall answers suggest that increasing soluble fiber may be worth considering.';
 
     }
 
@@ -1018,6 +1047,10 @@
 
     }
 
+
+    if (score >= 2) {
+      reason += ' Psyllium can help increase total fiber intake, but it is not a replacement for vegetables, fruit, legumes and whole grains.';
+    }
 
     if (score >= 4) {
       return result(
@@ -1530,6 +1563,14 @@
     }
 
 
+    if (hasSafety('pregnant') || hasSafety('medication') || hasSafety('medical_condition')) {
+      return result(
+        'Berberine',
+        'context',
+        'Your safety answers mean this questionnaire should not decide whether berberine is appropriate for you. Individualized professional guidance is more appropriate.'
+      );
+    }
+
     if (hasGoal('metabolic_health')) {
 
       return result(
@@ -1903,10 +1944,7 @@
 
       renderQuestion();
 
-      window.scrollTo({
-        top: root.offsetTop - 20,
-        behavior: 'smooth'
-      });
+      scrollToAssessment();
 
       return;
 
@@ -1947,11 +1985,31 @@
 
     });
 
+  }
+
+  document.querySelectorAll('.sendler-assessment').forEach(initializeAssessment);
+  document.addEventListener('shopify:section:load', (event) => {
+    event.target.querySelectorAll('.sendler-assessment').forEach(initializeAssessment);
+  });
 })();
-</script>
+{% endjavascript %}
 
 
 {% stylesheet %}
+
+.sendler-assessment :focus-visible {
+  outline: 2px solid var(--sendler-green);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sendler-assessment *,
+  .sendler-assessment *::before,
+  .sendler-assessment *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
 
 /* =========================================================
    PAGE
@@ -1987,7 +2045,7 @@
 }
 
 .sendler-assessment__intro h1,
-.sendler-assessment-results__hero h1 {
+.sendler-assessment-results__hero h2 {
   max-width: 850px;
   margin: 15px auto 0;
   font-size: clamp(3.4rem, 6vw, 6.7rem);
@@ -2082,6 +2140,8 @@
 }
 
 .sendler-assessment__back {
+  min-width: 44px;
+  min-height: 44px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -2396,6 +2456,7 @@
 }
 
 .sendler-assessment-results__footer h2 {
+  color: inherit;
   margin: 0;
   max-width: 530px;
   font-size: clamp(2rem, 3vw, 3.4rem);
@@ -2436,6 +2497,10 @@
   font-size: 11px;
   font-weight: 650;
   cursor: pointer;
+}
+
+.sendler-assessment-results__actions :focus-visible {
+  outline-color: var(--sendler-white);
 }
 
 .sendler-assessment-results__legal {
@@ -2482,7 +2547,7 @@
   }
 
   .sendler-assessment__intro h1,
-  .sendler-assessment-results__hero h1 {
+  .sendler-assessment-results__hero h2 {
     font-size: 3.2rem;
   }
 
@@ -2516,6 +2581,23 @@
 
   .sendler-assessment-option {
     min-height: 61px;
+    font-size: 14px;
+  }
+
+  .sendler-assessment__intro-points span,
+  .sendler-assessment__disclaimer,
+  .sendler-assessment-results__legal,
+  .sendler-result-card__status {
+    font-size: 12px;
+  }
+
+  .sendler-result-card p,
+  .sendler-result-group__header p,
+  .sendler-assessment-results__footer p,
+  .sendler-assessment__back,
+  .sendler-assessment__primary,
+  .sendler-assessment__secondary {
+    font-size: 14px;
   }
 
   .sendler-assessment-results {
